@@ -17,9 +17,9 @@ export class AuthService {
   OpenSpotifyWindow(){
     window.location.href = this.configUrl.authorize;
   }
-  SaveTokenAndExpiration(accessToken: string, expiresIn: string){
-    sessionStorage.setItem('token', accessToken)
-    sessionStorage.setItem('expiresIn', expiresIn)
+  SaveToken(token:any){
+    sessionStorage.setItem('tokenInfo', JSON.stringify(token)) //<------ this contains the tokenInfo that I need
+
   }
   GeTokenFromCode(accessCode: string){
     const body = new URLSearchParams();

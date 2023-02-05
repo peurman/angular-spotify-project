@@ -15,7 +15,7 @@ export class CallbackComponent implements OnInit{
       const accessCode = params.get('code');
       if(accessCode){
         this.auth.GeTokenFromCode(accessCode).subscribe((response:any) => {
-          sessionStorage.setItem('tokenInfo', JSON.stringify(response)) //<------ this contains the tokenInfo that I need
+          this.auth.SaveToken(response);
           this.router.navigateByUrl('/home');
         });
 
