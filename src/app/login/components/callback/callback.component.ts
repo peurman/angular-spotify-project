@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,17 +7,20 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './callback.component.html',
   styleUrls: ['./callback.component.scss']
 })
-export class CallbackComponent {
-  constructor(private route: ActivatedRoute, private router: Router, private auth: AuthService){
-    if(this.route.snapshot.fragment){
-      const params = new URLSearchParams(this.route.snapshot.fragment);
-      const accessToken = params.get('access_token');
-      const expiresIn = params.get('access_token');
-      if(accessToken && expiresIn){
-        this.auth.SaveTokenAndExpiration(accessToken, expiresIn);
-        this.router.navigateByUrl('/home');
+export class CallbackComponent implements OnInit{
+  constructor(private route: ActivatedRoute, private router: Router, private auth: AuthService){}
+  ngOnInit(): void {
+    if(this.route.snapshot.queryParams){
+      const params = new URLSearchParams(this.route.snapshot.queryParams);
+      const accessCode = params.get('code');
+      if(accessCode){
+        this.auth.GeTokenFromCode(accessCode).subscribe((response:any) => {
+          sessionStorage.setItem('tokenInfo', JSON.stringify(response)) //<------ this contains the tokenInfo that I need
+          this.router.navigateByUrl('/home');
+        });
+
       }
     }
-    //Add Validation in case somebody try to access to the path without token
   }
+    //Add Validation in case somebody try to access to the path without token
 }
