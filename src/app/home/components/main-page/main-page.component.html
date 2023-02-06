@@ -1,1 +1,14 @@
-<p>main-page works!</p>
+<div class="main-container">
+  <div class="main__genres-containers">
+    <h2>Genres</h2>
+    <div class="main__genres-list">
+      <button *ngFor="let genre of genresList">{{ genre }}</button>
+    </div>
+  </div>
+  <div class="main__genres-containers">
+    <h2>Categories</h2>
+    <!-- <div *ngFor="let categories of categoriesList">
+      <label>{{ categories }}</label>
+    </div> -->
+  </div>
+</div>
