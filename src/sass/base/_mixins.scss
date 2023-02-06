@@ -12,3 +12,31 @@
   align-items: center;
   align-content: center;
 }
+
+@mixin buttonLarge {
+  border: none;
+  background-color: #1db954;
+  width: 328px;
+  height: 52px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+@mixin buttonLabel {
+  border: none;
+  background-color: #1db954;
+  width: 150px;
+  height: 35px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: #fff;
+    color: #1db954;
+  }
+}
