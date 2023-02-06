@@ -1,0 +1,18 @@
+@use 'styles.scss' as *;
+
+.main-container {
+  @include centerMeColumn;
+  .main__genres-containers {
+    @include centerMeColumn;
+    .main__genres-list {
+      @include centerMeRow;
+      // justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 15px;
+      width: 100%;
+      button {
+        @include buttonLabel;
+      }
+    }
+  }
+}
