@@ -2,17 +2,134 @@
 
 .main-container {
   @include centerMeColumn;
-  .main__genres-containers {
-    @include centerMeColumn;
-    .main__genres-list {
+}
+
+.main__new-releases-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  .main__new-releases-cards {
+    @include centerMeRow;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    .main__new-releases-card {
       @include centerMeRow;
-      // justify-content: space-evenly;
-      flex-wrap: wrap;
-      gap: 15px;
-      width: 100%;
-      button {
-        @include buttonLabel;
+      justify-content: space-evenly;
+      @include card-style(120px, 280px);
+      img {
+        width: 120px;
+        object-fit: cover;
+        border-radius: 5px;
       }
+      .main__new-releases-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          font-size: 0.9rem;
+          color: $font-secondary-color;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 150px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+        .main__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}
+
+.main__featured-playlists-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  .main__featured-playlists-cards {
+    @include centerMeRow;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    .main__featured-playlists-card {
+      @include centerMeRow;
+      justify-content: space-evenly;
+      @include card-style(160px, 300px);
+      img {
+        width: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .main__featured-playlists-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          font-size: 0.9rem;
+          color: $font-secondary-color;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 150px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+        .main__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}
+
+.main__categories-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  .main__category-cards {
+    @include centerMeRow;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    .main__category-card {
+      @include centerMeColumn;
+      justify-content: space-evenly;
+      @include card-style(170px, 130px);
+      img {
+        width: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      label {
+        font-size: 0.9rem;
+        color: $font-secondary-color;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 120px;
+      }
+    }
+  }
+}
+
+.main__genres-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  .main__genres-list {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    button {
+      @include buttonLabel;
     }
   }
 }

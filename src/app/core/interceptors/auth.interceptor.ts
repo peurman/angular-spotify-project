@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
   // token = localStorage.getItem('user.token');
   token =
-    'BQBP_JHe5I6cVuysFi9TjBdWaDOWbrDXDIw96-UZjQGK0u6gIGWgWDQH6xGCDEn3MFHpR6EAYF353QL_d87Ajdl6RL6Uj8GE0Lyumhfzz4kaYbdfrV48';
+    'BQDF_gvJPLRWkJSgE_aubMlZfF0WXt2PlNyuFgc0lAFqB3y5_pgqnWAUBZCUR-JTCS6vdzz7Jtt7KyDN1-hm-Yp6AoL7aoumByoc26DnwmB3PfKrNYwe';
 
   intercept(
     req: HttpRequest<any>,
