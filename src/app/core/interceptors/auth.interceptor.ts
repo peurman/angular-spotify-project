@@ -5,21 +5,44 @@ import {
   HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/login/services/auth.service';
+import { AuthToken } from 'src/app/login/models/authtoken.interface';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  // token = localStorage.getItem('user.token');
-  token =
-    'BQBP_JHe5I6cVuysFi9TjBdWaDOWbrDXDIw96-UZjQGK0u6gIGWgWDQH6xGCDEn3MFHpR6EAYF353QL_d87Ajdl6RL6Uj8GE0Lyumhfzz4kaYbdfrV48';
-
+  constructor(private auth: AuthService) {}
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const authReq = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${this.token}`),
-    });
-    return next.handle(authReq);
+  ): Observable<HttpEvent<unknown>> {
+    if (!req.headers.has('Authorization')) {
+      let tokenInfo = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
+      if (new Date() > tokenInfo.expirationDate) {
+        return this.auth.RefreshToken().pipe(
+          switchMap((token: AuthToken) => {
+            this.auth.SaveToken(token);
+            tokenInfo = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
+            const authReq = req.clone({
+              headers: req.headers.set(
+                'Authorization',
+                `Bearer ${tokenInfo.access_token}`
+              ),
+            });
+            return next.handle(authReq);
+          })
+        );
+      } else {
+        const authReq = req.clone({
+          headers: req.headers.set(
+            'Authorization',
+            `Bearer ${tokenInfo.access_token}`
+          ),
+        });
+        return next.handle(authReq);
+      }
+    } else {
+      return next.handle(req);
+    }
   }
 }

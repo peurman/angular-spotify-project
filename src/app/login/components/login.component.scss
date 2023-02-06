@@ -1,0 +1,25 @@
+@use 'styles.scss' as *;
+
+.login {
+    display: grid;
+    background-color: black;
+    height: 100vh;
+    place-items: center;
+
+    .logo{
+      max-width: 100%;
+      height: auto;
+      min-width: 250px;
+    }
+
+    a{
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      padding: 20px;
+      border-radius: 99px;
+      font-weight: 800;
+      background-color: #1db954;
+    }
+  }
+  
