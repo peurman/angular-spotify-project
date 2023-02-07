@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { catchError, map, of, throwError } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { AuthToken } from '../login/models/authtoken.interface';
 import { AuthService } from '../login/services/auth.service';
 
@@ -11,6 +11,7 @@ export class HomeGuard implements CanActivate {
     const tokenInfo = localStorage.getItem('tokenInfo');
     if (tokenInfo) {
       const tokenAuth = JSON.parse(tokenInfo) as AuthToken;
+      console.log(tokenAuth.access_token);
       return this.auth.VerifyToken(tokenAuth.access_token).pipe(
         map(() => {
           return true;
