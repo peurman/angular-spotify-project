@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GenresInterface } from '../models/genres.interface';
 import { Categories } from '../models/categories.interface';
@@ -16,6 +15,7 @@ export class MainService {
   constructor(private http: HttpClient) {}
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // .set('Authorization', '');
   options = { headers: this.headers };
 
   getGenres(): Observable<GenresInterface> {
