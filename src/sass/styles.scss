@@ -1,17 +1,18 @@
-@forward './base/variables';
-@forward './base/mixins';
-@forward './base/fonts';
+@forward "./base/variables";
+@forward "./base/mixins";
+@forward "./base/fonts";
 
-@use './base/variables' as *;
+@use "./base/variables" as *;
 
 body {
-  font: 18px 'Circular';
+  font: 18px "Circular";
   background-color: $background;
   color: $font-color;
 }
 p {
   color: $font-color;
 }
+h1,
 h2 {
   margin: 10px 0;
 }
