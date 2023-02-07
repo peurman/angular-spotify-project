@@ -1,14 +1,58 @@
 <div class="main-container">
-  <div class="main__genres-containers">
+  <div class="main__new-releases-container">
+    <h2>New Releases</h2>
+    <div class="main__new-releases-cards">
+      <div
+        *ngFor="let newRelease of newReleasesList"
+        class="main__new-releases-card"
+        [id]="newRelease.id">
+        <img [src]="newRelease.images[0].url" alt="" />
+        <div class="main__new-releases-title-artists-container">
+          <label class="main__album-name">{{ newRelease.name }}</label>
+          <div class="main__album-artists">
+            <label *ngFor="let artist of newRelease.artists">{{
+              artist.name
+            }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main__featured-playlists-container">
+    <h2>Featured Playlists</h2>
+    <div class="main__featured-playlists-cards">
+      <div
+        *ngFor="let featuredPlaylist of featuredPlaylistsList"
+        class="main__featured-playlists-card"
+        [id]="featuredPlaylist.id">
+        <img [src]="featuredPlaylist.images[0].url" alt="" />
+        <div class="main__featured-playlists-title-artists-container">
+          <label class="main__album-name">{{ featuredPlaylist.name }}</label>
+          <!-- <div class="main__album-artists">
+            <label *ngFor="let artist of featuredPlaylist.artists">{{
+              artist.name
+            }}</label>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main__categories-container">
+    <h2>Categories</h2>
+    <div class="main__category-cards">
+      <div
+        *ngFor="let category of categoriesList"
+        class="main__category-card"
+        [id]="category.id">
+        <img [src]="category.icons[0].url" alt="" />
+        <label>{{ category.name }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="main__genres-container">
     <h2>Genres</h2>
     <div class="main__genres-list">
       <button *ngFor="let genre of genresList">{{ genre }}</button>
     </div>
-  </div>
-  <div class="main__genres-containers">
-    <h2>Categories</h2>
-    <!-- <div *ngFor="let categories of categoriesList">
-      <label>{{ categories }}</label>
-    </div> -->
   </div>
 </div>

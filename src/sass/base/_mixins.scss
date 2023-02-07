@@ -1,3 +1,5 @@
+@use './base/variables' as *;
+
 @mixin centerMeColumn {
   display: flex;
   flex-direction: column;
@@ -15,28 +17,70 @@
 
 @mixin buttonLarge {
   border: none;
-  background-color: #1db954;
+  background-color: $button-background-color;
   width: 328px;
   height: 52px;
   border-radius: 10px;
-  color: #fff;
+  color: $button-color;
   font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
 }
 @mixin buttonLabel {
   border: none;
-  background-color: #1db954;
+  background-color: $button-background-color;
   width: 150px;
   height: 35px;
   border-radius: 10px;
-  color: #fff;
+  color: $button-color;
   font-size: 0.9rem;
   font-weight: 700;
   transition: 0.4s;
   cursor: pointer;
   &:hover {
-    background-color: #fff;
-    color: #1db954;
+    background-color: $button-color;
+    color: $button-background-color;
+    @include scale-up-center();
+  }
+}
+
+@mixin scale-up-center {
+  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+    both;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+}
+
+@mixin card-style($height, $width) {
+  padding: 10px;
+  height: $height;
+  width: $width;
+  background-color: $background-card;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    @include scale-up-center();
+    background-color: $background-hover;
   }
 }

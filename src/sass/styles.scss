@@ -2,12 +2,15 @@
 @forward './base/mixins';
 @forward './base/fonts';
 
+@use './base/variables' as *;
+
 body {
-  background-color: #181818;
-  color: #b3b3b3;
+  font: 18px 'Circular';
+  background-color: $background;
+  color: $font-color;
 }
 p {
-  color: #b3b3b3;
+  color: $font-color;
 }
 h2 {
   margin: 10px 0;
