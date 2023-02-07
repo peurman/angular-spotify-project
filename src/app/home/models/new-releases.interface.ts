@@ -13,7 +13,7 @@ export interface Albums {
 }
 
 export interface Album {
-  album_type: AlbumTypeEnum;
+  album_type: string;
   artists: Artist[];
   available_markets: string[];
   external_urls: ExternalUrls;
@@ -24,15 +24,9 @@ export interface Album {
   release_date: Date;
   release_date_precision: string;
   total_tracks: number;
-  type: AlbumTypeEnum;
+  type: string;
   uri: string;
 }
-
-export enum AlbumTypeEnum {
-  Album = 'album',
-  Single = 'single',
-}
-
 export interface Artist {
   external_urls: ExternalUrls;
   href: string;
