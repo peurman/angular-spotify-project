@@ -4,10 +4,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthToken } from '../models/authtoken.interface';
 
 @Injectable()
-//We can use the packcage angular-oauth2-oidc if Daniel authorize us
-//https://www.npmjs.com/package/angular-oauth2-oidc
 export class AuthService {
   constructor(private http: HttpClient) {}
+  encoder = new TextEncoder();
+
   credentials = btoa(
     `${environment.credentials.clientId}:${environment.credentials.clientSecret}`
   );
