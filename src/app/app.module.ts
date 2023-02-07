@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthService } from './login/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthService,
   ],
   bootstrap: [AppComponent],
 })
