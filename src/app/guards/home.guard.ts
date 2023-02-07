@@ -10,7 +10,7 @@ export class HomeGuard implements CanActivate {
   canActivate() {
     const tokenInfo = localStorage.getItem('tokenInfo');
     if (tokenInfo) {
-      const tokenAuth = tokenInfo as unknown as AuthToken;
+      const tokenAuth = JSON.parse(tokenInfo) as AuthToken;
       return this.auth.VerifyToken(tokenAuth.access_token).pipe(
         map(() => {
           return true;
