@@ -18,36 +18,28 @@ export class HomeComponent {
 
   constructor(private mainService: MainService) {
     this.mainService.getGenres().subscribe({
-      next: data => {
+      next: (data) => {
         this.genres = data.genres;
       },
-      error: error => {
-        alert(error.message);
-      },
+      error: (error) => {},
     });
     this.mainService.getCategories('').subscribe({
-      next: data => {
+      next: (data) => {
         this.categories = data.categories.items;
       },
-      error: error => {
-        alert(error.message);
-      },
+      error: (error) => {},
     });
     this.mainService.getNewReleases().subscribe({
-      next: data => {
+      next: (data) => {
         this.newReleases = data.albums.items;
       },
-      error: error => {
-        alert(error.message);
-      },
+      error: (error) => {},
     });
     this.mainService.getFeaturedPlaylists().subscribe({
-      next: data => {
+      next: (data) => {
         this.featuredPlaylists = data.playlists.items;
       },
-      error: error => {
-        alert(error.message);
-      },
+      error: (error) => {},
     });
   }
 }

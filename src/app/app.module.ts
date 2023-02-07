@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
+import { LoginGuard } from './guards/login.guard';
+import { HomeGuard } from './guards/home.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,8 @@ import { AuthService } from './login/services/auth.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService,
+    LoginGuard,
+    HomeGuard,
   ],
   bootstrap: [AppComponent],
 })
