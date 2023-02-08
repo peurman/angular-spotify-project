@@ -82,7 +82,6 @@ export class AuthService {
     localStorage.removeItem('tokenInfo');
   }
   GetUserName() {
-    console.log('inside service');
     return this.http.get<User>('https://api.spotify.com/v1/me');
   }
 }
