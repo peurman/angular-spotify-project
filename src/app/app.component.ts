@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.loggedIn$ = this.store.select(fromLogin.selectLogin);
+    if (localStorage.getItem('tokenInfo'))
+      this.loggedIn$ = this.store.select(fromLogin.selectLogin);
   }
 }

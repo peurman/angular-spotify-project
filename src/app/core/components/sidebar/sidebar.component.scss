@@ -1,0 +1,15 @@
+@use "styles.scss" as *;
+
+.sidebar-container {
+  padding: 20px 0;
+  width: 200px;
+  @include centerMeColumn;
+  justify-content: flex-start;
+  gap: 10px;
+  min-height: 100vh;
+  .sidebar__image-container {
+    img {
+      width: 70px;
+    }
+  }
+}
