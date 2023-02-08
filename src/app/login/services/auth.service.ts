@@ -6,7 +6,7 @@ import { User } from 'src/app/store/login/login.state';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
   encoder = new TextEncoder();
 
   credentials = btoa(
@@ -36,6 +36,7 @@ export class AuthService {
       token.refresh_token = tokenBefore.refresh_token;
     }
     localStorage.setItem('tokenInfo', JSON.stringify(token));
+    this.store.dispatch(login({ user: 'John Doe' }));
   }
   RefreshToken() {
     const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
