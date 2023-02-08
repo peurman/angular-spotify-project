@@ -29,7 +29,7 @@
 @mixin buttonLabel {
   border: none;
   background-color: $button-background-color;
-  width: 150px;
+  width: 145px;
   height: 35px;
   border-radius: 10px;
   color: $button-color;
@@ -77,9 +77,9 @@
   width: $width;
   background-color: $background-card;
   border-radius: 5px;
-  cursor: pointer;
   transition: 0.4s;
   &:hover {
+    cursor: pointer;
     @include scale-up-center();
     background-color: $background-hover;
   }

@@ -15,8 +15,8 @@ export class CategoriesEffects {
   getCategories$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(categoriesActions.getCategoriesAction),
-      exhaustMap(() =>
-        this.categoryService.getCategories('').pipe(
+      exhaustMap((res) =>
+        this.categoryService.getCategories(res.url).pipe(
           map((response) => {
             return categoriesActions.getCategoriesSuccessAction({
               data: response.categories,

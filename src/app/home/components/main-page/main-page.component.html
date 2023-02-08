@@ -1,11 +1,31 @@
 <div class="main-container">
   <div class="main__new-releases-container">
-    <h2>New Releases</h2>
+    <div class="main__title-arrows-container">
+      <h2>New Releases</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousNewReleases()"
+          [disabled]="!newReleasesPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextNewReleases()"
+          [disabled]="!newReleasesNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
     <div class="main__new-releases-cards">
       <div
         *ngFor="let newRelease of newReleasesList"
         class="main__new-releases-card"
-        [id]="newRelease.id">
+        [id]="newRelease.id"
+        (click)="goToAlbum(newRelease.id)"
+      >
         <img [src]="newRelease.images[0].url" alt="" />
         <div class="main__new-releases-title-artists-container">
           <label class="main__album-name">{{ newRelease.name }}</label>
@@ -19,40 +39,95 @@
     </div>
   </div>
   <div class="main__featured-playlists-container">
-    <h2>Featured Playlists</h2>
+    <div class="main__title-arrows-container">
+      <h2>Featured Playlists</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousFeaturedPlaylists()"
+          [disabled]="!featuredPlaylistsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextFeaturedPlaylists()"
+          [disabled]="!featuredPlaylistsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
     <div class="main__featured-playlists-cards">
       <div
         *ngFor="let featuredPlaylist of featuredPlaylistsList"
         class="main__featured-playlists-card"
-        [id]="featuredPlaylist.id">
+        [id]="featuredPlaylist.id"
+        (click)="goToPlaylist(featuredPlaylist.id)"
+      >
         <img [src]="featuredPlaylist.images[0].url" alt="" />
         <div class="main__featured-playlists-title-artists-container">
           <label class="main__album-name">{{ featuredPlaylist.name }}</label>
-          <!-- <div class="main__album-artists">
-            <label *ngFor="let artist of featuredPlaylist.artists">{{
-              artist.name
-            }}</label>
-          </div> -->
         </div>
       </div>
     </div>
   </div>
   <div class="main__categories-container">
-    <h2>Categories</h2>
+    <div class="main__title-arrows-container">
+      <h2>Categories</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousCategories()"
+          [disabled]="!categoriesPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextCategories()"
+          [disabled]="!categoriesNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
     <div class="main__category-cards">
       <div
         *ngFor="let category of categoriesList"
         class="main__category-card"
-        [id]="category.id">
+        (click)="goToCategory(category.id)"
+        [id]="category.id"
+      >
         <img [src]="category.icons[0].url" alt="" />
         <label>{{ category.name }}</label>
       </div>
     </div>
   </div>
   <div class="main__genres-container">
-    <h2>Genres</h2>
+    <div class="main__title-arrows-container">
+      <h2>Genres</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousGenres()"
+          [disabled]="!genresPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextGenres()"
+          [disabled]="!genresNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
     <div class="main__genres-list">
-      <button *ngFor="let genre of genresList">{{ genre }}</button>
+      <button *ngFor="let genre of genresList" (click)="goToGenre(genre)">
+        {{ genre }}
+      </button>
     </div>
   </div>
 </div>
