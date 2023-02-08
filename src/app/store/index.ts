@@ -18,7 +18,12 @@ import { featuredPlaylistsReducer } from './featured-playlists/featured-playlist
 import { FeaturedPlaylistsEffects } from './featured-playlists/featured-playlists.effects';
 import * as fromFeaturedPlaylistsSelectors from './featured-playlists/featured-playlists.selectors';
 
+import { LoginState } from './login/login.state';
+import { loginReducer } from './login/login.reducer';
+import * as fromLoginSelectors from './login/login.selectors';
+
 export interface RootState {
+  loggedIn: LoginState;
   categories: CategoriesState;
   genres: GenresState;
   newReleases: NewReleasesState;
@@ -26,6 +31,7 @@ export interface RootState {
 }
 
 export const appReducer = {
+  loggedIn: loginReducer,
   categories: categoriesReducer,
   genres: genresReducer,
   newReleases: newReleasesReducer,
@@ -52,4 +58,5 @@ export const appSelectors = [
   fromFeaturedPlaylistsSelectors.selectNewReleasesData,
   fromFeaturedPlaylistsSelectors.selectIsError,
   fromFeaturedPlaylistsSelectors.selectIsLoading,
+  fromLoginSelectors.selectLogin,
 ];
