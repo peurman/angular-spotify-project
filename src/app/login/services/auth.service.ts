@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthToken } from '../models/authtoken.interface';
 import { User } from 'src/app/store/login/login.state';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +37,6 @@ export class AuthService {
       token.refresh_token = tokenBefore.refresh_token;
     }
     localStorage.setItem('tokenInfo', JSON.stringify(token));
-    this.store.dispatch(login({ user: 'John Doe' }));
   }
   RefreshToken() {
     const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
