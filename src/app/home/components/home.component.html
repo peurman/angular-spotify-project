@@ -1,6 +1,10 @@
 <h1>Welcome!</h1>
 <app-main-page
-  [genresList]="genres"
+  [genresList]="currentGenres"
+  [genresPrevious]="genresPrevious"
+  [genresNext]="genresNext"
+  (genresNextClick)="genresNextClick()"
+  (genresPreviousClick)="genresPreviousClick()"
   [categoriesList]="categories"
   [categoriesPrevious]="!!categoriesPrevious"
   [categoriesNext]="!!categoriesNext"
