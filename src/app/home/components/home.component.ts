@@ -27,8 +27,10 @@ export class HomeComponent implements OnInit {
   categoriesPrevious: string | null = '';
 
   genres: string[] = [];
-  // genresNext: string | null = '';
-  // genresPrevious: string | null = '';
+  genresPerPage = 15;
+  currentGenresPage = 0;
+  genresNext = true;
+  genresPrevious = false;
 
   newReleases: Album[] = [];
   newReleasesNext: string | null = '';
@@ -67,9 +69,7 @@ export class HomeComponent implements OnInit {
     this.genres$ = this.store.select(fromGenres.selectGenresData);
     this.genres$.subscribe({
       next: (res) => {
-        if (res) {
-          this.genres = res;
-        }
+        if (res) this.genres = res;
       },
       error: (error) => {
         console.log(error.message);
@@ -112,14 +112,47 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-
+  //categories
   categoriesPreviousClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesPrevious }));
   }
   categoriesNextClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesNext }));
   }
+  //genres
+  get currentGenres(): string[] {
+    return this.genres.slice(
+      this.currentGenresPage * this.genresPerPage,
+      (this.currentGenresPage + 1) * this.genresPerPage
+    );
+  }
+  genresPreviousClick(): void {
+    if (this.currentGenresPage > 0) this.currentGenresPage--;
+    if (this.currentGenresPage === 0) this.genresPrevious = false;
+    if (
+      this.currentGenresPage <
+      Math.ceil(this.genres.length / this.genresPerPage) - 1
+    ) {
+      this.genresNext = true;
+    } else this.genresNext = false;
+  }
+  genresNextClick(): void {
+    if (
+      this.currentGenresPage <
+      Math.ceil(this.genres.length / this.genresPerPage) - 1
+    )
+      this.currentGenresPage++;
+    if (
+      this.currentGenresPage ===
+      Math.ceil(this.genres.length / this.genresPerPage) - 1
+    )
+      this.genresNext = false;
 
+    if (this.currentGenresPage > 0) {
+      this.genresPrevious = true;
+    } else this.genresPrevious = false;
+  }
+  //new releases
   newReleasesPreviousClick() {
     this.store.dispatch(
       getNewReleasesAction({ url: this.newReleasesPrevious })
@@ -128,13 +161,12 @@ export class HomeComponent implements OnInit {
   newReleasesNextClick() {
     this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
   }
-
+  // featured playlists
   featuredPlaylistsPreviousClick() {
     this.store.dispatch(
       getFeaturedPlaylistsAction({ url: this.featuredPlaylistsPrevious })
     );
   }
-
   featuredPlaylistsNextClick() {
     this.store.dispatch(
       getFeaturedPlaylistsAction({ url: this.featuredPlaylistsNext })
