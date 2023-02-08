@@ -15,8 +15,8 @@ export class NewReleasesEffects {
   getNewReleases$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(newReleasesActions.getNewReleasesAction),
-      exhaustMap(() =>
-        this.newReleasesService.getNewReleases().pipe(
+      exhaustMap((res) =>
+        this.newReleasesService.getNewReleases(res.url).pipe(
           map((response) => {
             return newReleasesActions.getNewReleasesSuccessAction({
               data: response.albums,

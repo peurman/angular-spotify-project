@@ -15,8 +15,8 @@ export class FeaturedPlaylistsEffects {
   getNewReleases$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(featuredPlaylistsActions.getFeaturedPlaylistsAction),
-      exhaustMap(() =>
-        this.featuredPlaylistsService.getFeaturedPlaylists().pipe(
+      exhaustMap((res) =>
+        this.featuredPlaylistsService.getFeaturedPlaylists(res.url).pipe(
           map((response) => {
             return featuredPlaylistsActions.getFeaturedPlaylistsSuccessAction({
               data: response.playlists,
