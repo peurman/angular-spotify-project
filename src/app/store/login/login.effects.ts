@@ -13,15 +13,9 @@ export class LoginEffects {
       ofType(loginActions.getUserRequest),
       exhaustMap(() =>
         this.authService.GetUserName().pipe(
-          map((user: User) => {
-            const result = (({ display_name, followers, images }) => ({
-              display_name,
-              followers,
-              images,
-            }))(user);
-            return loginActions.login({
-              user: result,
-            });
+          map(({ display_name, followers, images }) => {
+            const user = { display_name, followers, images };
+            return loginActions.login({ user });
           })
         )
       )
