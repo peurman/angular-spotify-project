@@ -18,28 +18,42 @@ export class MainService {
   // .set('Authorization', '');
   options = { headers: this.headers };
 
-  getGenres(): Observable<GenresInterface> {
-    return this.http.get<GenresInterface>(
-      `${BASE_API}/recommendations/available-genre-seeds`,
-      this.options
-    );
+  getGenres(url: string | null): Observable<GenresInterface> {
+    if (!url) {
+      return this.http.get<GenresInterface>(
+        `${BASE_API}/recommendations/available-genre-seeds?limit=15`,
+        this.options
+      );
+    }
+    return this.http.get<GenresInterface>(url, this.options);
   }
   getCategories(url: string | null): Observable<Categories> {
-    return this.http.get<Categories>(
-      `${BASE_API}/browse/categories?limit=10`,
-      this.options
-    );
+    if (!url) {
+      return this.http.get<Categories>(
+        `${BASE_API}/browse/categories?limit=10`,
+        this.options
+      );
+    }
+    return this.http.get<Categories>(url, this.options);
   }
-  getNewReleases(): Observable<NewReleases> {
-    return this.http.get<NewReleases>(
-      `${BASE_API}/browse/new-releases?country=AR&offset=0&limit=10`,
-      this.options
-    );
+
+  getNewReleases(url: string | null): Observable<NewReleases> {
+    if (!url) {
+      return this.http.get<NewReleases>(
+        `${BASE_API}/browse/new-releases?country=AR&offset=0&limit=9`,
+        this.options
+      );
+    }
+    return this.http.get<NewReleases>(url, this.options);
   }
-  getFeaturedPlaylists(): Observable<FeaturedPlaylists> {
-    return this.http.get<FeaturedPlaylists>(
-      `${BASE_API}/browse/featured-playlists`,
-      this.options
-    );
+
+  getFeaturedPlaylists(url: string | null): Observable<FeaturedPlaylists> {
+    if (!url) {
+      return this.http.get<FeaturedPlaylists>(
+        `${BASE_API}/browse/featured-playlists?&limit=8`,
+        this.options
+      );
+    }
+    return this.http.get<FeaturedPlaylists>(url, this.options);
   }
 }

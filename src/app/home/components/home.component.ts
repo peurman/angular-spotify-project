@@ -23,9 +23,20 @@ import * as fromFeaturedPlaylists from 'src/app/store/featured-playlists/feature
 })
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
+  categoriesNext: string | null = '';
+  categoriesPrevious: string | null = '';
+
   genres: string[] = [];
+  // genresNext: string | null = '';
+  // genresPrevious: string | null = '';
+
   newReleases: Album[] = [];
+  newReleasesNext: string | null = '';
+  newReleasesPrevious: string | null = '';
+
   featuredPlaylists: Playlist[] = [];
+  featuredPlaylistsNext: string | null = '';
+  featuredPlaylistsPrevious: string | null = '';
 
   categories$!: Observable<CategoriesClass | null>;
   genres$!: Observable<string[] | null>;
@@ -36,11 +47,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     //categories
-    this.store.dispatch(getCategoriesAction());
+    this.store.dispatch(getCategoriesAction({ url: '' }));
     this.categories$ = this.store.select(fromCategories.selectCategoriesData);
     this.categories$.subscribe({
       next: (res) => {
-        if (res) this.categories = res.items;
+        if (res) {
+          this.categories = res.items;
+          this.categoriesNext = res.next;
+          this.categoriesPrevious = res.previous;
+        }
       },
       error: (error) => {
         console.log(error.message);
@@ -48,11 +63,13 @@ export class HomeComponent implements OnInit {
     });
 
     //genres
-    this.store.dispatch(getGenresAction());
+    this.store.dispatch(getGenresAction({ url: '' }));
     this.genres$ = this.store.select(fromGenres.selectGenresData);
     this.genres$.subscribe({
       next: (res) => {
-        if (res) this.genres = res;
+        if (res) {
+          this.genres = res;
+        }
       },
       error: (error) => {
         console.log(error.message);
@@ -60,13 +77,17 @@ export class HomeComponent implements OnInit {
     });
 
     //new releases
-    this.store.dispatch(getNewReleasesAction());
+    this.store.dispatch(getNewReleasesAction({ url: '' }));
     this.newReleases$ = this.store.select(
       fromNewReleases.selectNewReleasesData
     );
     this.newReleases$.subscribe({
       next: (res) => {
-        if (res) this.newReleases = res.items;
+        if (res) {
+          this.newReleases = res.items;
+          this.newReleasesNext = res.next;
+          this.newReleasesPrevious = res.previous;
+        }
       },
       error: (error) => {
         console.log(error.message);
@@ -74,26 +95,49 @@ export class HomeComponent implements OnInit {
     });
 
     // featured playlists
-    this.store.dispatch(getFeaturedPlaylistsAction());
+    this.store.dispatch(getFeaturedPlaylistsAction({ url: '' }));
     this.featuredPlaylists$ = this.store.select(
       fromFeaturedPlaylists.selectNewReleasesData
     );
     this.featuredPlaylists$.subscribe({
       next: (res) => {
-        if (res) this.featuredPlaylists = res.items;
+        if (res) {
+          this.featuredPlaylists = res.items;
+          this.featuredPlaylistsNext = res.next;
+          this.featuredPlaylistsPrevious = res.previous;
+        }
       },
       error: (error) => {
         console.log(error.message);
       },
     });
+  }
 
-    // this.mainService.getFeaturedPlaylists().subscribe({
-    //   next: (data) => {
-    //     this.featuredPlaylists = data.playlists.items;
-    //   },
-    //   error: (error) => {
-    //     alert(error.message);
-    //   },
-    // });
+  categoriesPreviousClick() {
+    this.store.dispatch(getCategoriesAction({ url: this.categoriesPrevious }));
+  }
+  categoriesNextClick() {
+    this.store.dispatch(getCategoriesAction({ url: this.categoriesNext }));
+  }
+
+  newReleasesPreviousClick() {
+    this.store.dispatch(
+      getNewReleasesAction({ url: this.newReleasesPrevious })
+    );
+  }
+  newReleasesNextClick() {
+    this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
+  }
+
+  featuredPlaylistsPreviousClick() {
+    this.store.dispatch(
+      getFeaturedPlaylistsAction({ url: this.featuredPlaylistsPrevious })
+    );
+  }
+
+  featuredPlaylistsNextClick() {
+    this.store.dispatch(
+      getFeaturedPlaylistsAction({ url: this.featuredPlaylistsNext })
+    );
   }
 }
