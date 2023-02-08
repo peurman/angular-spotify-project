@@ -18,6 +18,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
 import { LoginGuard } from './guards/login.guard';
 import { HomeGuard } from './guards/home.guard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CallbackGuard } from './guards/callback.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +27,7 @@ import { HomeGuard } from './guards/home.guard';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatSnackBarModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot(appEffects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

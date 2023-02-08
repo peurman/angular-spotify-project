@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthToken } from '../models/authtoken.interface';
-import { Store } from '@ngrx/store';
-import { login, logout } from '../../store/login/login.actions';
+import { User } from 'src/app/store/login/login.state';
 
 @Injectable()
 export class AuthService {
@@ -81,5 +80,9 @@ export class AuthService {
   }
   LogOut() {
     localStorage.removeItem('tokenInfo');
+  }
+  GetUserName() {
+    console.log('inside service');
+    return this.http.get<User>('https://api.spotify.com/v1/me');
   }
 }
