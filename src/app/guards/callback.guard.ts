@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { AuthToken } from '../login/models/authtoken.interface';
 import { AuthService } from '../login/services/auth.service';
 
-@Injectable()
-export class HomeGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root',
+})
+export class CallbackGuard implements CanActivate {
   constructor(
-    private auth: AuthService,
     private router: Router,
+    private auth: AuthService,
     private _snackBar: MatSnackBar
   ) {}
-  canActivate() {
-    const tokenInfo = localStorage.getItem('tokenInfo');
-    if (tokenInfo) {
-      const tokenAuth = JSON.parse(tokenInfo) as AuthToken;
-      console.log(tokenAuth.access_token);
-      return this.auth.VerifyToken(tokenAuth.access_token).pipe(
-        map(() => {
+  canActivate(childRoute: ActivatedRouteSnapshot) {
+    const param = childRoute.queryParamMap.get('code');
+    if (param) {
+      return this.auth.GetTokenFromCode(param).pipe(
+        map((token: AuthToken) => {
+          this.auth.SaveToken(token);
+          this.router.navigateByUrl('/home');
           return true;
         }),
         catchError(() => {
@@ -29,7 +31,7 @@ export class HomeGuard implements CanActivate {
           config.verticalPosition = 'bottom';
           config.horizontalPosition = 'center';
           this._snackBar.open(
-            'Error: You are not registered as a developer ',
+            'Error: The acces code provided was wrong',
             'Ok',
             config
           );

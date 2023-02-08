@@ -6,10 +6,11 @@ import { LoginComponent } from './components/login.component';
 import { AuthService } from './services/auth.service';
 import { CallbackComponent } from './components/callback/callback.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CallbackGuard } from '../guards/callback.guard';
 
 @NgModule({
   declarations: [LoginComponent, CallbackComponent],
   imports: [CommonModule, LoginRoutingModule, HttpClientModule],
-  providers: [AuthService],
+  providers: [AuthService, CallbackGuard],
 })
 export class LoginModule {}
