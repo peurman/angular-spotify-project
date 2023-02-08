@@ -10,6 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [LoginComponent, CallbackComponent],
   imports: [CommonModule, LoginRoutingModule, HttpClientModule],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class LoginModule {}

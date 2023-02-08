@@ -68,4 +68,15 @@ export class AuthService {
       }
     );
   }
+  VerifyToken(accessToken: string) {
+    return this.http.get('https://api.spotify.com/v1/me', {
+      headers: new HttpHeaders({
+        skip: 'true',
+        Authorization: `Bearer ${accessToken}`,
+      }),
+    });
+  }
+  LogOut() {
+    localStorage.removeItem('tokenInfo');
+  }
 }
