@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { catchError, map, of } from 'rxjs';
 import { AuthToken } from '../login/models/authtoken.interface';
 import { AuthService } from '../login/services/auth.service';
+import { login, logout } from '../store/login/login.actions';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CallbackGuard implements CanActivate {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private store: Store
   ) {}
   canActivate(childRoute: ActivatedRouteSnapshot) {
     const param = childRoute.queryParamMap.get('code');
@@ -26,6 +27,7 @@ export class CallbackGuard implements CanActivate {
         catchError(() => {
           this.router.navigateByUrl('/login');
           this.auth.LogOut();
+          this.store.dispatch(logout());
           const config = new MatSnackBarConfig();
           config.panelClass = ['success-dialog'];
           config.verticalPosition = 'bottom';

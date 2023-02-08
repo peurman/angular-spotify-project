@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthToken } from '../models/authtoken.interface';
-import { Store } from '@ngrx/store';
-import { login, logout } from '../../store/login/login.actions';
+import { User } from 'src/app/store/login/login.state';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(private http: HttpClient) {}
   encoder = new TextEncoder();
 
   credentials = btoa(
@@ -37,7 +36,6 @@ export class AuthService {
       token.refresh_token = tokenBefore.refresh_token;
     }
     localStorage.setItem('tokenInfo', JSON.stringify(token));
-    this.store.dispatch(login({ user: 'John Doe' }));
   }
   RefreshToken() {
     const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
@@ -81,5 +79,9 @@ export class AuthService {
   }
   LogOut() {
     localStorage.removeItem('tokenInfo');
+  }
+  GetUserName() {
+    console.log('inside service');
+    return this.http.get<User>('https://api.spotify.com/v1/me');
   }
 }

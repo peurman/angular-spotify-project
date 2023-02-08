@@ -20,6 +20,7 @@ import * as fromFeaturedPlaylistsSelectors from './featured-playlists/featured-p
 
 import { LoginState } from './login/login.state';
 import { loginReducer } from './login/login.reducer';
+import { LoginEffects } from './login/login.effects';
 import * as fromLoginSelectors from './login/login.selectors';
 
 export interface RootState {
@@ -43,6 +44,7 @@ export const appEffects = [
   GenresEffects,
   NewReleasesEffects,
   FeaturedPlaylistsEffects,
+  LoginEffects,
 ];
 
 export const appSelectors = [
