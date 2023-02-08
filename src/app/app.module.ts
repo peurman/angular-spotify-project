@@ -1,6 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -19,7 +18,6 @@ import { AuthService } from './login/services/auth.service';
 import { LoginGuard } from './guards/login.guard';
 import { HomeGuard } from './guards/home.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CallbackGuard } from './guards/callback.guard';
 
 @NgModule({
   declarations: [AppComponent],
