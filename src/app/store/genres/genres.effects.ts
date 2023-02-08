@@ -12,8 +12,8 @@ export class GenresEffects {
   getGenres$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(genresActions.getGenresAction),
-      exhaustMap(() =>
-        this.genresService.getGenres().pipe(
+      exhaustMap((res) =>
+        this.genresService.getGenres(res.url).pipe(
           map((response) => {
             return genresActions.getGenresSuccessAction({
               data: response.genres,

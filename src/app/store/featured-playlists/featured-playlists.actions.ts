@@ -2,7 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { Playlists } from 'src/app/home/models/featured-playlists.interface';
 
 export const getFeaturedPlaylistsAction = createAction(
-  '[FeaturedPlaylists] Get Featured Playlists Action'
+  '[FeaturedPlaylists] Get Featured Playlists Action',
+  props<{ url: string | null }>()
 );
 export const getFeaturedPlaylistsSuccessAction = createAction(
   '[FeaturedPlaylists] Get Featured Playlists Success Action',

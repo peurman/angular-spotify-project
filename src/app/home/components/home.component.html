@@ -2,6 +2,19 @@
 <app-main-page
   [genresList]="genres"
   [categoriesList]="categories"
+  [categoriesPrevious]="!!categoriesPrevious"
+  [categoriesNext]="!!categoriesNext"
+  (categoriesNextClick)="categoriesNextClick()"
+  (categoriesPreviousClick)="categoriesPreviousClick()"
   [newReleasesList]="newReleases"
-  [featuredPlaylistsList]="featuredPlaylists">
+  [newReleasesPrevious]="!!newReleasesPrevious"
+  [newReleasesNext]="!!newReleasesNext"
+  (newReleasesNextClick)="newReleasesNextClick()"
+  (newReleasesPreviousClick)="newReleasesPreviousClick()"
+  [featuredPlaylistsList]="featuredPlaylists"
+  [featuredPlaylistsPrevious]="!!featuredPlaylistsPrevious"
+  [featuredPlaylistsNext]="!!featuredPlaylistsNext"
+  (featuredPlaylistsNextClick)="featuredPlaylistsNextClick()"
+  (featuredPlaylistsPreviousClick)="featuredPlaylistsPreviousClick()"
+>
 </app-main-page>
