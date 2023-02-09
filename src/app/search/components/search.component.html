@@ -2,7 +2,10 @@
   <h2>What do you want to hear?</h2>
   <input
     class="search__input"
+    [(ngModel)]="searchTerm"
     type="text"
-    placeholder="write your search and press Enter..."
+    name="searchTerm"
+    id="searchTerm"
+    (ngModelChange)="this.searchInput.next($event)"
   />
 </div>
