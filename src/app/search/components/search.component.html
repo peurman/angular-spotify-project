@@ -9,3 +9,50 @@
     (ngModelChange)="this.searchInput.next($event)"
   />
 </div>
+<div>
+  <div *ngFor="let searched of (searchArtists$ | async)?.items">
+    {{ searched | json }}
+  </div>
+</div>
+<div class="main-container">
+  <div
+    class="main__featured-playlists-container"
+    *ngIf="searchArtists && searchTerm !== ''"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Artists</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchArtists()"
+          [disabled]="!searchArtistsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchArtists()"
+          [disabled]="!searchArtistsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__featured-playlists-cards">
+      <div
+        *ngFor="let searchedArtist of searchArtists"
+        class="main__featured-playlists-card"
+        [id]="searchedArtist.id"
+        (click)="goToArtist(searchedArtist.id)"
+      >
+        <img
+          [src]="searchedArtist.images ? searchedArtist.images[0].url : null"
+          alt=""
+        />
+        <div class="main__featured-playlists-title-artists-container">
+          <label class="main__album-name">{{ searchedArtist.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

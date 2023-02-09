@@ -22,9 +22,15 @@ import { LoginState } from './login/login.state';
 import { loginReducer } from './login/login.reducer';
 import { LoginEffects } from './login/login.effects';
 import * as fromLoginSelectors from './login/login.selectors';
+
 import { ProfileState } from './profile/profile.state';
-import { ProfileEffects } from './profile/profile.effects';
 import { profileReducer } from './profile/profile.reducer';
+import { ProfileEffects } from './profile/profile.effects';
+
+import { SearchArtistsState } from './search-artists/search-artists.state';
+import { searchArtistsReducer } from './search-artists/search-artists.reducer';
+import { SearchArtistsEffects } from './search-artists/search-artists.effects';
+import * as fromSearchArtistsSelectors from './search-artists/search-artists.selectors';
 
 export interface RootState {
   loggedIn: LoginState;
@@ -33,6 +39,7 @@ export interface RootState {
   newReleases: NewReleasesState;
   featuredPlaylists: FeaturedPlaylistsState;
   profile: ProfileState;
+  searchArtists: SearchArtistsState;
 }
 
 export const appReducer = {
@@ -42,6 +49,7 @@ export const appReducer = {
   newReleases: newReleasesReducer,
   featuredPlaylists: featuredPlaylistsReducer,
   profile: profileReducer,
+  searchArtists: searchArtistsReducer,
 };
 
 export const appEffects = [
@@ -51,6 +59,7 @@ export const appEffects = [
   FeaturedPlaylistsEffects,
   LoginEffects,
   ProfileEffects,
+  SearchArtistsEffects,
 ];
 
 export const appSelectors = [
@@ -67,4 +76,7 @@ export const appSelectors = [
   fromFeaturedPlaylistsSelectors.selectIsError,
   fromFeaturedPlaylistsSelectors.selectIsLoading,
   fromLoginSelectors.selectLogin,
+  fromSearchArtistsSelectors.selectSearchArtistsData,
+  fromSearchArtistsSelectors.selectIsError,
+  fromSearchArtistsSelectors.selectIsLoading,
 ];

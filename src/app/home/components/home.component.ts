@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../services/main.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CategoriesClass, Category } from '../models/categories.interface';
@@ -48,7 +47,7 @@ export class HomeComponent implements OnInit {
   newReleases$!: Observable<Albums | null>;
   featuredPlaylists$!: Observable<Playlists | null>;
 
-  constructor(private mainService: MainService, private store: Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.username$ = this.store.select(fromLogin.selectLoginUsername);

@@ -16,3 +16,70 @@
     color: $main-color;
   }
 }
+
+.main-container {
+  @include centerMeColumn;
+}
+.main__title-arrows-container {
+  @include centerMeRow;
+  justify-content: space-between;
+  width: 780px;
+  .main__previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
+    }
+  }
+}
+.main__featured-playlists-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .main__featured-playlists-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 410px;
+    .main__featured-playlists-card {
+      @include centerMeColumn;
+      gap: 10px;
+      @include card-style(180px, 165px);
+      img {
+        width: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .main__featured-playlists-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          cursor: pointer;
+          font-size: 0.9rem;
+          color: $font-secondary-color;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 150px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
