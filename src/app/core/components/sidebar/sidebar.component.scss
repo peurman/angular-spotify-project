@@ -9,7 +9,7 @@
   background-color: $background-darker;
   @include centerMeColumn;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 15px;
   padding: 20px 0;
   min-height: 100vh;
   .sidebar__main-nav-container {
@@ -25,10 +25,20 @@
     @include centerMeColumn;
     width: calc(100% - 5px);
     height: 60px;
+    font-size: 1rem;
     &-active {
       background-color: $background;
       border: none;
       border-left: 10px solid $main-color;
     }
+  }
+  hr {
+    margin: 0;
+    padding: 0;
+    width: 65%;
+    border: 1px groove $font-secondary-color;
+  }
+  &__my-playlists {
+    font-size: 1rem;
   }
 }
