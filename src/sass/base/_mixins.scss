@@ -17,7 +17,7 @@
 
 @mixin buttonLarge {
   border: none;
-  background-color: $button-background-color;
+  background-color: $main-color;
   width: 328px;
   height: 52px;
   border-radius: 10px;
@@ -28,7 +28,7 @@
 }
 @mixin buttonLabel {
   border: none;
-  background-color: $button-background-color;
+  background-color: $main-color;
   width: 145px;
   height: 35px;
   border-radius: 10px;
@@ -39,7 +39,7 @@
   cursor: pointer;
   &:hover {
     background-color: $button-color;
-    color: $button-background-color;
+    color: $main-color;
     @include scale-up-center();
   }
 }

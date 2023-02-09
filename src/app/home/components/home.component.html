@@ -1,4 +1,6 @@
-<h1>Welcome!</h1>
+<h1>
+  Welcome <em *ngIf="username$ | async as username">{{ username }}</em> !
+</h1>
 <app-main-page
   [genresList]="currentGenres"
   [genresPrevious]="genresPrevious"

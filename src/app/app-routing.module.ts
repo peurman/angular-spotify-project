@@ -40,6 +40,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./search/search.module').then((m) => m.SearchModule),
   },
+  {
+    path: 'myMusic',
+    loadChildren: () =>
+      import('./my-music/my-music.module').then((m) => m.MyMusicModule),
+  },
+  // {
+  //   path: 'profile',
+  //   loadChildren: () =>
+  //     import('./profile/profile.module').then((m) => m.ProfileModule),
+  // },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
