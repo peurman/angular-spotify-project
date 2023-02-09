@@ -1,0 +1,8 @@
+@use "styles.scss" as *;
+
+.my-music {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 800px;
+  gap: 10px;
+}
