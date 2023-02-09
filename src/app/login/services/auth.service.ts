@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthToken } from '../models/authtoken.interface';
 import { User } from 'src/app/store/login/login.state';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
       'https://accounts.spotify.com/es-ES/authorize?client_id=' +
       environment.credentials.clientId +
       '&response_type=code' +
+      '&scope=user-top-read,user-follow-read,user-follow-modify,user-library-read,user-library-modify' + //<------- add scopes to require permissions
       '&redirect_uri=' +
       encodeURIComponent('http://localhost:4200/login/callback') +
       '&expires_in=3600',

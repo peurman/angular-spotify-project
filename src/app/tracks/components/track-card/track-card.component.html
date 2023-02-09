@@ -1,1 +1,9 @@
-<p>track-card works!</p>
+<div class="main-track-card">
+<img [src]="track?.album?.images?.[0]?.url" alt="" />
+<div class="track-title-container">
+    <div class="track-info">
+        <label class="track-name">{{ track?.name }}</label>
+    </div>
+</div>
+</div>
+
