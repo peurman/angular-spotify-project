@@ -28,12 +28,14 @@ export interface Album {
   uri: string;
 }
 export interface Artist {
+  images: Image[];
   external_urls: ExternalUrls;
   href: string;
   id: string;
   name: string;
   type: ArtistType;
   uri: string;
+  isFollowing: boolean;
 }
 
 export interface ExternalUrls {

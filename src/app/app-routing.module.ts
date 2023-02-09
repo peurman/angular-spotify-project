@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeGuard } from './guards/home.guard';
+import { MainGuard } from './core/guards/main.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-    canActivate: [HomeGuard],
+    canActivate: [MainGuard],
   },
   {
     path: 'login',
@@ -19,37 +19,45 @@ const routes: Routes = [
     path: 'artists',
     loadChildren: () =>
       import('./artists/artists.module').then((m) => m.ArtistsModule),
+    canActivate: [MainGuard],
   },
   {
     path: 'playlists',
     loadChildren: () =>
       import('./playlists/playlists.module').then((m) => m.PlaylistsModule),
+    canActivate: [MainGuard],
   },
   {
     path: 'albums',
     loadChildren: () =>
       import('./albums/albums.module').then((m) => m.AlbumsModule),
+    canActivate: [MainGuard],
   },
   {
     path: 'tracks',
     loadChildren: () =>
       import('./tracks/tracks.module').then((m) => m.TracksModule),
+    canActivate: [MainGuard],
   },
   {
     path: 'search',
     loadChildren: () =>
       import('./search/search.module').then((m) => m.SearchModule),
+    canActivate: [MainGuard],
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
+    canActivate: [MainGuard],
   },
   {
     path: 'myMusic',
     loadChildren: () =>
       import('./my-music/my-music.module').then((m) => m.MyMusicModule),
+    canActivate: [MainGuard],
   },
-  // {
-  //   path: 'profile',
-  //   loadChildren: () =>
-  //     import('./profile/profile.module').then((m) => m.ProfileModule),
-  // },
+
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

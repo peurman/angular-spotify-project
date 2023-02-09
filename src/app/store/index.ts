@@ -22,6 +22,9 @@ import { LoginState } from './login/login.state';
 import { loginReducer } from './login/login.reducer';
 import { LoginEffects } from './login/login.effects';
 import * as fromLoginSelectors from './login/login.selectors';
+import { ProfileState } from './profile/profile.state';
+import { ProfileEffects } from './profile/profile.effects';
+import { profileReducer } from './profile/profile.reducer';
 
 export interface RootState {
   loggedIn: LoginState;
@@ -29,6 +32,7 @@ export interface RootState {
   genres: GenresState;
   newReleases: NewReleasesState;
   featuredPlaylists: FeaturedPlaylistsState;
+  profile: ProfileState;
 }
 
 export const appReducer = {
@@ -37,6 +41,7 @@ export const appReducer = {
   genres: genresReducer,
   newReleases: newReleasesReducer,
   featuredPlaylists: featuredPlaylistsReducer,
+  profile: profileReducer,
 };
 
 export const appEffects = [
@@ -45,6 +50,7 @@ export const appEffects = [
   NewReleasesEffects,
   FeaturedPlaylistsEffects,
   LoginEffects,
+  ProfileEffects,
 ];
 
 export const appSelectors = [

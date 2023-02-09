@@ -1,6 +1,6 @@
 export interface LoginState {
   loggedIn: boolean;
-  user?: User;
+  user: User | null;
 }
 
 export interface User {
@@ -9,7 +9,9 @@ export interface User {
     href: string;
     total: number;
   };
-  images: {
-    url: string;
-  };
+  images: [
+    {
+      url: string;
+    }
+  ];
 }

@@ -16,7 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
 import { LoginGuard } from './guards/login.guard';
-import { HomeGuard } from './guards/home.guard';
+import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService,
     LoginGuard,
-    HomeGuard,
+    MainGuard,
   ],
   bootstrap: [AppComponent],
 })

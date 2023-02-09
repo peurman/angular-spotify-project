@@ -16,12 +16,12 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('tokenInfo')) {
-      this.loggedIn$ = this.store.select(fromLogin.selectLogin);
-      this.subscription = this.loggedIn$.subscribe((loggedIn) => {
+    this.loggedIn$ = this.store.select(fromLogin.selectLogin);
+    this.subscription = this.loggedIn$.subscribe((loggedIn) => {
+      if (loggedIn) {
         this.isLoggedIn = loggedIn;
-      });
-    }
+      }
+    });
   }
 
   ngOnDestroy(): void {

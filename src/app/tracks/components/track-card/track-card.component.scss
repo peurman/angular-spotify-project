@@ -1,0 +1,57 @@
+@use "styles.scss" as *;
+@use "./base/variables" as *;
+
+.main-track-card{
+    @include centerMeColumn;
+      gap: 10px;
+      @include card-style(210px, 165px);
+      img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .track-title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        
+        .track-info {
+        display: flex;
+        align-items: center;
+        }
+        
+        label {
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: $font-secondary-color;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 150px;
+        }
+        
+        .track-name {
+        font-weight: bold;
+        font-size: 0.9rem;
+        }
+        
+        .follow-button, .unFollow-button {
+        text-align: center;
+        text-decoration: none;
+        background-color: $main-color;
+        border-radius: 3px;
+        width: 100px;
+        color: $button-color
+        }
+
+        .unFollow-button{
+          background-color: red;
+        }
+        }
+}

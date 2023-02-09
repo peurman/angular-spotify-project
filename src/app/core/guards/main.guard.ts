@@ -3,12 +3,12 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { catchError, map, of } from 'rxjs';
-import { AuthToken } from '../login/models/authtoken.interface';
-import { AuthService } from '../login/services/auth.service';
-import { getUserRequest, login, logout } from '../store/login/login.actions';
+import { AuthToken } from '../../login/models/authtoken.interface';
+import { AuthService } from '../../login/services/auth.service';
+import { getUserRequest, login, logout } from '../../store/login/login.actions';
 
 @Injectable()
-export class HomeGuard implements CanActivate {
+export class MainGuard implements CanActivate {
   constructor(
     private auth: AuthService,
     private router: Router,
