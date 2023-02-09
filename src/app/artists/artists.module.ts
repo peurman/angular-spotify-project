@@ -9,5 +9,6 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
 @NgModule({
   declarations: [ArtistsComponent, ArtistCardComponent, ArtistDetailComponent],
   imports: [CommonModule, ArtistsRoutingModule],
+  exports: [ArtistCardComponent],
 })
 export class ArtistsModule {}

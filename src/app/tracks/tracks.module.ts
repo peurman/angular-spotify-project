@@ -9,5 +9,6 @@ import { TrackDetailComponent } from './components/track-detail/track-detail.com
 @NgModule({
   declarations: [TracksComponent, TrackCardComponent, TrackDetailComponent],
   imports: [CommonModule, TracksRoutingModule],
+  exports: [TrackCardComponent],
 })
 export class TracksModule {}

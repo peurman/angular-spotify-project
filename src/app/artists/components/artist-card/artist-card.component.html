@@ -1,1 +1,9 @@
-<p>artist-card works!</p>
+<div class="main-artist-card">
+<img [src]="artist?.images?.[0]?.url" alt="" />
+<div class="artist-title-artists-container">
+    <div class="artist-info">
+        <label class="artist-name">{{ artist?.name }}</label>
+    </div>
+    <a (click)="handleClick()" [ngClass]="{'unFollow-button': artist?.isFollowing, 'follow-button': !artist?.isFollowing}">{{artist?.isFollowing ? 'Unfollow' : 'Follow'}}</a>
+</div>
+</div>

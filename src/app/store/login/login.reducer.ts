@@ -4,6 +4,7 @@ import { LoginState } from './login.state';
 
 export const initialState: LoginState = {
   loggedIn: false,
+  user: null,
 };
 
 export const loginReducerInternal = createReducer(
@@ -16,7 +17,7 @@ export const loginReducerInternal = createReducer(
   on(loginActions.logout, (state) => ({
     ...state,
     loggedIn: false,
-    user: undefined,
+    user: null,
   }))
 );
 
