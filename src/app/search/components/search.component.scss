@@ -1,0 +1,18 @@
+@use "styles.scss" as *;
+
+.search {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 800px;
+  gap: 10px;
+
+  &__input {
+    font: italic 1.2rem "Circular";
+    padding: 10px;
+    border-radius: 5px;
+    width: 350px;
+    height: 30px;
+    background-color: $background-hover;
+    color: $main-color;
+  }
+}

@@ -15,6 +15,7 @@ import * as fromCategories from 'src/app/store/categories/categories.selectors';
 import * as fromGenres from 'src/app/store/genres/genres.selectors';
 import * as fromNewReleases from 'src/app/store/new-releases/new-releases.selectors';
 import * as fromFeaturedPlaylists from 'src/app/store/featured-playlists/featured-playlists.selectors';
+import * as fromLogin from 'src/app/store/login/login.selectors';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,8 @@ import * as fromFeaturedPlaylists from 'src/app/store/featured-playlists/feature
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  username$!: Observable<string | undefined>;
+
   categories: Category[] = [];
   categoriesNext: string | null = '';
   categoriesPrevious: string | null = '';
@@ -48,6 +51,7 @@ export class HomeComponent implements OnInit {
   constructor(private mainService: MainService, private store: Store) {}
 
   ngOnInit(): void {
+    this.username$ = this.store.select(fromLogin.selectLoginUsername);
     //categories
     this.store.dispatch(getCategoriesAction({ url: '' }));
     this.categories$ = this.store.select(fromCategories.selectCategoriesData);

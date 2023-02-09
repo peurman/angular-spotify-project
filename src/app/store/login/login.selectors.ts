@@ -15,3 +15,7 @@ export const selectLogin = createSelector(
   selectLoginState,
   (state: LoginState) => state.loggedIn
 );
+export const selectLoginUsername = createSelector(
+  selectLoginState,
+  (state: LoginState) => state.user?.display_name
+);

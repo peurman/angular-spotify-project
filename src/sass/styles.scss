@@ -8,6 +8,8 @@ body {
   font: 18px "Circular";
   background-color: $background;
   color: $font-color;
+  margin: 0;
+  padding: 0;
 }
 p {
   color: $font-color;
@@ -15,4 +17,25 @@ p {
 h1,
 h2 {
   margin: 30px 0 15px 0;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+  &:link {
+    color: $font-color;
+  }
+  &:visited {
+    color: $font-color;
+  }
+  &:hover {
+    color: $main-color;
+  }
+  &:active,
+  &:visited:active {
+    color: $main-color;
+  }
+}
+
+em {
+  color: $main-color;
 }

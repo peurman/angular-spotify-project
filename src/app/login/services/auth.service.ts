@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(private http: HttpClient) {}
   encoder = new TextEncoder();
 
   credentials = btoa(

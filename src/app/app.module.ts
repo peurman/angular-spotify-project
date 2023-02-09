@@ -1,6 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -17,9 +16,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
 import { LoginGuard } from './guards/login.guard';
-import { HomeGuard } from './guards/home.guard';
+import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CallbackGuard } from './guards/callback.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +38,7 @@ import { CallbackGuard } from './guards/callback.guard';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService,
     LoginGuard,
-    HomeGuard,
+    MainGuard,
   ],
   bootstrap: [AppComponent],
 })
