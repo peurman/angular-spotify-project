@@ -3,21 +3,32 @@
 :host {
   width: 80%;
   min-width: 200px;
+  max-width: 300px;
 }
 .sidebar {
+  background-color: $background-darker;
   @include centerMeColumn;
   justify-content: flex-start;
-  padding: 20px 0;
   gap: 20px;
+  padding: 20px 0;
   min-height: 100vh;
+  .sidebar__main-nav-container {
+    @include centerMeColumn;
+    width: 100%;
+  }
   &__image-container {
     img {
       width: 60px;
     }
   }
-
-  &__nav-link-active {
-    color: $button-background-color;
-    border-radius: 5px;
+  &__nav-link {
+    @include centerMeColumn;
+    width: calc(100% - 5px);
+    height: 60px;
+    &-active {
+      background-color: $background;
+      border: none;
+      border-left: 10px solid $main-color;
+    }
   }
 }

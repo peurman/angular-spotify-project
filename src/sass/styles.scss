@@ -18,22 +18,24 @@ h1,
 h2 {
   margin: 30px 0 15px 0;
 }
-
 a {
   cursor: pointer;
   text-decoration: none;
-  //   a {
   &:link {
     color: $font-color;
   }
-  // &:visited {
-  //   color: inherit !important;
-  // }
+  &:visited {
+    color: $font-color;
+  }
   &:hover {
-    color: $button-background-color;
+    color: $main-color;
   }
   &:active,
   &:visited:active {
-    color: $button-background-color;
+    color: $main-color;
   }
+}
+
+em {
+  color: $main-color;
 }
