@@ -9,6 +9,8 @@ import {
   Albums,
   Playlist,
   Playlists,
+  Track,
+  Tracks,
 } from '../models/search.interface';
 
 import { getSearchArtistsAction } from 'src/app/store/search-artists/search-artists.actions';
@@ -19,6 +21,9 @@ import * as fromSearchAlbums from 'src/app/store/search-albums/search-albums.sel
 
 import { getSearchPlaylistsAction } from 'src/app/store/search-playlists/search-playlists.actions';
 import * as fromSearchPlaylists from 'src/app/store/search-playlists/search-playlists.selectors';
+
+import { getSearchTracksAction } from 'src/app/store/search-tracks/search-tracks.actions';
+import * as fromSearchTracks from 'src/app/store/search-tracks/search-tracks.selectors';
 
 @Component({
   selector: 'app-search',
@@ -45,6 +50,12 @@ export class SearchComponent implements OnInit {
   searchPlaylistsNext: string | null = '';
   searchPlaylistsPrevious: string | null = '';
   searchPlaylists$!: Observable<Playlists | null>;
+  // Tracks
+  searchTracks: Track[] = [];
+  searchTracksNext: string | null = '';
+  searchTracksPrevious: string | null = '';
+  searchTracks$!: Observable<Tracks | null>;
+  searchTracksIsLoading$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 
@@ -60,9 +71,16 @@ export class SearchComponent implements OnInit {
     this.searchPlaylists$ = this.store.select(
       fromSearchPlaylists.selectSearchPlaylistsData
     );
+    this.searchTracks$ = this.store.select(
+      fromSearchTracks.selectSearchTracksData
+    );
+    this.searchTracksIsLoading$ = this.store.select(
+      fromSearchTracks.selectIsLoading
+    );
+
     // Input
     this.searchInput
-      .pipe(debounceTime(600), distinctUntilChanged())
+      .pipe(debounceTime(700), distinctUntilChanged())
       .subscribe((term) => {
         console.log(`Searching for: ${term}`);
         this.store.dispatch(
@@ -73,6 +91,9 @@ export class SearchComponent implements OnInit {
         );
         this.store.dispatch(
           getSearchPlaylistsAction({ url: '', searchedTerm: term })
+        );
+        this.store.dispatch(
+          getSearchTracksAction({ url: '', searchedTerm: term })
         );
       });
     //Artists
@@ -97,6 +118,14 @@ export class SearchComponent implements OnInit {
         this.searchPlaylists = res.items;
         this.searchPlaylistsNext = res.next;
         this.searchPlaylistsPrevious = res.previous;
+      }
+    });
+    // Tracks
+    this.searchTracks$.subscribe((res) => {
+      if (res) {
+        this.searchTracks = res.items;
+        this.searchTracksNext = res.next;
+        this.searchTracksPrevious = res.previous;
       }
     });
   }
@@ -154,5 +183,25 @@ export class SearchComponent implements OnInit {
   }
   goToPlaylist(playlistId: string) {
     console.log('PLAYLIST ID: ', playlistId);
+  }
+  // Tracks
+  goToPreviousSearchTracks() {
+    this.store.dispatch(
+      getSearchTracksAction({
+        url: this.searchTracksPrevious,
+        searchedTerm: '',
+      })
+    );
+  }
+  goToNextSearchTracks() {
+    this.store.dispatch(
+      getSearchTracksAction({
+        url: this.searchTracksNext,
+        searchedTerm: '',
+      })
+    );
+  }
+  goToTrack(trackId: string) {
+    console.log('TRACK ID: ', trackId);
   }
 }

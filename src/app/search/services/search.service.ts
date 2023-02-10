@@ -5,6 +5,7 @@ import {
   SearchAlbum,
   SearchArtist,
   SearchPlaylist,
+  SearchTracks,
 } from '../models/search.interface';
 
 const BASE_API = 'https://api.spotify.com/v1';
@@ -56,5 +57,18 @@ export class SearchService {
       );
     }
     return this.http.get<SearchPlaylist>(url, this.options);
+  }
+  // Tracks
+  getTracksSearched(
+    url: string | null,
+    termSearched: string | null
+  ): Observable<SearchTracks> {
+    if (!url) {
+      return this.http.get<SearchTracks>(
+        `${BASE_API}/search?q=%22${termSearched}%22&type=track&limit=8`,
+        this.options
+      );
+    }
+    return this.http.get<SearchTracks>(url, this.options);
   }
 }

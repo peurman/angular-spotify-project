@@ -42,6 +42,11 @@ import { searchPlaylistsReducer } from './search-playlists/search-playlists.redu
 import { SearchPlaylistsEffects } from './search-playlists/search-playlists.effects';
 import * as fromSearchPlaylistsSelectors from './search-playlists/search-playlists.selectors';
 
+import { SearchTracksState } from './search-tracks/search-tracks.state';
+import { searchTracksReducer } from './search-tracks/search-tracks.reducer';
+import { SearchTracksEffects } from './search-tracks/search-tracks.effects';
+import * as fromSearchTracksSelectors from './search-tracks/search-tracks.selectors';
+
 export interface RootState {
   loggedIn: LoginState;
   categories: CategoriesState;
@@ -52,6 +57,7 @@ export interface RootState {
   searchArtists: SearchArtistsState;
   searchAlbums: SearchAlbumsState;
   searchPlaylists: SearchPlaylistsState;
+  searchTracks: SearchTracksState;
 }
 
 export const appReducer = {
@@ -64,6 +70,7 @@ export const appReducer = {
   searchArtists: searchArtistsReducer,
   searchAlbums: searchAlbumsReducer,
   searchPlaylists: searchPlaylistsReducer,
+  searchTracks: searchTracksReducer,
 };
 
 export const appEffects = [
@@ -76,6 +83,7 @@ export const appEffects = [
   SearchArtistsEffects,
   SearchAlbumsEffects,
   SearchPlaylistsEffects,
+  SearchTracksEffects,
 ];
 
 export const appSelectors = [
@@ -101,4 +109,7 @@ export const appSelectors = [
   fromSearchPlaylistsSelectors.selectSearchPlaylistsData,
   fromSearchPlaylistsSelectors.selectIsError,
   fromSearchPlaylistsSelectors.selectIsLoading,
+  fromSearchTracksSelectors.selectSearchTracksData,
+  fromSearchTracksSelectors.selectIsError,
+  fromSearchTracksSelectors.selectIsLoading,
 ];
