@@ -22,9 +22,30 @@ import { LoginState } from './login/login.state';
 import { loginReducer } from './login/login.reducer';
 import { LoginEffects } from './login/login.effects';
 import * as fromLoginSelectors from './login/login.selectors';
+
 import { ProfileState } from './profile/profile.state';
-import { ProfileEffects } from './profile/profile.effects';
 import { profileReducer } from './profile/profile.reducer';
+import { ProfileEffects } from './profile/profile.effects';
+
+import { SearchArtistsState } from './search-artists/search-artists.state';
+import { searchArtistsReducer } from './search-artists/search-artists.reducer';
+import { SearchArtistsEffects } from './search-artists/search-artists.effects';
+import * as fromSearchArtistsSelectors from './search-artists/search-artists.selectors';
+
+import { SearchAlbumsState } from './search-albums/search-albums.state';
+import { searchAlbumsReducer } from './search-albums/search-albums.reducer';
+import { SearchAlbumsEffects } from './search-albums/search-albums.effects';
+import * as fromSearchAlbumsSelectors from './search-albums/search-albums.selectors';
+
+import { SearchPlaylistsState } from './search-playlists/search-playlists.state';
+import { searchPlaylistsReducer } from './search-playlists/search-playlists.reducer';
+import { SearchPlaylistsEffects } from './search-playlists/search-playlists.effects';
+import * as fromSearchPlaylistsSelectors from './search-playlists/search-playlists.selectors';
+
+import { SearchTracksState } from './search-tracks/search-tracks.state';
+import { searchTracksReducer } from './search-tracks/search-tracks.reducer';
+import { SearchTracksEffects } from './search-tracks/search-tracks.effects';
+import * as fromSearchTracksSelectors from './search-tracks/search-tracks.selectors';
 
 export interface RootState {
   loggedIn: LoginState;
@@ -33,6 +54,10 @@ export interface RootState {
   newReleases: NewReleasesState;
   featuredPlaylists: FeaturedPlaylistsState;
   profile: ProfileState;
+  searchArtists: SearchArtistsState;
+  searchAlbums: SearchAlbumsState;
+  searchPlaylists: SearchPlaylistsState;
+  searchTracks: SearchTracksState;
 }
 
 export const appReducer = {
@@ -42,6 +67,10 @@ export const appReducer = {
   newReleases: newReleasesReducer,
   featuredPlaylists: featuredPlaylistsReducer,
   profile: profileReducer,
+  searchArtists: searchArtistsReducer,
+  searchAlbums: searchAlbumsReducer,
+  searchPlaylists: searchPlaylistsReducer,
+  searchTracks: searchTracksReducer,
 };
 
 export const appEffects = [
@@ -51,6 +80,10 @@ export const appEffects = [
   FeaturedPlaylistsEffects,
   LoginEffects,
   ProfileEffects,
+  SearchArtistsEffects,
+  SearchAlbumsEffects,
+  SearchPlaylistsEffects,
+  SearchTracksEffects,
 ];
 
 export const appSelectors = [
@@ -67,4 +100,16 @@ export const appSelectors = [
   fromFeaturedPlaylistsSelectors.selectIsError,
   fromFeaturedPlaylistsSelectors.selectIsLoading,
   fromLoginSelectors.selectLogin,
+  fromSearchArtistsSelectors.selectSearchArtistsData,
+  fromSearchArtistsSelectors.selectIsError,
+  fromSearchArtistsSelectors.selectIsLoading,
+  fromSearchAlbumsSelectors.selectSearchAlbumsData,
+  fromSearchAlbumsSelectors.selectIsError,
+  fromSearchAlbumsSelectors.selectIsLoading,
+  fromSearchPlaylistsSelectors.selectSearchPlaylistsData,
+  fromSearchPlaylistsSelectors.selectIsError,
+  fromSearchPlaylistsSelectors.selectIsLoading,
+  fromSearchTracksSelectors.selectSearchTracksData,
+  fromSearchTracksSelectors.selectIsError,
+  fromSearchTracksSelectors.selectIsLoading,
 ];
