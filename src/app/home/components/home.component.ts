@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 import { CategoriesClass, Category } from '../models/categories.interface';
 import { Album, Albums } from '../models/new-releases.interface';
 import { Playlist, Playlists } from '../models/featured-playlists.interface';
@@ -9,6 +11,7 @@ import { getCategoriesAction } from 'src/app/store/categories/categories.actions
 import { getGenresAction } from 'src/app/store/genres/genres.actions';
 import { getNewReleasesAction } from 'src/app/store/new-releases/new-releases.actions';
 import { getFeaturedPlaylistsAction } from 'src/app/store/featured-playlists/featured-playlists.actions';
+import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 
 import * as fromCategories from 'src/app/store/categories/categories.selectors';
 import * as fromGenres from 'src/app/store/genres/genres.selectors';
@@ -47,7 +50,7 @@ export class HomeComponent implements OnInit {
   newReleases$!: Observable<Albums | null>;
   featuredPlaylists$!: Observable<Playlists | null>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.username$ = this.store.select(fromLogin.selectLoginUsername);
@@ -62,9 +65,6 @@ export class HomeComponent implements OnInit {
           this.categoriesPrevious = res.previous;
         }
       },
-      error: (error) => {
-        console.log(error.message);
-      },
     });
 
     //genres
@@ -73,9 +73,6 @@ export class HomeComponent implements OnInit {
     this.genres$.subscribe({
       next: (res) => {
         if (res) this.genres = res;
-      },
-      error: (error) => {
-        console.log(error.message);
       },
     });
 
@@ -92,9 +89,6 @@ export class HomeComponent implements OnInit {
           this.newReleasesPrevious = res.previous;
         }
       },
-      error: (error) => {
-        console.log(error.message);
-      },
     });
 
     // featured playlists
@@ -109,9 +103,6 @@ export class HomeComponent implements OnInit {
           this.featuredPlaylistsNext = res.next;
           this.featuredPlaylistsPrevious = res.previous;
         }
-      },
-      error: (error) => {
-        console.log(error.message);
       },
     });
   }
@@ -163,6 +154,11 @@ export class HomeComponent implements OnInit {
   }
   newReleasesNextClick() {
     this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
+  }
+  goToAlbum(id: string) {
+    console.log(id);
+    this.store.dispatch(getAlbumDetailAction({ id }));
+    this.router.navigate(['/albums']);
   }
   // featured playlists
   featuredPlaylistsPreviousClick() {

@@ -1,0 +1,40 @@
+@use "styles.scss" as *;
+
+.album {
+  @include centerMeColumn;
+  align-items: flex-start;
+  margin-top: 30px;
+  width: 800px;
+  gap: 10px;
+}
+
+.album__image-data-container {
+  @include centerMeRow;
+
+  gap: 10px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .album__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    .album__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+    }
+  }
+}
+
+.album__artists-year-songs {
+  @include centerMeRow;
+  font-size: 0.9rem;
+  .album__artists {
+    @include centerMeRow;
+  }
+}

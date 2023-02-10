@@ -1,1 +1,53 @@
-<p>albums works!</p>
+<div class="album">
+  <div *ngIf="albumDetail$ | async as albumDetail">
+    <div class="album__image-data-container">
+      <div class="album__image-container">
+        <img [src]="albumDetail.images[0].url" alt="" />
+      </div>
+      <div class="album__data-container">
+        <div class="album__title">
+          {{ albumDetail.name }}
+        </div>
+        <div class="album__artists-year-songs">
+          <div>
+            <div
+              *ngIf="albumDetail.artists.length === 1"
+              class="album__artists"
+            >
+              {{ albumDetail.artists[0].name }}
+            </div>
+            <div *ngIf="albumDetail.artists.length > 1" class="album__artists">
+              <div *ngFor="let artist of albumDetail.artists; let i = index">
+                <label *ngIf="i === albumDetail.artists.length - 1">
+                  {{ artist.name }}</label
+                >
+                <label *ngIf="i < albumDetail.artists.length - 1">
+                  {{ artist.name }}&nbsp;&nbsp;▪&nbsp;&nbsp;
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="album__year">
+            &nbsp;&nbsp;▪&nbsp;&nbsp;{{
+              albumDetail.release_date | date : "yyyy"
+            }}&nbsp;&nbsp;▪&nbsp;&nbsp;
+          </div>
+          <div class="album__songs">
+            <div *ngIf="albumDetail.tracks.items.length === 1">
+              {{ albumDetail.tracks.items.length }} song
+            </div>
+            <div *ngIf="albumDetail.tracks.items.length > 1">
+              {{ albumDetail.tracks.items.length }} songs
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="album__tracks-container">
+      <h2>Track List</h2>
+      <div *ngFor="let track of albumDetail.tracks.items">
+        <label>{{ track.name }}</label>
+      </div>
+    </div>
+  </div>
+</div>
