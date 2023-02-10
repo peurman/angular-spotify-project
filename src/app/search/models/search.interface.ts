@@ -1,3 +1,4 @@
+//ARTISTS
 export interface SearchArtist {
   artists: Artists;
 }
@@ -10,7 +11,6 @@ export interface Artists {
   previous: null;
   total: number;
 }
-
 export interface Artist {
   external_urls: ExternalUrls;
   href: string;
@@ -20,7 +20,7 @@ export interface Artist {
   uri: string;
   followers?: Followers;
   genres?: string[];
-  images?: Image[];
+  images: Image[];
   popularity?: number;
 }
 export interface ExternalUrls {
@@ -36,6 +36,7 @@ export interface Image {
   width: number | null;
 }
 
+//ALBUMS
 export interface SearchAlbum {
   albums: Albums;
 }
@@ -64,10 +65,10 @@ export interface Album {
   uri: string;
 }
 
+//PLAYLISTS
 export interface SearchPlaylist {
   playlists: Playlists;
 }
-
 export interface Playlists {
   href: string;
   items: Item[];
@@ -77,7 +78,6 @@ export interface Playlists {
   previous: null;
   total: number;
 }
-
 export interface Item {
   collaborative: boolean;
   description: string;
@@ -91,38 +91,18 @@ export interface Item {
   public: null;
   snapshot_id: string;
   tracks: Tracks;
-  type: ItemType;
+  type: string;
   uri: string;
 }
-
-export interface ExternalUrls {
-  spotify: string;
-}
-
-export interface Image {
-  height: number | null;
-  url: string;
-  width: number | null;
-}
-
 export interface Owner {
   display_name: string;
   external_urls: ExternalUrls;
   href: string;
   id: string;
-  type: OwnerType;
+  type: string;
   uri: string;
 }
-
-export enum OwnerType {
-  User = 'user',
-}
-
 export interface Tracks {
   href: string;
   total: number;
-}
-
-export enum ItemType {
-  Playlist = 'playlist',
 }

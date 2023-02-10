@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SearchArtistsState } from './search-artists.state';
 
 const selectSearchArtistsState =
-  createFeatureSelector<SearchArtistsState>('newReleases');
+  createFeatureSelector<SearchArtistsState>('searchArtists');
 
 export const selectSearchArtistsData = createSelector(
   selectSearchArtistsState,

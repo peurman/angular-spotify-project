@@ -9,15 +9,52 @@
     (ngModelChange)="this.searchInput.next($event)"
   />
 </div>
-<div>
-  <div *ngFor="let searched of (searchArtists$ | async)?.items">
-    {{ searched | json }}
-  </div>
-</div>
 <div class="main-container">
   <div
-    class="main__featured-playlists-container"
-    *ngIf="searchArtists && searchTerm !== ''"
+    class="main__search-albums-container"
+    *ngIf="!!searchAlbums.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Albums</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchAlbums()"
+          [disabled]="!!!this.searchAlbumsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchAlbums()"
+          [disabled]="!!!this.searchAlbumsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-albums-cards">
+      <div
+        *ngFor="let album of searchAlbums"
+        class="main__search-albums-card"
+        [id]="album.id"
+        (click)="goToAlbum(album.id)"
+      >
+        <img [src]="album.images[0].url" alt="" />
+        <div class="main__search-albums-title-artists-container">
+          <label class="main__album-name">{{ album.name }}</label>
+          <div class="main__album-artists">
+            <label *ngFor="let artist of album.artists">{{
+              artist.name
+            }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="main__search-artists-container"
+    *ngIf="!!searchArtists.length && !!searchTerm"
   >
     <div class="main__title-arrows-container">
       <h2>Artists</h2>
@@ -25,31 +62,35 @@
         <button
           title="Previous"
           (click)="goToPreviousSearchArtists()"
-          [disabled]="!searchArtistsPrevious"
+          [disabled]="!!!this.searchArtistsPrevious"
         >
           &#8249;
         </button>
         <button
           title="Next"
           (click)="goToNextSearchArtists()"
-          [disabled]="!searchArtistsNext"
+          [disabled]="!!!this.searchArtistsNext"
         >
           &#8250;
         </button>
       </div>
     </div>
-    <div class="main__featured-playlists-cards">
+    <div class="main__search-artists-cards">
       <div
         *ngFor="let searchedArtist of searchArtists"
-        class="main__featured-playlists-card"
+        class="main__search-artists-card"
         [id]="searchedArtist.id"
         (click)="goToArtist(searchedArtist.id)"
       >
         <img
-          [src]="searchedArtist.images ? searchedArtist.images[0].url : null"
+          [src]="
+            searchedArtist.images.length
+              ? searchedArtist.images[0].url
+              : defaultArtist
+          "
           alt=""
         />
-        <div class="main__featured-playlists-title-artists-container">
+        <div class="main__search-artists-title-artists-container">
           <label class="main__album-name">{{ searchedArtist.name }}</label>
         </div>
       </div>

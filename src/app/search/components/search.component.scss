@@ -19,6 +19,7 @@
 
 .main-container {
   @include centerMeColumn;
+  margin-bottom: 15px;
 }
 .main__title-arrows-container {
   @include centerMeRow;
@@ -41,27 +42,77 @@
     }
   }
 }
-.main__featured-playlists-container {
+.main__search-albums-container {
   @include centerMeColumn;
   align-items: flex-start;
   width: 100%;
-  .main__featured-playlists-cards {
+  .main__search-albums-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 350px;
+    overflow: hidden;
+    .main__search-albums-card {
+      @include centerMeRow;
+      justify-content: space-between;
+      @include card-style(90px, 230px);
+      img {
+        width: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .main__search-albums-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          cursor: pointer;
+          font-size: 0.8rem;
+          color: $font-secondary-color;
+          text-align: left;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 130px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+        .main__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}
+.main__search-artists-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .main__search-artists-cards {
     @include centerMeRow;
     flex-wrap: wrap;
     gap: 10px;
     align-content: flex-start;
     width: 800px;
     height: 410px;
-    .main__featured-playlists-card {
+    .main__search-artists-card {
       @include centerMeColumn;
       gap: 10px;
       @include card-style(180px, 165px);
       img {
         width: 150px;
+        height: 150px;
         object-fit: cover;
         border-radius: 5px;
       }
-      .main__featured-playlists-title-artists-container {
+      .main__search-artists-title-artists-container {
         @include centerMeColumn;
         justify-content: space-evenly;
         height: 100%;
