@@ -2,14 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Artist, Artists } from '../models/search.interface';
-import { Album, Albums } from '../models/search.interface';
+import {
+  Artist,
+  Artists,
+  Album,
+  Albums,
+  Playlist,
+  Playlists,
+} from '../models/search.interface';
 
 import { getSearchArtistsAction } from 'src/app/store/search-artists/search-artists.actions';
 import * as fromSearchArtists from 'src/app/store/search-artists/search-artists.selectors';
 
 import { getSearchAlbumsAction } from 'src/app/store/search-albums/search-albums.actions';
 import * as fromSearchAlbums from 'src/app/store/search-albums/search-albums.selectors';
+
+import { getSearchPlaylistsAction } from 'src/app/store/search-playlists/search-playlists.actions';
+import * as fromSearchPlaylists from 'src/app/store/search-playlists/search-playlists.selectors';
 
 @Component({
   selector: 'app-search',
@@ -31,23 +40,42 @@ export class SearchComponent implements OnInit {
   searchAlbumsNext: string | null = '';
   searchAlbumsPrevious: string | null = '';
   searchAlbums$!: Observable<Albums | null>;
+  // Playlists
+  searchPlaylists: Playlist[] = [];
+  searchPlaylistsNext: string | null = '';
+  searchPlaylistsPrevious: string | null = '';
+  searchPlaylists$!: Observable<Playlists | null>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    // Artists
+    // Selectors
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );
     // .pipe(tap((res) => console.log('RESPONSE', res)));
+    this.searchAlbums$ = this.store.select(
+      fromSearchAlbums.selectSearchAlbumsData
+    );
+    this.searchPlaylists$ = this.store.select(
+      fromSearchPlaylists.selectSearchPlaylistsData
+    );
+    // Input
     this.searchInput
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(600), distinctUntilChanged())
       .subscribe((term) => {
         console.log(`Searching for: ${term}`);
         this.store.dispatch(
           getSearchArtistsAction({ url: '', searchedTerm: term })
         );
+        this.store.dispatch(
+          getSearchAlbumsAction({ url: '', searchedTerm: term })
+        );
+        this.store.dispatch(
+          getSearchPlaylistsAction({ url: '', searchedTerm: term })
+        );
       });
+    //Artists
     this.searchArtists$.subscribe((res) => {
       if (res) {
         this.searchArtists = res.items;
@@ -56,23 +84,19 @@ export class SearchComponent implements OnInit {
       }
     });
     // Albums
-    this.searchAlbums$ = this.store.select(
-      fromSearchAlbums.selectSearchAlbumsData
-    );
-    // .pipe(tap((res) => console.log('RESPONSE', res)));
-    this.searchInput
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((term) => {
-        console.log(`Searching for: ${term}`);
-        this.store.dispatch(
-          getSearchAlbumsAction({ url: '', searchedTerm: term })
-        );
-      });
     this.searchAlbums$.subscribe((res) => {
       if (res) {
         this.searchAlbums = res.items;
         this.searchAlbumsNext = res.next;
         this.searchAlbumsPrevious = res.previous;
+      }
+    });
+    // Playlists
+    this.searchPlaylists$.subscribe((res) => {
+      if (res) {
+        this.searchPlaylists = res.items;
+        this.searchPlaylistsNext = res.next;
+        this.searchPlaylistsPrevious = res.previous;
       }
     });
   }
@@ -110,5 +134,25 @@ export class SearchComponent implements OnInit {
   }
   goToAlbum(albumId: string) {
     console.log('ALBUM ID: ', albumId);
+  }
+  // Playlists
+  goToPreviousSearchPlaylists() {
+    this.store.dispatch(
+      getSearchPlaylistsAction({
+        url: this.searchPlaylistsPrevious,
+        searchedTerm: '',
+      })
+    );
+  }
+  goToNextSearchPlaylists() {
+    this.store.dispatch(
+      getSearchPlaylistsAction({
+        url: this.searchPlaylistsNext,
+        searchedTerm: '',
+      })
+    );
+  }
+  goToPlaylist(playlistId: string) {
+    console.log('PLAYLIST ID: ', playlistId);
   }
 }

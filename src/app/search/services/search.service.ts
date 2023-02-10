@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SearchAlbum, SearchArtist } from '../models/search.interface';
+import {
+  SearchAlbum,
+  SearchArtist,
+  SearchPlaylist,
+} from '../models/search.interface';
 
 const BASE_API = 'https://api.spotify.com/v1';
 
@@ -39,5 +43,18 @@ export class SearchService {
       );
     }
     return this.http.get<SearchAlbum>(url, this.options);
+  }
+  // Playlists
+  getPlaylistsSearched(
+    url: string | null,
+    termSearched: string | null
+  ): Observable<SearchPlaylist> {
+    if (!url) {
+      return this.http.get<SearchPlaylist>(
+        `${BASE_API}/search?q=%22${termSearched}%22&type=playlist&limit=9`,
+        this.options
+      );
+    }
+    return this.http.get<SearchPlaylist>(url, this.options);
   }
 }

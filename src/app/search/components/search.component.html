@@ -96,4 +96,44 @@
       </div>
     </div>
   </div>
+  <div
+    class="main__search-albums-container"
+    *ngIf="!!searchPlaylists.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Playlists</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchPlaylists()"
+          [disabled]="!!!this.searchPlaylistsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchPlaylists()"
+          [disabled]="!!!this.searchPlaylistsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-albums-cards">
+      <div
+        *ngFor="let playlist of searchPlaylists"
+        class="main__search-albums-card"
+        [id]="playlist.id"
+        (click)="goToAlbum(playlist.id)"
+      >
+        <img [src]="playlist.images[0].url" alt="" />
+        <div class="main__search-albums-title-artists-container">
+          <label class="main__album-name">{{ playlist.name }}</label>
+          <div class="main__album-artists">
+            <label>{{ playlist.owner.display_name }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

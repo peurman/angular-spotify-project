@@ -71,14 +71,14 @@ export interface SearchPlaylist {
 }
 export interface Playlists {
   href: string;
-  items: Item[];
+  items: Playlist[];
   limit: number;
   next: string;
   offset: number;
   previous: null;
   total: number;
 }
-export interface Item {
+export interface Playlist {
   collaborative: boolean;
   description: string;
   external_urls: ExternalUrls;
@@ -105,4 +105,40 @@ export interface Owner {
 export interface Tracks {
   href: string;
   total: number;
+}
+
+// TRACKS
+export interface SearchTracks {
+  tracks: Tracks;
+}
+export interface Tracks {
+  href: string;
+  items: Track[];
+  limit: number;
+  next: string;
+  offset: number;
+  previous: null;
+  total: number;
+}
+export interface Track {
+  album: Album;
+  artists: Artist[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_ids: ExternalIDS;
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  is_local: boolean;
+  name: string;
+  popularity: number;
+  preview_url: string;
+  track_number: number;
+  type: string;
+  uri: string;
+}
+export interface ExternalIDS {
+  isrc: string;
 }
