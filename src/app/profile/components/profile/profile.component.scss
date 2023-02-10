@@ -1,77 +1,74 @@
 @use "styles.scss" as *;
 .main {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 800px;
-    justify-content: center;
-    align-items: center;
-    }
-  
-  .profile-top {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  justify-content: center;
+  align-items: center;
+}
 
-    .user-avatar {
-        width: 150px;
-        height: 150px;
-      
-        img {
-          border-radius: 100%;
-          width: 100%;
-          max-width: 100%;
-          vertical-align: middle;
-        }
-      } 
-      .user-followers {
-        margin-top: 20px;
-        text-align: center;
-      
-        .user-followers-count {
-          font-weight: 700;
-          font-size: 20px;
-          color: rgb(29, 185, 84);
-        }
-      
-        .user-followers-text {
-          color: rgb(155, 155, 155);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          margin-top: 5px;
-        }
-      }
+.profile-top {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
 
-  }
-  .top-artist, .top-tracks{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .artists-card{
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
+  .user-avatar {
+    width: 150px;
+    height: 150px;
 
-  .previous-next-container{
-    @include centerMeRow;
-    margin-bottom: 30px;
-    button {
-      background: transparent;
-      border: none;
-      color: $button-color;
-      font: 2.4rem "Circular";
-      line-height: 0.5rem;
-      cursor: pointer;
-      &:disabled {
-        color: $background-hover;
-      }
+    img {
+      border-radius: 100%;
+      width: 100%;
+      max-width: 100%;
+      vertical-align: middle;
     }
   }
-  
-  
+  .user-followers {
+    margin-top: 20px;
+    text-align: center;
+
+    .user-followers-count {
+      font-weight: 700;
+      font-size: 20px;
+      color: rgb(29, 185, 84);
+    }
+
+    .user-followers-text {
+      color: rgb(155, 155, 155);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+  }
+}
+.top-artist,
+.top-tracks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.artists-card {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.previous-next-container {
+  @include centerMeRow;
+  margin-bottom: 30px;
+  button {
+    background: transparent;
+    border: none;
+    color: $button-color;
+    font: 2.4rem "Circular";
+    line-height: 0.5rem;
+    cursor: pointer;
+    &:disabled {
+      color: $background-hover;
+    }
+  }
+}
