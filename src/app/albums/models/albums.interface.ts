@@ -27,6 +27,7 @@ export interface Artist {
   type: string;
   uri: string;
 }
+
 export interface ExternalUrls {
   spotify: string;
 }
@@ -46,9 +47,9 @@ export interface Tracks {
   href: string;
   items: Track[];
   limit: number;
-  next: null;
+  next: string | null;
   offset: number;
-  previous: null;
+  previous: string | null;
   total: number;
 }
 
@@ -65,6 +66,41 @@ export interface Track {
   name: string;
   preview_url: null;
   track_number: number;
+  type: string;
+  uri: string;
+}
+
+export interface AlbumsSaved {
+  href: string;
+  items: AlbumSavedItem[];
+  limit: number;
+  next: null;
+  offset: number;
+  previous: null;
+  total: number;
+}
+export interface AlbumSavedItem {
+  added_at: Date;
+  album: Album;
+}
+export interface Album {
+  album_type: string;
+  artists: Artist[];
+  available_markets: string[];
+  copyrights: Copyright[];
+  external_ids: ExternalIDS;
+  external_urls: ExternalUrls;
+  genres: string[];
+  href: string;
+  id: string;
+  images: Image[];
+  label: string;
+  name: string;
+  popularity: number;
+  release_date: Date;
+  release_date_precision: string;
+  total_tracks: number;
+  tracks: Tracks;
   type: string;
   uri: string;
 }
