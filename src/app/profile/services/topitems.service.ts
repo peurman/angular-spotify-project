@@ -7,9 +7,7 @@ import { TopTracks } from '../model/toptracks.interface';
 
 const BASE_API = 'https://api.spotify.com/v1/me';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TopItems {
   constructor(private http: HttpClient) {}
   headers = new HttpHeaders().set('Content-Type', 'application/json');

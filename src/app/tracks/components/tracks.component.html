@@ -1,1 +1,16 @@
-<p>tracks works!</p>
+<div class="main">
+    <div class="track-image">
+        <img [src]="(track$ | async)?.album?.images?.[0]?.url">
+    </div>
+    <div class="track-info">
+        <h2>Track name: {{(track$ | async)?.name}}</h2>
+        <h3>Album name: {{(track$ | async)?.album?.name}}</h3>
+        <h3>Artist(s):</h3>
+        <h3 *ngFor="let artist of (track$ | async)?.album?.artists"><li>{{artist.name}}</li></h3>
+        <h3>Track duration: {{(track$ | async)?.duration_ms | date:'mm:ss'}}</h3>
+        <audio
+        controls
+        [src]="(track$ | async)?.preview_url">
+        </audio>
+    </div>
+</div>

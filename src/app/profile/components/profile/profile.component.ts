@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromLogin from 'src/app/store/login/login.selectors';
 import * as fromProfile from 'src/app/store/profile/profile.selectors';
+
 import { User } from 'src/app/store/login/login.state';
 import {
   followArtistsAction,
@@ -12,7 +13,9 @@ import {
   unFollowArtistsAction,
 } from 'src/app/store/profile/profile.actions';
 import { TopArtists } from '../../model/topartists.interface';
-import { TopTracks } from '../../model/toptracks.interface';
+import { TopTracks, Track } from '../../model/toptracks.interface';
+import { getTrackSuccessAction } from 'src/app/store/track/track.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +30,7 @@ export class ProfileComponent implements OnInit {
   topTracks$!: Observable<TopTracks | null>;
   topTracksNext: string | null = '';
   topTracksPrevious: string | null = '';
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(getTopArtistsAction({ url: '' }));
@@ -57,6 +60,12 @@ export class ProfileComponent implements OnInit {
         console.log(error.message);
       },
     });
+  }
+  handleSelectTrack(track: Track) {
+    if (track) {
+      this.store.dispatch(getTrackSuccessAction({ track }));
+      this.router.navigateByUrl('tracks');
+    }
   }
   handlePreviousArtist() {
     this.store.dispatch(getTopArtistsAction({ url: this.topArtistsPrevious }));

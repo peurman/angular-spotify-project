@@ -12,13 +12,11 @@ export class TrackCardComponent {
     id: string;
   }>();
   @Input() track!: Track | undefined;
+  @Output() selectTrack = new EventEmitter<Track>();
   handleClick() {
     if (this.track) {
-      // if (this.track) {
-      //   this.saveRemoveEvent.emit({ type: 'unfollow', id: this.artist.id });
-      // } else {
-      //   this.saveRemoveEvent.emit({ type: 'follow', id: this.artist.id });
-      // }
+      console.log(this.track.album.id);
+      this.selectTrack.emit(this.track);
     }
   }
 }

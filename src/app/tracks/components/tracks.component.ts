@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Track } from 'src/app/profile/model/toptracks.interface';
+import * as fromTrack from 'src/app/store/track/track.selector';
 
 @Component({
   selector: 'app-tracks',
   templateUrl: './tracks.component.html',
-  styleUrls: ['./tracks.component.scss']
+  styleUrls: ['./tracks.component.scss'],
 })
-export class TracksComponent {
+export class TracksComponent implements OnInit {
+  track$!: Observable<Track | null>;
+  constructor(private store: Store) {}
 
+  ngOnInit(): void {
+    this.track$ = this.store.select(fromTrack.selectTrack);
+  }
 }

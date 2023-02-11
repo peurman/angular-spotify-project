@@ -45,7 +45,7 @@
             </button>
           </div>
         <div class="artists-card">
-            <app-track-card *ngFor="let track of (topTracks$ | async)?.items" [track]="track"></app-track-card>
+            <app-track-card *ngFor="let track of (topTracks$ | async)?.items" [track]="track" (selectTrack)="handleSelectTrack($event)"></app-track-card>
         </div>
     </div>
 </div>

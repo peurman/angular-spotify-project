@@ -26,6 +26,11 @@ import { ProfileState } from './profile/profile.state';
 import { ProfileEffects } from './profile/profile.effects';
 import { profileReducer } from './profile/profile.reducer';
 
+import { TrackState } from './track/track.state';
+import { trackReducer } from './track/track.reducer';
+import { TrackEffects } from './track/track.effects';
+import * as fromTrackSelectors from './track/track.selector';
+
 export interface RootState {
   loggedIn: LoginState;
   categories: CategoriesState;
@@ -33,6 +38,7 @@ export interface RootState {
   newReleases: NewReleasesState;
   featuredPlaylists: FeaturedPlaylistsState;
   profile: ProfileState;
+  track: TrackState;
 }
 
 export const appReducer = {
@@ -42,6 +48,7 @@ export const appReducer = {
   newReleases: newReleasesReducer,
   featuredPlaylists: featuredPlaylistsReducer,
   profile: profileReducer,
+  track: trackReducer,
 };
 
 export const appEffects = [
@@ -51,6 +58,7 @@ export const appEffects = [
   FeaturedPlaylistsEffects,
   LoginEffects,
   ProfileEffects,
+  TrackEffects,
 ];
 
 export const appSelectors = [
@@ -67,4 +75,5 @@ export const appSelectors = [
   fromFeaturedPlaylistsSelectors.selectIsError,
   fromFeaturedPlaylistsSelectors.selectIsLoading,
   fromLoginSelectors.selectLogin,
+  fromTrackSelectors.selectTrack,
 ];
