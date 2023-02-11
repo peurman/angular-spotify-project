@@ -42,9 +42,6 @@ export class ProfileComponent implements OnInit {
           this.topArtistsPrevious = res.previous;
         }
       },
-      error: (error) => {
-        console.log(error.message);
-      },
     });
     this.topTracks$.subscribe({
       next: (res) => {
@@ -52,9 +49,6 @@ export class ProfileComponent implements OnInit {
           this.topTracksNext = res.next;
           this.topTracksPrevious = res.previous;
         }
-      },
-      error: (error) => {
-        console.log(error.message);
       },
     });
   }

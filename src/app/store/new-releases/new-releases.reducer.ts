@@ -10,27 +10,33 @@ export const initialNewReleasesState: NewReleasesState = {
 
 const newReleasesReducerInternal = createReducer(
   initialNewReleasesState,
-  on(newReleasesActions.getNewReleasesAction, (state) => {
+  on(newReleasesActions.getNewReleasesAction, (state): NewReleasesState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(newReleasesActions.getNewReleasesSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      newReleasesData: data,
-      isLoading: false,
-    };
-  }),
-  on(newReleasesActions.getNewReleasesErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  })
+  on(
+    newReleasesActions.getNewReleasesSuccessAction,
+    (state, { data }): NewReleasesState => {
+      return {
+        ...state,
+        newReleasesData: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    newReleasesActions.getNewReleasesErrorAction,
+    (state, { message }): NewReleasesState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  )
 );
 export function newReleasesReducer(
   state: NewReleasesState | undefined,

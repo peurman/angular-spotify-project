@@ -64,7 +64,6 @@ export class SearchComponent implements OnInit {
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );
-    // .pipe(tap((res) => console.log('RESPONSE', res)));
     this.searchAlbums$ = this.store.select(
       fromSearchAlbums.selectSearchAlbumsData
     );
@@ -82,7 +81,6 @@ export class SearchComponent implements OnInit {
     this.searchInput
       .pipe(debounceTime(700), distinctUntilChanged())
       .subscribe((term) => {
-        console.log(`Searching for: ${term}`);
         this.store.dispatch(
           getSearchArtistsAction({ url: '', searchedTerm: term })
         );

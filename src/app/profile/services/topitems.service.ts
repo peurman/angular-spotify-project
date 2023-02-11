@@ -18,7 +18,7 @@ export class TopItems {
   getTopArtists(url: string | null): Observable<TopArtists> {
     if (!url) {
       return this.http.get<TopArtists>(
-        `${BASE_API}/top/artists?limit=10`,
+        `${BASE_API}/top/artists?limit=8`,
         this.options
       );
     }
@@ -28,7 +28,7 @@ export class TopItems {
   getTopTracks(url: string | null): Observable<TopTracks> {
     if (!url) {
       return this.http.get<TopTracks>(
-        `${BASE_API}/top/tracks?limit=10`,
+        `${BASE_API}/top/tracks?limit=8`,
         this.options
       );
     }

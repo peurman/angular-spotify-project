@@ -156,7 +156,6 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
   }
   goToAlbum(id: string) {
-    console.log(id);
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigate(['/albums']);
   }

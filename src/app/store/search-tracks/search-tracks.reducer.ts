@@ -10,27 +10,33 @@ export const initialSearchTracksState: SearchTracksState = {
 
 const searchTracksReducerInternal = createReducer(
   initialSearchTracksState,
-  on(searchTracksActions.getSearchTracksAction, (state) => {
+  on(searchTracksActions.getSearchTracksAction, (state): SearchTracksState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(searchTracksActions.getSearchTracksSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      searchTracksData: data,
-      isLoading: false,
-    };
-  }),
-  on(searchTracksActions.getSearchTracksErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  })
+  on(
+    searchTracksActions.getSearchTracksSuccessAction,
+    (state, { data }): SearchTracksState => {
+      return {
+        ...state,
+        searchTracksData: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    searchTracksActions.getSearchTracksErrorAction,
+    (state, { message }): SearchTracksState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  )
 );
 export function searchTracksReducer(
   state: SearchTracksState | undefined,

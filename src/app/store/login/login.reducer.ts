@@ -9,16 +9,22 @@ export const initialState: LoginState = {
 
 export const loginReducerInternal = createReducer(
   initialState,
-  on(loginActions.login, (state, { user }) => ({
-    ...state,
-    loggedIn: true,
-    user,
-  })),
-  on(loginActions.logout, (state) => ({
-    ...state,
-    loggedIn: false,
-    user: null,
-  }))
+  on(
+    loginActions.login,
+    (state, { user }): LoginState => ({
+      ...state,
+      loggedIn: true,
+      user,
+    })
+  ),
+  on(
+    loginActions.logout,
+    (state): LoginState => ({
+      ...state,
+      loggedIn: false,
+      user: null,
+    })
+  )
 );
 
 export function loginReducer(state: LoginState | undefined, action: Action) {

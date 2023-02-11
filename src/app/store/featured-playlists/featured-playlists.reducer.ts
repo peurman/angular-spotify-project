@@ -10,16 +10,19 @@ export const initialNewReleasesState: FeaturedPlaylistsState = {
 
 const featuredPlaylistsReducerInternal = createReducer(
   initialNewReleasesState,
-  on(featuredPlaylistsActions.getFeaturedPlaylistsAction, (state) => {
-    return {
-      ...state,
-      isLoading: true,
-      isError: null,
-    };
-  }),
+  on(
+    featuredPlaylistsActions.getFeaturedPlaylistsAction,
+    (state): FeaturedPlaylistsState => {
+      return {
+        ...state,
+        isLoading: true,
+        isError: null,
+      };
+    }
+  ),
   on(
     featuredPlaylistsActions.getFeaturedPlaylistsSuccessAction,
-    (state, { data }) => {
+    (state, { data }): FeaturedPlaylistsState => {
       return {
         ...state,
         featuredPlaylistsData: data,
@@ -29,7 +32,7 @@ const featuredPlaylistsReducerInternal = createReducer(
   ),
   on(
     featuredPlaylistsActions.getFeaturedPlaylistsErrorAction,
-    (state, { message }) => {
+    (state, { message }): FeaturedPlaylistsState => {
       return {
         ...state,
         isLoading: false,

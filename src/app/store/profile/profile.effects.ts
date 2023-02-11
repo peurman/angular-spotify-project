@@ -46,7 +46,6 @@ export class ProfileEffects {
       switchMap((res) => {
         return this.topService.getTopTracks(res.url).pipe(
           map((response) => {
-            console.log(response.items);
             return profileActions.getTopTracksSuccessAction({
               data: response,
             });

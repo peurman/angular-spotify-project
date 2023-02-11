@@ -10,27 +10,33 @@ export const initialCategoryState: AlbumDetailState = {
 
 const albumDetailReducerInternal = createReducer(
   initialCategoryState,
-  on(albumDetailActions.getAlbumDetailAction, (state) => {
+  on(albumDetailActions.getAlbumDetailAction, (state): AlbumDetailState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(albumDetailActions.getAlbumDetailSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      albumDetailData: data,
-      isLoading: false,
-    };
-  }),
-  on(albumDetailActions.getAlbumDetailErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  })
+  on(
+    albumDetailActions.getAlbumDetailSuccessAction,
+    (state, { data }): AlbumDetailState => {
+      return {
+        ...state,
+        albumDetailData: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    albumDetailActions.getAlbumDetailErrorAction,
+    (state, { message }): AlbumDetailState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  )
 );
 export function albumDetailReducer(
   state: AlbumDetailState | undefined,

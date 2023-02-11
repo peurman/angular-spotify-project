@@ -56,19 +56,24 @@
   flex-wrap: wrap;
   gap: 7px;
 }
-
-.previous-next-container {
+.title-arrows-container {
   @include centerMeRow;
-  margin-bottom: 30px;
-  button {
-    background: transparent;
-    border: none;
-    color: $button-color;
-    font: 2.4rem "Circular";
-    line-height: 0.5rem;
-    cursor: pointer;
-    &:disabled {
-      color: $background-hover;
+  justify-content: space-between;
+  width: 780px;
+  .previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
     }
   }
 }
