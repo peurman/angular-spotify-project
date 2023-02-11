@@ -1,10 +1,23 @@
 <div class="album">
-  <div *ngIf="albumDetail$ | async as albumDetail">
+  <div *ngIf="albumDetail$ | async as albumDetail" class="album-container">
     <div class="album__image-data-container">
       <div class="album__image-container">
         <img [src]="albumDetail.images[0].url" alt="" />
       </div>
       <div class="album__data-container">
+        <div class="album__type-heart-container">
+          <div class="album__type">
+            {{ albumDetail.album_type | uppercase }}
+          </div>
+          <div class="album__heart">
+            <img
+              [src]="following ? saveOn : saveOff"
+              alt=""
+              title="Save or remove this album"
+              (click)="saveRemoveAlbum()"
+            />
+          </div>
+        </div>
         <div class="album__title">
           {{ albumDetail.name }}
         </div>
@@ -44,10 +57,47 @@
       </div>
     </div>
     <div class="album__tracks-container">
-      <h2>Track List</h2>
-      <div *ngFor="let track of albumDetail.tracks.items">
-        <label>{{ track.name }}</label>
-      </div>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Artists</th>
+          <th>Duration</th>
+          <th>30 seconds Preview</th>
+        </tr>
+        <tr *ngFor="let track of albumDetail.tracks.items">
+          <td>{{ track.track_number }}</td>
+          <td>
+            <a (click)="goToTrack(track.id)">{{ track.name }}</a>
+          </td>
+          <td>
+            <div *ngIf="track.artists.length === 1" class="track__artists">
+              <a (click)="goToArtist(track.artists[0].id)">{{
+                track.artists[0].name
+              }}</a>
+            </div>
+            <div *ngIf="track.artists.length > 1" class="track__artists">
+              <div *ngFor="let artist of track.artists; let i = index">
+                <label *ngIf="i === track.artists.length - 1">
+                  <a (click)="goToArtist(artist.id)">{{
+                    artist.name
+                  }}</a></label
+                >
+                <label *ngIf="i < albumDetail.artists.length - 1">
+                  <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                  >&nbsp;&nbsp;▪&nbsp;&nbsp;
+                </label>
+              </div>
+            </div>
+          </td>
+          <td>{{ track.duration_ms | times }}</td>
+          <td>
+            <audio controls volume="0.50">
+              <source [src]="track.preview_url" type="audio/mpeg" />
+            </audio>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

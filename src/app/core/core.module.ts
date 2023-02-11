@@ -7,16 +7,19 @@ import { HomeComponent } from '../home/components/home.component';
 import { SearchComponent } from '../search/components/search.component';
 import { MyMusicComponent } from '../my-music/components/my-music.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ProfileComponent } from '../profile/components/profile/profile.component';
+
+import { TimesPipe } from './pipes/times.pipe';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
-  // { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'myMusic', component: MyMusicComponent },
 ];
 @NgModule({
-  declarations: [SidebarComponent, LoadingComponent],
-  exports: [SidebarComponent, RouterModule, LoadingComponent],
+  declarations: [SidebarComponent, LoadingComponent, TimesPipe],
+  exports: [SidebarComponent, RouterModule, LoadingComponent, TimesPipe],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class CoreModule {}
