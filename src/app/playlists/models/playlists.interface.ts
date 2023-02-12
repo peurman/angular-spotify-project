@@ -1,5 +1,6 @@
 import { Track } from 'src/app/search/models/search.interface';
 import { Owner } from 'src/app/search/models/search.interface';
+import { Image } from 'src/app/search/models/search.interface';
 import { ExternalUrls } from 'src/app/search/models/search.interface';
 
 export interface Playlist {
@@ -9,7 +10,7 @@ export interface Playlist {
   followers: Followers;
   href: string;
   id: string;
-  images: string[];
+  images: Image[];
   name: string;
   owner: Owner;
   primary_color: null;

@@ -28,6 +28,7 @@ import * as fromSearchTracks from 'src/app/store/search-tracks/search-tracks.sel
 
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import { getTrackAction } from 'src/app/store/track/track.actions';
+import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 
 @Component({
   selector: 'app-search',
@@ -185,7 +186,8 @@ export class SearchComponent implements OnInit {
     );
   }
   goToPlaylist(playlistId: string) {
-    console.log('PLAYLIST ID: ', playlistId);
+    this.store.dispatch(getPlaylistAction({ id: playlistId }));
+    this.router.navigate(['/playlists']);
   }
   // Tracks
   goToPreviousSearchTracks() {

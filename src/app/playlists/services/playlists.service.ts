@@ -15,6 +15,6 @@ export class PlaylistService {
   options = { headers: this.headers };
 
   getPlaylist(id: string): Observable<Playlist> {
-    return this.http.put<Playlist>(`${BASE_API}/playlists/${id}`, this.options);
+    return this.http.get<Playlist>(`${BASE_API}/playlists/${id}`, this.options);
   }
 }

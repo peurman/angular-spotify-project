@@ -1,10 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { Observable, firstValueFrom } from 'rxjs';
+
+import * as fromPlaylist from 'src/app/store/playlists/playlist.selectors';
+import { getTrackAction } from 'src/app/store/track/track.actions';
+
+import { PlaylistService } from '../services/playlists.service';
+import { Playlist } from '../models/playlists.interface';
 
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.component.html',
-  styleUrls: ['./playlists.component.scss']
+  styleUrls: ['./playlists.component.scss'],
 })
-export class PlaylistsComponent {
+export class PlaylistsComponent implements OnInit {
+  constructor(
+    private store: Store,
+    private playlistService: PlaylistService,
+    private router: Router
+  ) {}
 
+  saveOn = '../../../assets/images/saveOn.png';
+  saveOff = '../../../assets/images/saveOff.png';
+  defaultAlbum = '../../../assets/images/defaultAlbum.jpg';
+  following = false;
+
+  playlist$!: Observable<Playlist | null>;
+  playlistID: string | undefined;
+  // albumsSaved: AlbumSavedItem[] | undefined = [];
+  // albumsSavedComplete!: AlbumsSaved | null;
+
+  async ngOnInit() {
+    this.playlist$ = this.store.select(fromPlaylist.selectPlaylistData);
+    this.playlist$.subscribe((res) => (this.playlistID = res?.id));
+
+    // this.playlistsSavedComplete = await firstValueFrom(
+    //   this.playlistService.getPlaylistsSaved()
+    // );
+    // console.log(
+    //   'PLAYLISTS SAVED: ',
+    //   this.playlistsSavedComplete.items,
+    //   '- PLAYLIST ID: ',
+    //   this.playlistID
+    // );
+    // this.playlistsSavedComplete.items.forEach((el) => {
+    //   if (el.playlist.id === this.playlistID) this.following = true;
+    // });
+  }
+
+  goToTrack(trackId: string) {
+    this.store.dispatch(getTrackAction({ id: trackId }));
+    this.router.navigateByUrl('/tracks');
+  }
+
+  goToArtist(artistId: string) {
+    console.log('ARTIST ID: ', artistId);
+  }
+
+  saveRemovePlaylist(playlistId: string) {
+    if (this.following) console.log('REMOVE: ', playlistId);
+    else console.log('SAVE: ', playlistId);
+    this.following = !this.following;
+  }
 }
