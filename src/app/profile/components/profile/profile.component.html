@@ -1,51 +1,71 @@
 <div class="main">
-    <div class="profile-top">
-        <div class="user-avatar">
-            <img [src]="(profileInfo$ | async)?.images?.[0]?.url">
-        </div>
-        <div class="user-username">
-            <h1>{{(profileInfo$ | async)?.display_name}}</h1>
-        </div>
-        <div class="user-followers">
-            <p class="user-followers-count">{{(profileInfo$ | async)?.followers?.total}}</p>
-            <p class="user-followers-text">Followers</p>
-        </div>
+  <div class="profile-top">
+    <div class="user-avatar">
+      <img [src]="(profileInfo$ | async)?.images?.[0]?.url" />
     </div>
-    <div class="top-artist">
-        <p>Top Artists</p>
-        <div class="previous-next-container">
-            <button
-              title="Previous" (click)="handlePreviousArtist()"
-              [disabled]="topArtistsPrevious === null">
-              &#8249;
-            </button>
-            <button
-              title="Next" (click)="handleNextArtist()"
-              [disabled]="topArtistsNext === null">
-              &#8250;
-            </button>
-          </div>
-        <div class="artists-card">
-            <app-artist-card *ngFor="let artist of (topArtists$ | async)?.items" [artist]="artist"
-            (followUnFollowEvent)="handleFollowUnfollow($event)"></app-artist-card>
-        </div>
+    <div class="user-username">
+      <h1>{{ (profileInfo$ | async)?.display_name }}</h1>
     </div>
-    <div class="top-tracks">
-        <p>Top Tracks</p>
-        <div class="previous-next-container">
-            <button
-              title="Previous" (click)="handlePreviousTrack()"
-              [disabled]="topTracksPrevious === null">
-              &#8249;
-            </button>
-            <button
-              title="Next" (click)="handleNextTrack()"
-              [disabled]="topTracksNext === null">
-              &#8250;
-            </button>
-          </div>
-        <div class="artists-card">
-            <app-track-card *ngFor="let track of (topTracks$ | async)?.items" [track]="track"></app-track-card>
-        </div>
+    <div class="user-followers">
+      <p class="user-followers-count">
+        {{ (profileInfo$ | async)?.followers?.total }}
+      </p>
+      <p class="user-followers-text">Followers</p>
     </div>
+  </div>
+  <div class="top-artist">
+    <div class="title-arrows-container">
+      <h2>Top Artists</h2>
+      <div class="previous-next-container">
+        <button
+          title="Previous"
+          (click)="handlePreviousArtist()"
+          [disabled]="topArtistsPrevious === null"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="handleNextArtist()"
+          [disabled]="topArtistsNext === null"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="artists-card">
+      <app-artist-card
+        *ngFor="let artist of (topArtists$ | async)?.items"
+        [artist]="artist"
+        (followUnFollowEvent)="handleFollowUnfollow($event)"
+      ></app-artist-card>
+    </div>
+  </div>
+  <div class="top-tracks">
+    <div class="title-arrows-container">
+      <h2>Top Tracks</h2>
+      <div class="previous-next-container">
+        <button
+          title="Previous"
+          (click)="handlePreviousTrack()"
+          [disabled]="topTracksPrevious === null"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="handleNextTrack()"
+          [disabled]="topTracksNext === null"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="artists-card">
+      <app-track-card
+        *ngFor="let track of (topTracks$ | async)?.items"
+        [track]="track"
+      ></app-track-card>
+    </div>
+  </div>
 </div>

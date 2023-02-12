@@ -14,27 +14,33 @@ export const initialProfileState: ProfileState = {
 
 const profileReducerInternal = createReducer(
   initialProfileState,
-  on(profileActions.getTopArtistsAction, (state) => {
+  on(profileActions.getTopArtistsAction, (state): ProfileState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(profileActions.getTopArtistsSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      topArtists: data,
-      isLoading: false,
-    };
-  }),
-  on(profileActions.getTopArtistsErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  }),
+  on(
+    profileActions.getTopArtistsSuccessAction,
+    (state, { data }): ProfileState => {
+      return {
+        ...state,
+        topArtists: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    profileActions.getTopArtistsErrorAction,
+    (state, { message }): ProfileState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  ),
   on(profileActions.getTopTracksAction, (state) => {
     return {
       ...state,

@@ -9,6 +9,7 @@
     (ngModelChange)="this.searchInput.next($event)"
   />
 </div>
+<app-loading *ngIf="searchTracksIsLoading$ | async"></app-loading>
 <div class="main-container">
   <div
     class="main__search-albums-container"

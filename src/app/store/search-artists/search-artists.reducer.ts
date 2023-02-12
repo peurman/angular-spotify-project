@@ -10,27 +10,36 @@ export const initialSearchArtistsState: SearchArtistsState = {
 
 const searchArtistsReducerInternal = createReducer(
   initialSearchArtistsState,
-  on(searchArtistsActions.getSearchArtistsAction, (state) => {
-    return {
-      ...state,
-      isLoading: true,
-      isError: null,
-    };
-  }),
-  on(searchArtistsActions.getSearchArtistsSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      searchArtistsData: data,
-      isLoading: false,
-    };
-  }),
-  on(searchArtistsActions.getSearchArtistsErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  })
+  on(
+    searchArtistsActions.getSearchArtistsAction,
+    (state): SearchArtistsState => {
+      return {
+        ...state,
+        isLoading: true,
+        isError: null,
+      };
+    }
+  ),
+  on(
+    searchArtistsActions.getSearchArtistsSuccessAction,
+    (state, { data }): SearchArtistsState => {
+      return {
+        ...state,
+        searchArtistsData: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    searchArtistsActions.getSearchArtistsErrorAction,
+    (state, { message }): SearchArtistsState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  )
 );
 export function searchArtistsReducer(
   state: SearchArtistsState | undefined,

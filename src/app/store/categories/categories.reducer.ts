@@ -10,27 +10,33 @@ export const initialCategoryState: CategoriesState = {
 
 const categoriesReducerInternal = createReducer(
   initialCategoryState,
-  on(categoriesActions.getCategoriesAction, (state) => {
+  on(categoriesActions.getCategoriesAction, (state): CategoriesState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(categoriesActions.getCategoriesSuccessAction, (state, { data }) => {
-    return {
-      ...state,
-      categoriesData: data,
-      isLoading: false,
-    };
-  }),
-  on(categoriesActions.getCategoriesErrorAction, (state, { message }) => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: message,
-    };
-  })
+  on(
+    categoriesActions.getCategoriesSuccessAction,
+    (state, { data }): CategoriesState => {
+      return {
+        ...state,
+        categoriesData: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    categoriesActions.getCategoriesErrorAction,
+    (state, { message }): CategoriesState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  )
 );
 export function categoriesReducer(
   state: CategoriesState | undefined,

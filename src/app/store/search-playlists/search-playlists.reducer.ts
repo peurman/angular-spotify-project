@@ -10,16 +10,19 @@ export const initialSearchPlaylistsState: SearchPlaylistsState = {
 
 const searchPlaylistsReducerInternal = createReducer(
   initialSearchPlaylistsState,
-  on(searchPlaylistsActions.getSearchPlaylistsAction, (state) => {
-    return {
-      ...state,
-      isLoading: true,
-      isError: null,
-    };
-  }),
+  on(
+    searchPlaylistsActions.getSearchPlaylistsAction,
+    (state): SearchPlaylistsState => {
+      return {
+        ...state,
+        isLoading: true,
+        isError: null,
+      };
+    }
+  ),
   on(
     searchPlaylistsActions.getSearchPlaylistsSuccessAction,
-    (state, { data }) => {
+    (state, { data }): SearchPlaylistsState => {
       return {
         ...state,
         searchPlaylistsData: data,
@@ -29,7 +32,7 @@ const searchPlaylistsReducerInternal = createReducer(
   ),
   on(
     searchPlaylistsActions.getSearchPlaylistsErrorAction,
-    (state, { message }) => {
+    (state, { message }): SearchPlaylistsState => {
       return {
         ...state,
         isLoading: false,

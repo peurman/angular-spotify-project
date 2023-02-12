@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import {
@@ -24,6 +25,8 @@ import * as fromSearchPlaylists from 'src/app/store/search-playlists/search-play
 
 import { getSearchTracksAction } from 'src/app/store/search-tracks/search-tracks.actions';
 import * as fromSearchTracks from 'src/app/store/search-tracks/search-tracks.selectors';
+
+import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 
 @Component({
   selector: 'app-search',
@@ -57,14 +60,13 @@ export class SearchComponent implements OnInit {
   searchTracks$!: Observable<Tracks | null>;
   searchTracksIsLoading$!: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     // Selectors
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );
-    // .pipe(tap((res) => console.log('RESPONSE', res)));
     this.searchAlbums$ = this.store.select(
       fromSearchAlbums.selectSearchAlbumsData
     );
@@ -82,7 +84,6 @@ export class SearchComponent implements OnInit {
     this.searchInput
       .pipe(debounceTime(700), distinctUntilChanged())
       .subscribe((term) => {
-        console.log(`Searching for: ${term}`);
         this.store.dispatch(
           getSearchArtistsAction({ url: '', searchedTerm: term })
         );
@@ -162,7 +163,8 @@ export class SearchComponent implements OnInit {
     );
   }
   goToAlbum(albumId: string) {
-    console.log('ALBUM ID: ', albumId);
+    this.store.dispatch(getAlbumDetailAction({ id: albumId }));
+    this.router.navigate(['/albums']);
   }
   // Playlists
   goToPreviousSearchPlaylists() {

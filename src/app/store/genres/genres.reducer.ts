@@ -10,21 +10,21 @@ export const initialCategoryState: GenresState = {
 
 const genresReducerInternal = createReducer(
   initialCategoryState,
-  on(genresActions.getGenresAction, (state) => {
+  on(genresActions.getGenresAction, (state): GenresState => {
     return {
       ...state,
       isLoading: true,
       isError: null,
     };
   }),
-  on(genresActions.getGenresSuccessAction, (state, { data }) => {
+  on(genresActions.getGenresSuccessAction, (state, { data }): GenresState => {
     return {
       ...state,
       genresData: data,
       isLoading: false,
     };
   }),
-  on(genresActions.getGenresErrorAction, (state, { message }) => {
+  on(genresActions.getGenresErrorAction, (state, { message }): GenresState => {
     return {
       ...state,
       isLoading: false,
