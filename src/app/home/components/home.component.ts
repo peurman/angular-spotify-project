@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
   //categories
   categoriesPreviousClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesPrevious }));
@@ -156,7 +157,7 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
   }
   goToAlbum(id: string) {
-    this.store.dispatch(getAlbumDetailAction({ id }));
+    this.store.dispatch(getAlbumDetailAction({ id: id }));
     this.router.navigate(['/albums']);
   }
   // featured playlists

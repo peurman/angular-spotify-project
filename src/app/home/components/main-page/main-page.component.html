@@ -24,7 +24,7 @@
         *ngFor="let newRelease of newReleasesList"
         class="main__new-releases-card"
         [id]="newRelease.id"
-        (click)="goToAlbum(newRelease.id)"
+        (click)="handleClickNewReleases(newRelease.total_tracks, newRelease.id)"
       >
         <img [src]="newRelease.images[0].url" alt="" />
         <div class="main__new-releases-title-artists-container">

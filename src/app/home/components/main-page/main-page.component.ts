@@ -35,6 +35,14 @@ export class MainPageComponent {
   @Output() featuredPlaylistsPreviousClick: EventEmitter<null> =
     new EventEmitter();
 
+  @Output() goToTrackClick: EventEmitter<string> = new EventEmitter();
+
+  handleClickNewReleases(trackCount: number, id: string) {
+    this.goToAlbum(id);
+  }
+  goToTrack(trackId: string) {
+    this.goToTrackClick.emit(trackId);
+  }
   goToAlbum(albumId: string) {
     this.goToAlbumClick.emit(albumId);
   }

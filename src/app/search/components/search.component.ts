@@ -27,6 +27,7 @@ import { getSearchTracksAction } from 'src/app/store/search-tracks/search-tracks
 import * as fromSearchTracks from 'src/app/store/search-tracks/search-tracks.selectors';
 
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
+import { getTrackAction } from 'src/app/store/track/track.actions';
 
 @Component({
   selector: 'app-search',
@@ -204,6 +205,7 @@ export class SearchComponent implements OnInit {
     );
   }
   goToTrack(trackId: string) {
-    console.log('TRACK ID: ', trackId);
+    this.store.dispatch(getTrackAction({ id: trackId }));
+    this.router.navigateByUrl('tracks');
   }
 }

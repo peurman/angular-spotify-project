@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import {
@@ -11,6 +11,8 @@ import {
 import { AlbumService } from '../services/album.service';
 
 import * as fromAlbum from 'src/app/store/album/album.selectors';
+import { getTrackAction } from 'src/app/store/track/track.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-albums',
@@ -18,7 +20,11 @@ import * as fromAlbum from 'src/app/store/album/album.selectors';
   styleUrls: ['./albums.component.scss'],
 })
 export class AlbumsComponent implements OnInit {
-  constructor(private store: Store, private albumService: AlbumService) {}
+  constructor(
+    private store: Store,
+    private albumService: AlbumService,
+    private router: Router
+  ) {}
 
   saveOn = '../../../assets/images/saveOn.png';
   saveOff = '../../../assets/images/saveOff.png';
@@ -65,7 +71,8 @@ export class AlbumsComponent implements OnInit {
   }
 
   goToTrack(trackId: string) {
-    console.log('TRACK ID: ', trackId);
+    this.store.dispatch(getTrackAction({ id: trackId }));
+    this.router.navigateByUrl('/tracks');
   }
   goToArtist(artistId: string) {
     console.log('ARTIST ID: ', artistId);

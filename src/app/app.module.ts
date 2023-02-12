@@ -18,6 +18,8 @@ import { AuthService } from './login/services/auth.service';
 import { LoginGuard } from './guards/login.guard';
 import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TopItems } from './profile/services/topitems.service';
+import { TrackService } from './tracks/services/track.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +41,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AuthService,
     LoginGuard,
     MainGuard,
+    TopItems,
+    TrackService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,92 @@
+@use "styles.scss" as *;
+
+.track-image-data-container {
+  @include centerMeRow;
+  background: rgb(146, 158, 143);
+  background: linear-gradient(
+    180deg,
+    rgba(146, 158, 143, 1) 0%,
+    rgba(89, 95, 87, 1) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .track__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .track__type-heart-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+    .track__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+  }
+}
+.track__artists-year-songs {
+  @include centerMeRow;
+  padding-left: 10px;
+  color: $font-secondary-color;
+  font-size: 0.9rem;
+  .track__artists {
+    @include centerMeRow;
+  }
+}
+.tracks-container {
+  table {
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
+    }
+  }
+}
+
+audio {
+  width: 250px;
+  height: 30px;
+  &::-webkit-media-controls-panel {
+    background-color: $main-color;
+  }
+  &::-moz-media-controls-panel {
+    background-color: $main-color;
+  }
+}

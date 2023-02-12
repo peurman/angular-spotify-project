@@ -1,15 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Albums, Artist } from 'src/app/home/models/new-releases.interface';
+import { Artist } from 'src/app/home/models/new-releases.interface';
 import { TopArtists } from '../model/topartists.interface';
 import { TopTracks } from '../model/toptracks.interface';
 
 const BASE_API = 'https://api.spotify.com/v1/me';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TopItems {
   constructor(private http: HttpClient) {}
   headers = new HttpHeaders().set('Content-Type', 'application/json');
