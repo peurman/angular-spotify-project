@@ -2,7 +2,204 @@
   <h2>What do you want to hear?</h2>
   <input
     class="search__input"
+    [(ngModel)]="searchTerm"
     type="text"
-    placeholder="write your search and press Enter..."
+    name="searchTerm"
+    id="searchTerm"
+    (ngModelChange)="this.searchInput.next($event)"
   />
+</div>
+<app-loading *ngIf="searchTracksIsLoading$ | async"></app-loading>
+<div class="main-container">
+  <div
+    class="main__search-albums-container"
+    *ngIf="!!searchAlbums.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Albums</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchAlbums()"
+          [disabled]="!!!this.searchAlbumsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchAlbums()"
+          [disabled]="!!!this.searchAlbumsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-albums-cards">
+      <div
+        *ngFor="let album of searchAlbums"
+        class="main__search-albums-card"
+        [id]="album.id"
+        (click)="goToAlbum(album.id)"
+      >
+        <img
+          [src]="album.images.length ? album.images[0].url : defaultAlbum"
+          alt=""
+        />
+        <div class="main__search-albums-title-artists-container">
+          <label class="main__album-name">{{ album.name }}</label>
+          <div class="main__album-artists">
+            <label *ngFor="let artist of album.artists">{{
+              artist.name
+            }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="main__search-artists-container"
+    *ngIf="!!searchArtists.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Artists</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchArtists()"
+          [disabled]="!!!this.searchArtistsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchArtists()"
+          [disabled]="!!!this.searchArtistsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-artists-cards">
+      <div
+        *ngFor="let searchedArtist of searchArtists"
+        class="main__search-artists-card"
+        [id]="searchedArtist.id"
+        (click)="goToArtist(searchedArtist.id)"
+      >
+        <img
+          [src]="
+            searchedArtist.images.length
+              ? searchedArtist.images[0].url
+              : defaultArtist
+          "
+          alt=""
+        />
+        <div class="main__search-artists-title-artists-container">
+          <label class="main__album-name">{{ searchedArtist.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="main__search-playlists-container"
+    *ngIf="!!searchPlaylists.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Playlists</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchPlaylists()"
+          [disabled]="!!!this.searchPlaylistsPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchPlaylists()"
+          [disabled]="!!!this.searchPlaylistsNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-playlists-cards">
+      <div
+        *ngFor="let playlist of searchPlaylists"
+        class="main__search-playlists-card"
+        [id]="playlist.id"
+        (click)="goToAlbum(playlist.id)"
+      >
+        <img
+          [src]="playlist.images.length ? playlist.images[0].url : defaultAlbum"
+          alt=""
+        />
+        <div class="main__search-playlists-title-artists-container">
+          <label class="main__playlist-name">{{ playlist.name }}</label>
+          <div class="main__playlist-artists">
+            <label>{{ playlist.owner.display_name }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="main__search-tracks-container"
+    *ngIf="!!searchTracks.length && !!searchTerm"
+  >
+    <div class="main__title-arrows-container">
+      <h2>Tracks</h2>
+      <div class="main__previous-next-container">
+        <button
+          title="Previous"
+          (click)="goToPreviousSearchTracks()"
+          [disabled]="!!!this.searchTracksPrevious"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextSearchTracks()"
+          [disabled]="!!!this.searchTracksNext"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="main__search-tracks-cards">
+      <div
+        *ngFor="let searchedTrack of searchTracks"
+        class="main__search-tracks-card"
+        [id]="searchedTrack.id"
+        (click)="goToTrack(searchedTrack.id)"
+      >
+        <img
+          [src]="
+            searchedTrack.album.images.length
+              ? searchedTrack.album.images[0].url
+              : defaultAlbum
+          "
+          alt=""
+        />
+        <div class="main__search-tracks-title-tracks-container">
+          <label>{{ searchedTrack.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="
+      !!!(searchTracks$ | async) &&
+      !!!(searchArtists$ | async) &&
+      !!!(searchAlbums$ | async) &&
+      !!!(searchPlaylists$ | async) &&
+      !!!(searchTracksIsLoading$ | async) &&
+      !!searchTerm &&
+      false
+    "
+  >
+    <h2>
+      Sorry, there are no results with that search, please try with other term
+    </h2>
+  </div>
 </div>

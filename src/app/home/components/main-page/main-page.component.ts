@@ -26,6 +26,7 @@ export class MainPageComponent {
   @Input() newReleasesNext!: boolean;
   @Output() newReleasesNextClick: EventEmitter<null> = new EventEmitter();
   @Output() newReleasesPreviousClick: EventEmitter<null> = new EventEmitter();
+  @Output() goToAlbumClick: EventEmitter<string> = new EventEmitter();
 
   @Input() featuredPlaylistsList: Playlist[] = [];
   @Input() featuredPlaylistsPrevious!: boolean;
@@ -47,7 +48,7 @@ export class MainPageComponent {
     this.goToTrackClick.emit(trackId);
   }
   goToAlbum(albumId: string) {
-    console.log('album', albumId);
+    this.goToAlbumClick.emit(albumId);
   }
   goToPlaylist(playlistId: string) {
     console.log(playlistId);

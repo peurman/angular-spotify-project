@@ -1,10 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, firstValueFrom } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+import {
+  AlbumDetail,
+  AlbumSavedItem,
+  AlbumsSaved,
+} from '../models/albums.interface';
+import { AlbumService } from '../services/album.service';
+
+import * as fromAlbum from 'src/app/store/album/album.selectors';
 
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
-  styleUrls: ['./albums.component.scss']
+  styleUrls: ['./albums.component.scss'],
 })
-export class AlbumsComponent {
+export class AlbumsComponent implements OnInit {
+  constructor(private store: Store, private albumService: AlbumService) {}
 
+  saveOn = '../../../assets/images/saveOn.png';
+  saveOff = '../../../assets/images/saveOff.png';
+  following = false;
+
+  albumDetail$!: Observable<AlbumDetail | null>;
+  albumID: string | undefined;
+  albumsSaved: AlbumSavedItem[] | undefined = [];
+  albumsSavedComplete!: AlbumsSaved | null;
+
+  async ngOnInit() {
+    this.albumDetail$ = this.store.select(fromAlbum.selectAlbumDetailData);
+    this.albumDetail$.subscribe((res) => (this.albumID = res?.id));
+
+    // this.albumsSavedComplete = await firstValueFrom(
+    //   this.albumService.getAlbumsSaved()
+    // );
+    // console.log(
+    //   'ALBUMS SAVED: ',
+    //   this.albumsSavedComplete.items,
+    //   '- ALBUM ID: ',
+    //   this.albumID
+    // );
+    // this.albumsSavedComplete.items.forEach((el) => {
+    //   if (el.album.id === this.albumID) this.following = true;
+    // });
+
+    this.albumService
+      .getAlbumsSaved()
+      .pipe(first())
+      .toPromise()
+      .then((res) => {
+        this.albumsSaved = res?.items;
+        console.log(
+          'ALBUMS SAVED: ',
+          this.albumsSaved,
+          '- ALBUM ID: ',
+          this.albumID
+        );
+        this.albumsSaved?.forEach((el) => {
+          if (el.album.id === this.albumID) this.following = true;
+        });
+      });
+  }
+
+  goToTrack(trackId: string) {
+    console.log('TRACK ID: ', trackId);
+  }
+  goToArtist(artistId: string) {
+    console.log('ARTIST ID: ', artistId);
+  }
+  saveRemoveAlbum(albumId: string) {
+    if (this.following) {
+      this.albumService.removeAlbumFromLibrary(albumId).subscribe();
+    } else {
+      this.albumService.saveAlbumToLibrary(albumId).subscribe();
+    }
+    this.following = !this.following;
+  }
 }

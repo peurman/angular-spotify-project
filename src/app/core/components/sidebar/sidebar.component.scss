@@ -1,9 +1,8 @@
 @use "styles.scss" as *;
 
 :host {
-  width: 80%;
+  width: 200px;
   min-width: 200px;
-  max-width: 300px;
 }
 .sidebar {
   background-color: $background-darker;
