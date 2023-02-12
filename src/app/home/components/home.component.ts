@@ -18,7 +18,6 @@ import * as fromGenres from 'src/app/store/genres/genres.selectors';
 import * as fromNewReleases from 'src/app/store/new-releases/new-releases.selectors';
 import * as fromFeaturedPlaylists from 'src/app/store/featured-playlists/featured-playlists.selectors';
 import * as fromLogin from 'src/app/store/login/login.selectors';
-import { getTrackAction } from 'src/app/store/track/track.actions';
 
 @Component({
   selector: 'app-home',
@@ -108,10 +107,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleClickTrack(trackId: string) {
-    this.store.dispatch(getTrackAction({ id: trackId }));
-  }
-
   //categories
   categoriesPreviousClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesPrevious }));
@@ -162,7 +157,7 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getNewReleasesAction({ url: this.newReleasesNext }));
   }
   goToAlbum(id: string) {
-    this.store.dispatch(getAlbumDetailAction({ id }));
+    this.store.dispatch(getAlbumDetailAction({ id: id }));
     this.router.navigate(['/albums']);
   }
   // featured playlists

@@ -63,7 +63,6 @@
           <th>Track Name</th>
           <th>Artists</th>
           <th>Duration</th>
-          <th>30 seconds Preview</th>
         </tr>
         <tr *ngFor="let track of albumDetail.tracks.items">
           <td>{{ track.track_number }}</td>
@@ -91,11 +90,7 @@
             </div>
           </td>
           <td>{{ track.duration_ms | times }}</td>
-          <td>
-            <audio controls volume="0.50">
-              <source [src]="track.preview_url" type="audio/mpeg" />
-            </audio>
-          </td>
+          
         </tr>
       </table>
     </div>

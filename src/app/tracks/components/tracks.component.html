@@ -1,16 +1,82 @@
 <div class="main">
-    <div class="track-image">
-        <img [src]="(track$ | async)?.album?.images?.[0]?.url">
+    <div class="track-image-data-container">
+        <div>
+          <img [src]="(track$ | async)?.album?.images?.[0]?.url" alt="" />
+        </div>
+        <div class="track__data-container">
+          <div class="track__type-heart-container">
+            <div class="album__heart">
+                <!--saveOn-->
+            </div>
+          </div>
+          <div class="track__title">
+            {{ (track$ | async)?.name }}
+          </div>
+          <div class="track__artists-year-songs">
+            <div>
+              <div
+                *ngIf="(track$ | async)?.album?.artists?.length === 1"
+                class="track__artists"
+              >
+                {{ (track$ | async)?.album?.artists?.[0]?.name }}
+              </div>
+              <div *ngIf="(track$ | async)?.album?.artists!.length > 1" class="track__artists">
+                <div *ngFor="let artist of (track$ | async)?.album?.artists; let i = index">
+                  <label *ngIf="i === (track$ | async)?.album?.artists!.length - 1">
+                    {{ artist.name }}</label
+                  >
+                  <label *ngIf="i < (track$ | async)?.album?.artists!.length - 1">
+                    {{ artist.name }}&nbsp;&nbsp;▪&nbsp;&nbsp;
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              &nbsp;&nbsp;▪&nbsp;&nbsp;{{
+                (track$ | async)?.album?.release_date | date : "yyyy"
+              }}&nbsp;&nbsp;▪&nbsp;&nbsp;
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="track-info">
-        <h2>Track name: {{(track$ | async)?.name}}</h2>
-        <h3>Album name: {{(track$ | async)?.album?.name}}</h3>
-        <h3>Artist(s):</h3>
-        <h3 *ngFor="let artist of (track$ | async)?.album?.artists"><li>{{artist.name}}</li></h3>
-        <h3>Track duration: {{(track$ | async)?.duration_ms | date:'mm:ss'}}</h3>
-        <audio
-        controls
-        [src]="(track$ | async)?.preview_url">
-        </audio>
-    </div>
+    <div class="tracks-container">
+        <table>
+          <tr>
+            <th>Track Name</th>
+            <th>Artists</th>
+            <th>Duration</th>
+            <th>30 seconds Preview</th>
+          </tr>
+          <tr>
+            <td>
+              <a>{{ (track$ | async)?.name }}</a>
+            </td>
+            <td>
+              <div *ngIf="(track$ | async)?.album?.artists?.length === 1" class="track__artists">
+                <a (click)="goToArtist()">{{ (track$ | async)?.album?.artists?.[0]?.name }}</a>
+              </div>
+              <div *ngIf="(track$ | async)?.album?.artists!.length > 1" class="track__artists">
+                <div *ngFor="let artist of (track$ | async)?.album?.artists; let i = index">
+                  <label *ngIf="i === (track$ | async)?.album?.artists!.length - 1">
+                    <a (click)="goToArtist()">{{artist.name}}</a></label
+                  >
+                  <label *ngIf="i < (track$ | async)?.album?.artists!.length - 1">
+                    <a (click)="goToArtist()">{{ artist.name }}</a
+                    >&nbsp;&nbsp;▪&nbsp;&nbsp;
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>{{ (track$ | async)!.duration_ms | date:'mm:ss' }}</td>
+            <td>
+              <audio controls volume="0.50">
+                <source [src]="(track$ | async)?.preview_url" />
+              </audio>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      
+
 </div>

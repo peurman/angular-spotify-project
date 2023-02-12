@@ -38,11 +38,7 @@ export class MainPageComponent {
   @Output() goToTrackClick: EventEmitter<string> = new EventEmitter();
 
   handleClickNewReleases(trackCount: number, id: string) {
-    if (trackCount === 1) {
-      this.goToTrack(id);
-    } else {
-      this.goToAlbum(id);
-    }
+    this.goToAlbum(id);
   }
   goToTrack(trackId: string) {
     this.goToTrackClick.emit(trackId);

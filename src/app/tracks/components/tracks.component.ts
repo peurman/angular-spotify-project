@@ -16,4 +16,7 @@ export class TracksComponent implements OnInit {
   ngOnInit(): void {
     this.track$ = this.store.select(fromTrack.selectTrack);
   }
+  goToArtist() {
+    console.log();
+  }
 }
