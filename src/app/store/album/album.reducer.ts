@@ -2,14 +2,14 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as albumDetailActions from './album.actions';
 import { AlbumDetailState } from './album.state';
 
-export const initialCategoryState: AlbumDetailState = {
+export const initialAlbumState: AlbumDetailState = {
   albumDetailData: null,
   isLoading: false,
   isError: null,
 };
 
 const albumDetailReducerInternal = createReducer(
-  initialCategoryState,
+  initialAlbumState,
   on(albumDetailActions.getAlbumDetailAction, (state): AlbumDetailState => {
     return {
       ...state,
