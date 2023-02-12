@@ -20,6 +20,7 @@ import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopItems } from './profile/services/topitems.service';
 import { TrackService } from './tracks/services/track.service';
+import { ArtistinfoService } from './artists/services/artistinfo.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +44,7 @@ import { TrackService } from './tracks/services/track.service';
     MainGuard,
     TopItems,
     TrackService,
+    ArtistinfoService,
   ],
   bootstrap: [AppComponent],
 })

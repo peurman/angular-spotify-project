@@ -1,4 +1,4 @@
-<div class="main-artist-card">
+<div class="main-artist-card" (click)="handleArtistClick(artist!.id)">
 <img [src]="artist?.images?.[0]?.url" alt="" />
 <div class="artist-title-artists-container">
     <div class="artist-info">

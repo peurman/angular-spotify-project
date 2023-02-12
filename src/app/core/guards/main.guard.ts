@@ -24,8 +24,9 @@ export class MainGuard implements CanActivate {
           this.store.dispatch(getUserRequest());
           return true;
         }),
-        catchError(() => {
-          this.auth.RefreshToken();
+        catchError((error) => {
+          //error?
+          console.log('error, fix this', error);
           this.router.navigateByUrl('/login');
           this.store.dispatch(logout());
           this.auth.LogOut();

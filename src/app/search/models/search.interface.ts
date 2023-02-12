@@ -1,3 +1,4 @@
+//MOVE TO CORE?
 //ARTISTS
 export interface SearchArtist {
   artists: Artists;

@@ -38,6 +38,7 @@
         *ngFor="let artist of (topArtists$ | async)?.items"
         [artist]="artist"
         (followUnFollowEvent)="handleFollowUnfollow($event)"
+        (artistClickedEvent)="handleArtistClick($event)"
       ></app-artist-card>
     </div>
   </div>
