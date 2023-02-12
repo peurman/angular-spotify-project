@@ -14,7 +14,7 @@
               [src]="following ? saveOn : saveOff"
               alt=""
               title="Save or remove this album"
-              (click)="saveRemoveAlbum()"
+              (click)="saveRemoveAlbum(albumDetail.id)"
             />
           </div>
         </div>

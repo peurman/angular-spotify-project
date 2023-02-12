@@ -26,4 +26,26 @@ export class AlbumService {
       }),
     });
   }
+  saveAlbumToLibrary(id: string): Observable<void> {
+    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
+    return this.http.put<void>(
+      `${BASE_API}/me/albums?ids=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({
+          skip: 'true',
+          Authorization: `Bearer ${token.access_token}`,
+        }),
+      }
+    );
+  }
+  removeAlbumFromLibrary(id: string): Observable<void> {
+    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
+    return this.http.delete<void>(`${BASE_API}/me/albums?ids=${id}`, {
+      headers: new HttpHeaders({
+        skip: 'true',
+        Authorization: `Bearer ${token.access_token}`,
+      }),
+    });
+  }
 }
