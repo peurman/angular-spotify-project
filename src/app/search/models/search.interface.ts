@@ -19,7 +19,7 @@ export interface Artist {
   name: string;
   type: string;
   uri: string;
-  followers?: Followers;
+  followers: Followers;
   genres?: string[];
   images: Image[];
   popularity?: number;

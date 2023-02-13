@@ -29,6 +29,7 @@ import * as fromSearchTracks from 'src/app/store/search-tracks/search-tracks.sel
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import { getTrackAction } from 'src/app/store/track/track.actions';
 import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 
 @Component({
   selector: 'app-search',
@@ -148,7 +149,8 @@ export class SearchComponent implements OnInit {
     );
   }
   goToArtist(artistId: string) {
-    console.log('ARTIST ID: ', artistId);
+    this.store.dispatch(getArtistAction({ id: artistId }));
+    this.router.navigateByUrl('/artists');
   }
   // Albums
   goToPreviousSearchAlbums() {

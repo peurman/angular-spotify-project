@@ -10,7 +10,7 @@
       <p class="user-followers-count">
         {{ (profileInfo$ | async)?.followers?.total }}
       </p>
-      <p class="user-followers-text">Followers</p>
+      <p class="user-followers-text">{{(profileInfo$ | async)?.followers!.total > 1 ? 'Followers' : 'Follower'}}</p>
     </div>
   </div>
   <div class="top-artist">
