@@ -36,6 +36,7 @@ export class MainPageComponent {
     new EventEmitter();
 
   @Output() goToTrackClick: EventEmitter<string> = new EventEmitter();
+  @Output() goToPlaylistClick: EventEmitter<string> = new EventEmitter();
 
   handleClickNewReleases(trackCount: number, id: string) {
     this.goToAlbum(id);
@@ -47,7 +48,7 @@ export class MainPageComponent {
     this.goToAlbumClick.emit(albumId);
   }
   goToPlaylist(playlistId: string) {
-    console.log(playlistId);
+    this.goToPlaylistClick.emit(playlistId);
   }
   goToCategory(categoryId: string) {
     console.log(categoryId);

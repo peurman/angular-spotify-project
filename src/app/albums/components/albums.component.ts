@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Observable, firstValueFrom } from 'rxjs';
 
 import {
   AlbumDetail,
@@ -39,35 +38,18 @@ export class AlbumsComponent implements OnInit {
     this.albumDetail$ = this.store.select(fromAlbum.selectAlbumDetailData);
     this.albumDetail$.subscribe((res) => (this.albumID = res?.id));
 
-    // this.albumsSavedComplete = await firstValueFrom(
-    //   this.albumService.getAlbumsSaved()
-    // );
-    // console.log(
-    //   'ALBUMS SAVED: ',
-    //   this.albumsSavedComplete.items,
-    //   '- ALBUM ID: ',
-    //   this.albumID
-    // );
-    // this.albumsSavedComplete.items.forEach((el) => {
-    //   if (el.album.id === this.albumID) this.following = true;
-    // });
-
-    this.albumService
-      .getAlbumsSaved()
-      .pipe(first())
-      .toPromise()
-      .then((res) => {
-        this.albumsSaved = res?.items;
-        console.log(
-          'ALBUMS SAVED: ',
-          this.albumsSaved,
-          '- ALBUM ID: ',
-          this.albumID
-        );
-        this.albumsSaved?.forEach((el) => {
-          if (el.album.id === this.albumID) this.following = true;
-        });
-      });
+    this.albumsSavedComplete = await firstValueFrom(
+      this.albumService.getAlbumsSaved()
+    );
+    console.log(
+      'ALBUMS SAVED: ',
+      this.albumsSavedComplete.items,
+      '- ALBUM ID: ',
+      this.albumID
+    );
+    this.albumsSavedComplete.items.forEach((el) => {
+      if (el.album.id === this.albumID) this.following = true;
+    });
   }
 
   goToTrack(trackId: string) {

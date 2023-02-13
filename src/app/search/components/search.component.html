@@ -128,7 +128,7 @@
         *ngFor="let playlist of searchPlaylists"
         class="main__search-playlists-card"
         [id]="playlist.id"
-        (click)="goToAlbum(playlist.id)"
+        (click)="goToPlaylist(playlist.id)"
       >
         <img
           [src]="playlist.images.length ? playlist.images[0].url : defaultAlbum"

@@ -10,6 +10,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ProfileComponent } from '../profile/components/profile/profile.component';
 
 import { TimesPipe } from './pipes/times.pipe';
+import { ThousandsPipe } from './pipes/thousands.pipe';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,8 +19,14 @@ const routes: Routes = [
   { path: 'myMusic', component: MyMusicComponent },
 ];
 @NgModule({
-  declarations: [SidebarComponent, LoadingComponent, TimesPipe],
-  exports: [SidebarComponent, RouterModule, LoadingComponent, TimesPipe],
+  declarations: [SidebarComponent, LoadingComponent, TimesPipe, ThousandsPipe],
+  exports: [
+    SidebarComponent,
+    RouterModule,
+    LoadingComponent,
+    TimesPipe,
+    ThousandsPipe,
+  ],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class CoreModule {}
