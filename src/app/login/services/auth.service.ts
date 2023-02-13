@@ -19,11 +19,12 @@ export class AuthService {
       'https://accounts.spotify.com/es-ES/authorize?client_id=' +
       environment.credentials.clientId +
       '&response_type=code' +
-      '&scope=user-top-read,user-follow-read,user-follow-modify,user-library-read,user-library-modify' + //<------- add scopes to require permissions
+      '&scope=user-read-recently-played,user-top-read,user-read-playback-position,user-read-playback-state,user-follow-read,user-follow-modify,user-modify-playback-state, user-read-currently-playing,streaming,playlist-modify-public,playlist-modify-private,playlist-read-private,playlist-read-collaborative,user-library-modify,user-library-read,user-read-email,user-read-private' +
       '&redirect_uri=' +
       encodeURIComponent('http://localhost:4200/login/callback') +
       '&expires_in=3600',
   };
+
   OpenSpotifyWindow() {
     window.location.href = this.configUrl.authorize;
   }

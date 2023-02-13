@@ -54,18 +54,27 @@ export interface Album {
   album_type: string;
   artists: Artist[];
   available_markets: string[];
+  copyrights?: Copyright[];
+  external_ids?: ExternalIDS;
   external_urls: ExternalUrls;
+  genres?: string[];
   href: string;
   id: string;
   images: Image[];
+  label?: string;
   name: string;
-  release_date: string;
+  popularity?: number;
+  release_date: Date;
   release_date_precision: string;
   total_tracks: number;
+  tracks?: Tracks;
   type: string;
   uri: string;
 }
-
+export interface Copyright {
+  text: string;
+  type: string;
+}
 //PLAYLISTS
 export interface SearchPlaylist {
   playlists: Playlists;
@@ -96,12 +105,13 @@ export interface Playlist {
   uri: string;
 }
 export interface Owner {
-  display_name: string;
+  display_name?: string;
   external_urls: ExternalUrls;
   href: string;
   id: string;
   type: string;
   uri: string;
+  name?: string;
 }
 export interface Tracks {
   href: string;
@@ -127,6 +137,7 @@ export interface Track {
   available_markets: string[];
   disc_number: number;
   duration_ms: number;
+  episode?: boolean;
   explicit: boolean;
   external_ids: ExternalIDS;
   external_urls: ExternalUrls;
@@ -136,6 +147,7 @@ export interface Track {
   name: string;
   popularity: number;
   preview_url: string;
+  track?: boolean;
   track_number: number;
   type: string;
   uri: string;

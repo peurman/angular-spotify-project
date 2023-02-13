@@ -61,6 +61,10 @@ import { ArtistState } from './artist/artist.state';
 import { artistReducer } from './artist/artist.reducer';
 import { ArtistEffects } from './artist/artist.effects';
 import * as fromArtistSelectors from './artist/artist.selectors';
+import { PlaylistState } from './playlists/playlist.state';
+import { playlistReducer } from './playlists/playlist.reducer';
+import { PlaylistEffects } from './playlists/playlist.effects';
+import * as fromPlaylistSelectors from './playlists/playlist.selectors';
 
 export interface RootState {
   loggedIn: LoginState;
@@ -76,6 +80,7 @@ export interface RootState {
   searchTracks: SearchTracksState;
   albumDetail: AlbumDetailState;
   artist: ArtistState;
+  playlist: PlaylistState;
 }
 
 export const appReducer = {
@@ -92,6 +97,7 @@ export const appReducer = {
   searchTracks: searchTracksReducer,
   albumDetail: albumDetailReducer,
   artist: artistReducer,
+  playlist: playlistReducer,
 };
 
 export const appEffects = [
@@ -108,6 +114,7 @@ export const appEffects = [
   SearchTracksEffects,
   AlbumDetailEffects,
   ArtistEffects,
+  PlaylistEffects,
 ];
 
 export const appSelectors = [
@@ -143,4 +150,7 @@ export const appSelectors = [
   fromArtistSelectors.selectIsLoading,
   fromArtistSelectors.selectIsError,
   fromArtistSelectors.selectArtistData,
+  fromPlaylistSelectors.selectPlaylistData,
+  fromPlaylistSelectors.selectIsError,
+  fromPlaylistSelectors.selectIsLoading,
 ];

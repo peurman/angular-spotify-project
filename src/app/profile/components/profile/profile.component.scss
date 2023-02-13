@@ -1,10 +1,8 @@
 @use "styles.scss" as *;
 .main {
-  display: flex;
-  flex-direction: column;
+  @include centerMeColumn;
+  margin: 30px 0 15px 0;
   width: 800px;
-  justify-content: center;
-  align-items: center;
 }
 
 .profile-top {
@@ -27,7 +25,6 @@
     }
   }
   .user-followers {
-    margin-top: 20px;
     text-align: center;
 
     .user-followers-count {
