@@ -18,26 +18,10 @@ export class PlaylistService {
     return this.http.get<Playlist>(`${BASE_API}/playlists/${id}`, this.options);
   }
   getPlaylistsSaved(): Observable<PlaylistsSaved> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<PlaylistsSaved>(`${BASE_API}/me/playlists?limit=50`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+    return this.http.get<PlaylistsSaved>(`${BASE_API}/me/playlists?limit=50`);
   }
   followPlaylist(id: string): Observable<void> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.put<void>(
-      `${BASE_API}/playlists/${id}/followers`,
-      {},
-      {
-        headers: new HttpHeaders({
-          skip: 'true',
-          Authorization: `Bearer ${token.access_token}`,
-        }),
-      }
-    );
+    return this.http.put<void>(`${BASE_API}/playlists/${id}/followers`, {});
   }
   unfollowPlaylist(id: string): Observable<void> {
     const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');

@@ -23,9 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!skipIntercept) {
       if (!req.headers.has('Authorization')) {
         let tokenInfo = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-        console.log('fix this also', tokenInfo);
-        console.log('new Date()', new Date());
-        if (new Date() > tokenInfo.expirationDate) {
+        if (Date.now() > tokenInfo.expirationDate) {
           return this.auth.RefreshToken().pipe(
             switchMap((token: AuthToken) => {
               this.auth.SaveToken(token);

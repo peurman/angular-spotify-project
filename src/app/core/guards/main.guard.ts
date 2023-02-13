@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
@@ -24,9 +25,11 @@ export class MainGuard implements CanActivate {
           this.store.dispatch(getUserRequest());
           return true;
         }),
-        catchError((error) => {
-          //error?
-          console.log('error, fix this', error);
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 401) {
+            //token expired, inteceptor will fix it
+            return of(true);
+          }
           this.router.navigateByUrl('/login');
           this.store.dispatch(logout());
           this.auth.LogOut();

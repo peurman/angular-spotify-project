@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Artist } from 'src/app/search/models/search.interface';
+import { Albums, Artist } from 'src/app/home/models/new-releases.interface';
 
 @Injectable()
 export class ArtistinfoService {
@@ -11,5 +11,14 @@ export class ArtistinfoService {
 
   getArtistInfo(id: string): Observable<Artist> {
     return this.http.get<Artist>('https://api.spotify.com/v1/artists/' + id);
+  }
+  getArtistAlbums(id: string | null, url: string | null): Observable<Albums> {
+    if (!url) {
+      return this.http.get<Albums>(
+        `	https://api.spotify.com/v1/artists/${id}/albums?limit=9`
+      );
+    } else {
+      return this.http.get<Albums>(url);
+    }
   }
 }

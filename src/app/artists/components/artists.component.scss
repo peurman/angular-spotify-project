@@ -38,6 +38,19 @@
     }
 
   }
+  .follow-button, .unFollow-button {
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+    background-color: $main-color;
+    border-radius: 3px;
+    width: 100px;
+    color: $button-color
+    }
+
+    .unFollow-button{
+      background-color: red;
+    }
 }
 .top-artist,
 .top-tracks {
@@ -87,3 +100,73 @@
     margin-top: 5px;
   }
 
+.albums-container{
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .arrows-container{
+    @include centerMeRow;
+    justify-content: space-between;
+    width: 780px;
+    .main__previous-next-container {
+      @include centerMeRow;
+      justify-content: right;
+      gap: 35px;
+      button {
+        background: transparent;
+        border: none;
+        color: $button-color;
+        font: 2.4rem "Circular";
+        line-height: 0.5rem;
+        cursor: pointer;
+        &:disabled {
+          color: $background-hover;
+        }
+      }
+    }
+  }
+  .albums-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 350px;
+    overflow: hidden;
+    .album-card {
+      @include centerMeRow;
+      justify-content: space-between;
+      @include card-style(90px, 230px);
+      img {
+        width: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .album-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          cursor: pointer;
+          font-size: 0.8rem;
+          color: $font-secondary-color;
+          text-align: left;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 130px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+        .main__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}

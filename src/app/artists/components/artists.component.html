@@ -12,6 +12,7 @@
           </p>
           <p class="user-followers-text">{{ (artistInfo$ | async)?.followers!.total > 1 ? 'Followers' : 'Follower'}}</p>
         </div>
+        <a (click)="handleFollowClick()" [ngClass]="{'unFollow-button':(artistInfo$ | async)?.isFollowing, 'follow-button': !(artistInfo$ | async)?.isFollowing}">{{(artistInfo$ | async)?.isFollowing ? 'Unfollow' : 'Follow'}}</a>
         <div>
             <div class="artist-genders">
                 <div
@@ -31,4 +32,42 @@
             <p class="user-followers-text">Genres</p>
         </div>
     </div>
+    <div class="albums-container">
+      <div class="arrows-container">
+        <h2>Albums</h2>
+        <div class="main__previous-next-container">
+          <button
+            title="Previous"
+            (click)="goToPreviousAlbums()"
+            [disabled]="!ArtistsAlbumsPrevious"
+          >
+            &#8249;
+          </button>
+          <button
+            title="Next"
+            (click)="goToNextAlbums()"
+            [disabled]="!ArtistsAlbumsNext"
+          >
+            &#8250;
+          </button>
+        </div>
+      </div>
+      <div class="albums-cards">
+        <div
+          *ngFor="let album of (artistAlbums$ | async)?.items"
+          class="album-card"
+          [id]="album.id">
+          <img [src]="album.images[0].url" alt="" />
+          <div class="album-title-artists-container">
+            <label class="main__album-name">{{ album.name }}</label>
+            <div class="main__album-artists">
+              <label *ngFor="let artist of album.artists">{{
+                artist.name
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>

@@ -17,3 +17,8 @@ export const selectIsError = createSelector(
   selectArtistState,
   (state: ArtistState) => state.isError
 );
+
+export const selectAlbumsData = createSelector(
+  selectArtistState,
+  (state: ArtistState) => state.artistAlbums
+);
