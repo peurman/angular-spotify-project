@@ -160,6 +160,7 @@ export class HomeComponent implements OnInit {
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigate(['/albums']);
+    window.scrollTo(0, 0);
   }
   // featured playlists
   featuredPlaylistsPreviousClick() {
@@ -175,5 +176,6 @@ export class HomeComponent implements OnInit {
   goToPlaylist(id: string) {
     this.store.dispatch(getPlaylistAction({ id }));
     this.router.navigate(['/playlists']);
+    window.scrollTo(0, 0);
   }
 }

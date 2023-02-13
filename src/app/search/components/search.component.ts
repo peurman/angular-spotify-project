@@ -167,6 +167,7 @@ export class SearchComponent implements OnInit {
   goToAlbum(albumId: string) {
     this.store.dispatch(getAlbumDetailAction({ id: albumId }));
     this.router.navigate(['/albums']);
+    window.scrollTo(0, 0);
   }
   // Playlists
   goToPreviousSearchPlaylists() {
@@ -188,6 +189,7 @@ export class SearchComponent implements OnInit {
   goToPlaylist(playlistId: string) {
     this.store.dispatch(getPlaylistAction({ id: playlistId }));
     this.router.navigate(['/playlists']);
+    window.scrollTo(0, 0);
   }
   // Tracks
   goToPreviousSearchTracks() {

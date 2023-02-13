@@ -16,8 +16,8 @@
             <img
               [src]="following ? saveOn : saveOff"
               alt=""
-              title="Save or remove this playlist"
-              (click)="saveRemovePlaylist(playlist.id)"
+              title="Follow or unfollow this playlist"
+              (click)="followUnfollowPlaylist(playlist.id)"
             />
           </div>
         </div>
@@ -36,11 +36,11 @@
             >&nbsp;&nbsp;▪&nbsp;&nbsp;
           </div>
           <div class="playlist__songs">
-            <div *ngIf="playlist.tracks.items.length === 1">
-              {{ playlist.tracks.items.length }} song
+            <div *ngIf="playlist.tracks?.items?.length === 1">
+              {{ playlist.tracks.items?.length }} song
             </div>
-            <div *ngIf="playlist.tracks.items.length > 1">
-              {{ playlist.tracks.items.length }} songs
+            <div *ngIf="playlist.tracks?.items?.length !== 1">
+              {{ playlist.tracks.items?.length }} songs
             </div>
           </div>
         </div>
@@ -54,8 +54,8 @@
           <th>Artists</th>
           <th>Duration</th>
         </tr>
-        <tr *ngFor="let trackList of playlist.tracks.items">
-          <td>{{ trackList.track.track_number }}</td>
+        <tr *ngFor="let trackList of playlist.tracks.items; let i = index">
+          <td>{{ i + 1 }}</td>
           <td>
             <a (click)="goToTrack(trackList.track.id)">{{
               trackList.track.name

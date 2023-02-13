@@ -26,11 +26,11 @@ export interface Followers {
 }
 export interface Tracks {
   href: string;
-  items: Item[];
-  limit: number;
-  next: null;
-  offset: number;
-  previous: null;
+  items?: Item[];
+  limit?: number;
+  next?: null;
+  offset?: number;
+  previous?: null;
   total: number;
 }
 export interface Item {
@@ -43,4 +43,14 @@ export interface Item {
 }
 export interface VideoThumbnail {
   url: null;
+}
+
+export interface PlaylistsSaved {
+  href: string;
+  items: Playlist[];
+  limit: number;
+  next: null;
+  offset: number;
+  previous: null;
+  total: number;
 }
