@@ -27,6 +27,11 @@ import { ProfileState } from './profile/profile.state';
 import { profileReducer } from './profile/profile.reducer';
 import { ProfileEffects } from './profile/profile.effects';
 
+import { MyMusicState } from './my-music/my-music.state';
+import { myMusicReducer } from './my-music/my-music.reducer';
+import { MyMusicEffects } from './my-music/my-music.effects';
+import * as fromMyMusicSelectors from './my-music/my-music.selectors';
+
 import { AlbumDetailState } from './album/album.state';
 import { albumReducer } from './album/album.reducer';
 import { AlbumDetailEffects } from './album/album.effects';
@@ -69,6 +74,7 @@ export interface RootState {
   newReleases: NewReleasesState;
   featuredPlaylists: FeaturedPlaylistsState;
   profile: ProfileState;
+  myMusic: MyMusicState;
   track: TrackState;
   album: AlbumDetailState;
   playlist: PlaylistState;
@@ -85,6 +91,7 @@ export const appReducer = {
   newReleases: newReleasesReducer,
   featuredPlaylists: featuredPlaylistsReducer,
   profile: profileReducer,
+  myMusic: myMusicReducer,
   track: trackReducer,
   album: albumReducer,
   playlist: playlistReducer,
@@ -101,6 +108,7 @@ export const appEffects = [
   FeaturedPlaylistsEffects,
   LoginEffects,
   ProfileEffects,
+  MyMusicEffects,
   TrackEffects,
   AlbumDetailEffects,
   PlaylistEffects,
@@ -125,6 +133,18 @@ export const appSelectors = [
   fromFeaturedPlaylistsSelectors.selectIsLoading,
   fromLoginSelectors.selectLogin,
   fromTrackSelectors.selectTrack,
+  fromMyMusicSelectors.selectMyAlbumsData,
+  fromMyMusicSelectors.selectMyAlbumsIsError,
+  fromMyMusicSelectors.selectMyAlbumsIsLoading,
+  fromMyMusicSelectors.selectMyArtistsData,
+  fromMyMusicSelectors.selectMyArtistsIsError,
+  fromMyMusicSelectors.selectMyArtistsIsLoading,
+  fromMyMusicSelectors.selectMyPlaylistsData,
+  fromMyMusicSelectors.selectMyPlaylistsIsError,
+  fromMyMusicSelectors.selectMyPlaylistsIsLoading,
+  fromMyMusicSelectors.selectMyTracksData,
+  fromMyMusicSelectors.selectMyTracksIsError,
+  fromMyMusicSelectors.selectMyTracksIsLoading,
   fromAlbumDetailSelectors.selectAlbumDetailData,
   fromAlbumDetailSelectors.selectIsError,
   fromAlbumDetailSelectors.selectIsLoading,

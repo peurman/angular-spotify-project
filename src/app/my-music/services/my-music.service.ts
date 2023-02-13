@@ -13,46 +13,50 @@ const BASE_API = 'https://api.spotify.com/v1';
 @Injectable({
   providedIn: 'root',
 })
-export class AlbumService {
+export class MyMusicService {
   constructor(private http: HttpClient) {}
+  token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
+  options = {
+    headers: new HttpHeaders({
+      skip: 'true',
+      Authorization: `Bearer ${this.token.access_token}`,
+    }),
+  };
 
-  getAlbumsSaved(): Observable<AlbumsSaved> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<AlbumsSaved>(`${BASE_API}/me/albums`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+  getAlbumsSaved(url: string | null): Observable<AlbumsSaved> {
+    if (!url) {
+      return this.http.get<AlbumsSaved>(
+        `${BASE_API}/me/albums?limit=50`,
+        this.options
+      );
+    }
+    return this.http.get<AlbumsSaved>(url, this.options);
   }
-  getPlaylistsSaved(): Observable<PlaylistsSaved> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<PlaylistsSaved>(`${BASE_API}/me/playlists?limit=50`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+  getPlaylistsSaved(url: string | null): Observable<PlaylistsSaved> {
+    if (!url) {
+      return this.http.get<PlaylistsSaved>(
+        `${BASE_API}/me/playlists?limit=50`,
+        this.options
+      );
+    }
+    return this.http.get<PlaylistsSaved>(url, this.options);
   }
-  getTracksSaved(): Observable<TracksSaved> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<TracksSaved>(`${BASE_API}/me/tracks?limit=50`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+  getTracksSaved(url: string | null): Observable<TracksSaved> {
+    if (!url) {
+      return this.http.get<TracksSaved>(
+        `${BASE_API}/me/tracks?limit=50`,
+        this.options
+      );
+    }
+    return this.http.get<TracksSaved>(url, this.options);
   }
-  getArtistsFollowed(): Observable<ArtistsFollowed> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<ArtistsFollowed>(
-      `${BASE_API}/me/following?type=artist`,
-      {
-        headers: new HttpHeaders({
-          skip: 'true',
-          Authorization: `Bearer ${token.access_token}`,
-        }),
-      }
-    );
+  getArtistsFollowed(url: string | null): Observable<ArtistsFollowed> {
+    if (!url) {
+      return this.http.get<ArtistsFollowed>(
+        `${BASE_API}/me/following?type=artist`,
+        this.options
+      );
+    }
+    return this.http.get<ArtistsFollowed>(url, this.options);
   }
 }

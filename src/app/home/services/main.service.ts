@@ -15,7 +15,6 @@ export class MainService {
   constructor(private http: HttpClient) {}
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  // .set('Authorization', '');
   options = { headers: this.headers };
 
   getGenres(url: string | null): Observable<GenresInterface> {

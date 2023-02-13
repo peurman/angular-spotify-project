@@ -20,6 +20,13 @@ import * as fromFeaturedPlaylists from 'src/app/store/featured-playlists/feature
 import * as fromLogin from 'src/app/store/login/login.selectors';
 import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 
+import {
+  getMyPlaylistsAction,
+  getMyAlbumsAction,
+  getMyArtistsAction,
+  getMyTracksAction,
+} from 'src/app/store/my-music/my-music.actions';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -55,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.username$ = this.store.select(fromLogin.selectLoginUsername);
-    //categories
+
     this.store.dispatch(getCategoriesAction({ url: '' }));
     this.categories$ = this.store.select(fromCategories.selectCategoriesData);
     this.categories$.subscribe({
@@ -68,7 +75,6 @@ export class HomeComponent implements OnInit {
       },
     });
 
-    //genres
     this.store.dispatch(getGenresAction({ url: '' }));
     this.genres$ = this.store.select(fromGenres.selectGenresData);
     this.genres$.subscribe({
@@ -77,7 +83,6 @@ export class HomeComponent implements OnInit {
       },
     });
 
-    //new releases
     this.store.dispatch(getNewReleasesAction({ url: '' }));
     this.newReleases$ = this.store.select(
       fromNewReleases.selectNewReleasesData
@@ -92,7 +97,6 @@ export class HomeComponent implements OnInit {
       },
     });
 
-    // featured playlists
     this.store.dispatch(getFeaturedPlaylistsAction({ url: '' }));
     this.featuredPlaylists$ = this.store.select(
       fromFeaturedPlaylists.selectNewReleasesData
@@ -106,6 +110,11 @@ export class HomeComponent implements OnInit {
         }
       },
     });
+
+    this.store.dispatch(getMyPlaylistsAction({ url: '' }));
+    this.store.dispatch(getMyAlbumsAction({ url: '' }));
+    this.store.dispatch(getMyArtistsAction({ url: '' }));
+    this.store.dispatch(getMyTracksAction({ url: '' }));
   }
 
   //categories

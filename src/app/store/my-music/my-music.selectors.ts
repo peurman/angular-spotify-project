@@ -1,20 +1,62 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { PlaylistState } from './my-music.state';
+import { MyMusicState } from './my-music.state';
 
-const selectPlaylistState = createFeatureSelector<PlaylistState>('playlist');
+const selectPlaylistState = createFeatureSelector<MyMusicState>('myMusic');
 
-export const selectPlaylistData = createSelector(
+export const selectMyPlaylistsData = createSelector(
   selectPlaylistState,
-  (state: PlaylistState) => state.playlistData
+  (state: MyMusicState) => state.playlists.data
 );
 
-export const selectIsLoading = createSelector(
+export const selectMyPlaylistsIsLoading = createSelector(
   selectPlaylistState,
-  (state: PlaylistState) => state.isLoading
+  (state: MyMusicState) => state.playlists.isLoading
 );
 
-export const selectIsError = createSelector(
+export const selectMyPlaylistsIsError = createSelector(
   selectPlaylistState,
-  (state: PlaylistState) => state.isError
+  (state: MyMusicState) => state.playlists.isError
+);
+export const selectMyArtistsData = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.artists.data
+);
+
+export const selectMyArtistsIsLoading = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.artists.isLoading
+);
+
+export const selectMyArtistsIsError = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.artists.isError
+);
+export const selectMyAlbumsData = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.albums.data
+);
+
+export const selectMyAlbumsIsLoading = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.albums.isLoading
+);
+
+export const selectMyAlbumsIsError = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.albums.isError
+);
+export const selectMyTracksData = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.tracks.data
+);
+
+export const selectMyTracksIsLoading = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.tracks.isLoading
+);
+
+export const selectMyTracksIsError = createSelector(
+  selectPlaylistState,
+  (state: MyMusicState) => state.tracks.isError
 );

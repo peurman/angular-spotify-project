@@ -9,14 +9,14 @@ export interface ArtistsFollowed {
 
 export interface TracksSaved {
   href: string;
-  items: Item[];
+  items: TracksSavedItem[];
   limit: number;
   next: string;
   offset: number;
   previous: null;
   total: number;
 }
-export interface Item {
+export interface TracksSavedItem {
   added_at: Date;
   track: Track;
 }
