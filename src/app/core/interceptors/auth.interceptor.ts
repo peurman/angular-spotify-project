@@ -11,10 +11,16 @@ import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/app/login/services/auth.service';
 import { AuthToken } from 'src/app/login/models/authtoken.interface';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from 'src/app/store/login/login.actions';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private store: Store,
+    private router: Router
+  ) {}
   intercept(
     req: HttpRequest<unknown>,
     next: HttpHandler
@@ -24,7 +30,6 @@ export class AuthInterceptor implements HttpInterceptor {
       if (!req.headers.has('Authorization')) {
         let tokenInfo = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
         if (Date.now() > tokenInfo.expirationDate) {
-          console.log('token expired');
           return this.auth.RefreshToken().pipe(
             switchMap((token: AuthToken) => {
               this.auth.SaveToken(token);

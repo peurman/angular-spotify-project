@@ -47,7 +47,6 @@ export class ArtistEffects {
           switchMap((response) => {
             return this.topService.checkSavedAlbum(response).pipe(
               map((booleanResponse) => {
-                console.log('booleanResponse', booleanResponse);
                 response.items.forEach((album, index) => {
                   const albumValue = booleanResponse[index];
                   if (albumValue) {

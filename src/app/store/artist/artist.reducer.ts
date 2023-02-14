@@ -2,8 +2,12 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { ArtistState } from './artist.state';
 import * as artistActions from './artist.actions';
 import * as profileActions from '../profile/profile.actions';
+import * as trackActions from '../track/track.actions';
 import { Artist } from 'src/app/home/models/new-releases.interface';
-import { RelatedArtist } from 'src/app/artists/models/topartistracks.interface';
+import {
+  ArtistTracks,
+  RelatedArtist,
+} from 'src/app/artists/models/topartistracks.interface';
 
 export const initialArtistState: ArtistState = {
   artist: null,
@@ -157,6 +161,36 @@ const artistReducerInternal = createReducer(
         ...state,
         isLoading: false,
         isError: message,
+      };
+    }
+  ),
+  on(trackActions.SaveRemoveTrackAction, (state): ArtistState => {
+    return {
+      ...state,
+      isLoading: true,
+      isError: null,
+    };
+  }),
+  on(
+    trackActions.SaveRemoveTrackSuccessAction,
+    (state, { id }): ArtistState => {
+      //const tracksUpdated = { ...state.tracks } as ArtistTracks;
+      const tracksUpdated = state.tracks?.tracks?.map((track) => {
+        const trackFixed = { ...track };
+        if (track.id == id) {
+          trackFixed.saved = !track.saved;
+        }
+        return trackFixed;
+      });
+      const data = { ...state.tracks } as ArtistTracks;
+      if (tracksUpdated) {
+        data.tracks = tracksUpdated;
+      }
+
+      return {
+        ...state,
+        tracks: data,
+        isLoading: false,
       };
     }
   )

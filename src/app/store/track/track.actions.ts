@@ -15,3 +15,18 @@ export const getTrackErrorAction = createAction(
   '[Track] Get Track Error',
   props<{ message: string }>()
 );
+//reactions
+export const SaveRemoveTrackAction = createAction(
+  '[Track] Save/Remove Track',
+  props<{ id: string; save: boolean }>()
+);
+
+export const SaveRemoveTrackSuccessAction = createAction(
+  '[Track] Save/Remove Track Success',
+  props<{ id: string }>()
+);
+
+export const SaveRemoveTrackErrorAction = createAction(
+  '[Track] Save/Remove Track Error',
+  props<{ message: string }>()
+);

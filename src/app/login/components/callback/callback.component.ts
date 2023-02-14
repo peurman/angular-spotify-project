@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthToken } from '../../models/authtoken.interface';
+import {} from '../../models/authtoken.interface';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,5 +14,4 @@ export class CallbackComponent {
     private router: Router,
     private auth: AuthService
   ) {}
-  //Add Validation in case somebody try to access to the path without token
 }

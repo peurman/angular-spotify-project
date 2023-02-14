@@ -36,15 +36,12 @@ export class AuthService {
     token.expirationDate = expirationDate;
     const tokenBefore = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
     if (tokenBefore.refresh_token) {
-      console.log('inside refresh', tokenBefore.refresh_token);
       token.refresh_token = tokenBefore.refresh_token;
     }
     localStorage.setItem('tokenInfo', JSON.stringify(token));
   }
   RefreshToken() {
     const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    console.log('should fix this', token.refresh_token);
-    console.log('should fix this', token);
     const body = new URLSearchParams();
     body.set('grant_type', 'refresh_token');
     body.set('refresh_token', token.refresh_token);

@@ -16,4 +16,6 @@ export interface Track {
   preview_url: string;
   duration_ms: number;
   type?: string;
+  saved?: boolean;
+  id: string;
 }

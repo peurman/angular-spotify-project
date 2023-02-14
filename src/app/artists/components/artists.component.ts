@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { Artist } from 'src/app/home/models/new-releases.interface';
 import { Albums } from 'src/app/search/models/search.interface';
+import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import {
   getArtistAction,
   getArtistAlbumsAction,
@@ -16,6 +17,10 @@ import {
   followArtistsAction,
   unFollowArtistsAction,
 } from 'src/app/store/profile/profile.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 import {
   ArtistTracks,
   RelatedArtist,
@@ -76,7 +81,6 @@ export class ArtistsComponent implements OnInit {
   }
   handleFollowClick() {
     this.artistInfo$.pipe(first()).subscribe((artist) => {
-      console.log(artist?.isFollowing);
       if (artist?.isFollowing) {
         this.store.dispatch(unFollowArtistsAction({ id: this.id }));
       } else {
@@ -85,10 +89,17 @@ export class ArtistsComponent implements OnInit {
     });
   }
   goToTrack(id: string) {
-    console.log(id);
+    this.store.dispatch(getTrackAction({ id }));
+    this.router.navigateByUrl('/tracks');
   }
   goToArtist(id: string) {
-    console.log(id);
+    window.scrollTo(0, 0);
+    this.store.dispatch(getArtistAction({ id }));
+  }
+  goToAlbum(id: string) {
+    window.scrollTo(0, 0);
+    this.store.dispatch(getAlbumDetailAction({ id }));
+    this.router.navigateByUrl('/albums');
   }
   handleArtistClick(id: string) {
     window.scrollTo(0, 0);
@@ -101,10 +112,11 @@ export class ArtistsComponent implements OnInit {
       this.store.dispatch(followArtistsAction({ id: event.id }));
     }
   }
-  saveRemoveAlbum(id: string) {
+  SaveRemoveAlbum(id: string) {
     console.log('test');
   }
-  saveRemoveTrack(id: string) {
-    console.log('test');
+  SaveRemoveTrack(id: string, save: boolean | undefined) {
+    save = !save;
+    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
   }
 }

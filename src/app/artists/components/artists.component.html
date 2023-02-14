@@ -57,9 +57,10 @@
           *ngFor="let album of (artistAlbums$ | async)?.items"
           class="album-card"
           [id]="album.id">
-          <img [src]="album.images[0].url" alt="" />
+          <img [src]="album.images[0].url" alt="" 
+          (click)="goToAlbum(album.id)"/>
           <div class="album-title-artists-container">
-            <label class="main__album-name">{{ album.name }}</label>
+            <label class="main__album-name" (click)="goToAlbum(album.id)">{{ album.name }}</label>
             <div class="main__album-artists">
               <label *ngFor="let artist of album.artists">{{
                 artist.name
@@ -71,7 +72,7 @@
               [src]="album.saved ? saveOn : saveOff"
               alt=""
               title="Save or remove this album"
-              (click)="saveRemoveAlbum(album.id)"
+              (click)="SaveRemoveAlbum(album.id)"
               />
             </div>
           </div>
@@ -119,7 +120,7 @@
             [src]="track.saved ? saveOn : saveOff"
             alt=""
             title="Save or remove this album"
-            (click)="saveRemoveTrack(track.id)"
+            (click)="SaveRemoveTrack(track.id, track.saved)"
           /></td>
           
         </tr>

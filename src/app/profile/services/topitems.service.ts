@@ -5,7 +5,7 @@ import { ArtistTracks } from 'src/app/artists/models/topartistracks.interface';
 import { Artist } from 'src/app/home/models/new-releases.interface';
 import { Albums } from 'src/app/search/models/search.interface';
 import { TopArtists } from '../model/topartists.interface';
-import { TopTracks } from '../model/toptracks.interface';
+import { TopTracks, Track as TopTrack } from '../model/toptracks.interface';
 import { Track } from 'src/app/search/models/search.interface';
 
 const BASE_API = 'https://api.spotify.com/v1/me';
@@ -49,7 +49,6 @@ export class TopItems {
   checkSavedAlbum(albumList: Albums): Observable<boolean[]> {
     const ids: string[] = [];
     albumList.items.forEach((album) => {
-      console.log(album.name, ' ', album.id);
       ids.push(album.id);
     });
     return this.http.get<boolean[]>(
