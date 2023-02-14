@@ -117,14 +117,13 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getMyTracksAction({ url: '' }));
   }
 
-  //categories
   categoriesPreviousClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesPrevious }));
   }
   categoriesNextClick() {
     this.store.dispatch(getCategoriesAction({ url: this.categoriesNext }));
   }
-  //genres
+
   get currentGenres(): string[] {
     return this.genres.slice(
       this.currentGenresPage * this.genresPerPage,
@@ -157,7 +156,7 @@ export class HomeComponent implements OnInit {
       this.genresPrevious = true;
     } else this.genresPrevious = false;
   }
-  //new releases
+
   newReleasesPreviousClick() {
     this.store.dispatch(
       getNewReleasesAction({ url: this.newReleasesPrevious })
@@ -171,7 +170,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/albums']);
     window.scrollTo(0, 0);
   }
-  // featured playlists
+
   featuredPlaylistsPreviousClick() {
     this.store.dispatch(
       getFeaturedPlaylistsAction({ url: this.featuredPlaylistsPrevious })

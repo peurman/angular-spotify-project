@@ -1,8 +1,148 @@
 @use "styles.scss" as *;
 
-.my-music {
+.my-music-container {
+  @include centerMeColumn;
+}
+.my-music__title-arrows-container {
+  @include centerMeRow;
+  justify-content: space-between;
+  width: 780px;
+  .my-music__previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
+    }
+  }
+}
+
+.my-music__album-container {
   @include centerMeColumn;
   align-items: flex-start;
-  width: 800px;
-  gap: 10px;
+  width: 100%;
+  .my-music__album-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 350px;
+    overflow: hidden;
+    .my-music__album-card {
+      @include centerMeRow;
+      justify-content: space-between;
+      @include card-style(90px, 230px);
+      &:hover {
+        cursor: default;
+      }
+      img {
+        width: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .my-music__album-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        .my-music__heart {
+          @include centerMeRow;
+          justify-content: flex-end;
+          width: 100%;
+          img {
+            width: 25px;
+          }
+        }
+        label {
+          cursor: default;
+          font-size: 0.8rem;
+          color: $font-secondary-color;
+          text-align: left;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 130px;
+        }
+        .my-music__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+          cursor: default;
+        }
+        .my-music__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}
+
+.album__image-data-container {
+  @include centerMeRow;
+  background: rgb(146, 158, 143);
+  background: linear-gradient(
+    180deg,
+    rgba(146, 158, 143, 1) 0%,
+    rgba(89, 95, 87, 1) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .album__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .album__type-heart-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      .album__type {
+        font-size: 1.1rem;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+    .album__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+  }
+}
+.album__artists-year-songs {
+  @include centerMeRow;
+  padding-left: 10px;
+  color: $font-secondary-color;
+  font-size: 1.4rem;
+  .album__artists {
+    @include centerMeRow;
+    color: $main-color;
+  }
 }

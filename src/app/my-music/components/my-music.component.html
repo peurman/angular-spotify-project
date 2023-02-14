@@ -1,4 +1,71 @@
-<div class="my-music">
-  <h2>My Music</h2>
-  <app-loading></app-loading>
+<div class="my-music-container">
+  <div class="album__image-data-container">
+    <div class="album__image-container">
+      <img [src]="myMusic" alt="My Music" />
+    </div>
+    <div class="album__data-container">
+      <div class="album__type-heart-container">
+        <div class="album__type">ALBUMS and TRACKS</div>
+      </div>
+      <div class="album__title">My Music</div>
+      <div class="album__artists-year-songs">
+        <div>
+          <div class="album__artists">{{ username$ | async }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-music__album-container">
+    <div class="my-music__title-arrows-container">
+      <h2>My Albums</h2>
+      <div
+        class="my-music__previous-next-container"
+        *ngIf="myAlbums$ | async as myAlbums"
+      >
+        <button
+          title="Previous"
+          (click)="goToPreviousMyAlbums(myAlbums.previous)"
+          [disabled]="!myAlbums.previous"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextMyAlbums(myAlbums.next)"
+          [disabled]="!myAlbums.next"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="my-music__album-cards" *ngIf="myAlbums$ | async as myAlbums">
+      <div
+        *ngFor="let album of myAlbums.items"
+        class="my-music__album-card"
+        [id]="album.album.id"
+      >
+        <img
+          [src]="album.album.images[0].url"
+          alt="Go to album"
+          (click)="goToAlbum(album.album.id)"
+        />
+        <div class="my-music__album-title-artists-container">
+          <label class="my-music__album-name">{{ album.album.name }}</label>
+          <div class="my-music__album-artists">
+            <label *ngFor="let artist of album.album.artists">{{
+              artist.name
+            }}</label>
+          </div>
+          <div class="my-music__heart">
+            <img
+              [src]="saveOn"
+              title="remove Album"
+              (click)="removeAlbum(album.album.id)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

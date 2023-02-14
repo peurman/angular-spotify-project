@@ -26,7 +26,7 @@ export class MyMusicService {
   getAlbumsSaved(url: string | null): Observable<AlbumsSaved> {
     if (!url) {
       return this.http.get<AlbumsSaved>(
-        `${BASE_API}/me/albums?limit=50`,
+        `${BASE_API}/me/albums?limit=9`,
         this.options
       );
     }
