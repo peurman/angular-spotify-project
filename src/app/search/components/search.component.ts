@@ -69,6 +69,7 @@ export class SearchComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );

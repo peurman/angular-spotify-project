@@ -14,6 +14,7 @@ export class TracksComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.track$ = this.store.select(fromTrack.selectTrack);
   }
   goToArtist() {

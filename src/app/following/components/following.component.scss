@@ -1,0 +1,204 @@
+@use "styles.scss" as *;
+
+.following-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  margin: 30px 0 15px 0;
+  width: 800px;
+  gap: 10px;
+}
+
+.following__image-data-container {
+  @include centerMeRow;
+  background: rgb(168, 149, 168);
+  background: linear-gradient(
+    180deg,
+    rgb(172, 141, 169) 0%,
+    rgb(120, 96, 112) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .following__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .following__type-heart-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      .following__type {
+        font-size: 1.1rem;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+    .following__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+  }
+}
+.following__user-container {
+  @include centerMeRow;
+  padding-left: 10px;
+  color: $font-secondary-color;
+  font-size: 1.4rem;
+  .following__user {
+    @include centerMeRow;
+    color: $main-color;
+  }
+}
+
+.main__title-arrows-container {
+  @include centerMeRow;
+  justify-content: space-between;
+  width: 780px;
+  .main__previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
+    }
+  }
+}
+.main__my-artists-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .main__my-artists-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    // height: 410px;
+    .main__my-artists-card {
+      @include centerMeColumn;
+      gap: 10px;
+      @include card-style(180px, 165px);
+      img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .main__my-artists-title-artists-container {
+        @include centerMeRow;
+        justify-content: space-between;
+        height: 100%;
+        label {
+          cursor: default;
+          font-size: 0.9rem;
+          color: $font-secondary-color;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 150px;
+        }
+        img {
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+.main__search-playlists-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .main__search-playlists-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 350px;
+    overflow: hidden;
+    .main__search-playlists-card {
+      @include centerMeRow;
+      justify-content: space-between;
+      @include card-style(90px, 230px);
+      &:hover {
+        cursor: default;
+      }
+      img {
+        cursor: pointer;
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .main__search-playlists-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          cursor: default;
+          font-size: 0.8rem;
+          color: $font-secondary-color;
+          text-align: left;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 130px;
+        }
+        .playlist-heart-container {
+          @include centerMeRow;
+          justify-content: flex-end;
+          width: 100%;
+          img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+        .main__playlist-name {
+          cursor: default;
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+        .main__playlist-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}

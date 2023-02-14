@@ -111,6 +111,7 @@
       @include card-style(90px, 230px);
       img {
         width: 90px;
+        height: 90px;
         object-fit: cover;
         border-radius: 5px;
       }
@@ -203,6 +204,7 @@
       @include card-style(90px, 230px);
       img {
         width: 90px;
+        height: 90px;
         object-fit: cover;
         border-radius: 5px;
       }

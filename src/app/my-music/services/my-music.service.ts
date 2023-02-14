@@ -31,7 +31,7 @@ export class MyMusicService {
   getPlaylistsSaved(url: string | null): Observable<PlaylistsSaved> {
     if (!url) {
       return this.http.get<PlaylistsSaved>(
-        `${BASE_API}/me/playlists?limit=50`,
+        `${BASE_API}/me/playlists?limit=9`,
         this.options
       );
     }
@@ -49,7 +49,7 @@ export class MyMusicService {
   getArtistsFollowed(url: string | null): Observable<ArtistsFollowed> {
     if (!url) {
       return this.http.get<ArtistsFollowed>(
-        `${BASE_API}/me/following?type=artist`,
+        `${BASE_API}/me/following?type=artist&limit=50`,
         this.options
       );
     }
