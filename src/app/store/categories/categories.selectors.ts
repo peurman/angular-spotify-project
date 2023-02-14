@@ -19,3 +19,8 @@ export const selectIsError = createSelector(
   selectCategoryState,
   (state: CategoriesState) => state.isError
 );
+
+export const selectPlayLists = createSelector(
+  selectCategoryState,
+  (state: CategoriesState) => state.playlists
+);
