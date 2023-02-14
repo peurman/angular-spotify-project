@@ -27,6 +27,9 @@ import { ProfileState } from './profile/profile.state';
 import { profileReducer } from './profile/profile.reducer';
 import { ProfileEffects } from './profile/profile.effects';
 
+import { myMusicReducer } from './my-music/my-music.reducer';
+import { MyMusicEffects } from './my-music/my-music.effects';
+import { MyMusicState } from './my-music/my-music.state';
 import * as fromMyMusicSelectors from './my-music/my-music.selectors';
 
 import { SearchArtistsState } from './search-artists/search-artists.state';
@@ -63,13 +66,16 @@ import { ArtistState } from './artist/artist.state';
 import { artistReducer } from './artist/artist.reducer';
 import { ArtistEffects } from './artist/artist.effects';
 import * as fromArtistSelectors from './artist/artist.selectors';
+
 import { PlaylistState } from './playlists/playlist.state';
 import { playlistReducer } from './playlists/playlist.reducer';
 import { PlaylistEffects } from './playlists/playlist.effects';
 import * as fromPlaylistSelectors from './playlists/playlist.selectors';
-import { myMusicReducer } from './my-music/my-music.reducer';
-import { MyMusicEffects } from './my-music/my-music.effects';
-import { MyMusicState } from './my-music/my-music.state';
+
+import { RecommendationsState } from './recommendations/recommendations.state';
+import { recommendationsReducer } from './recommendations/recommendations.reducer';
+import { RecommendationsEffects } from './recommendations/recommendations.effects';
+import * as fromRecommendationsSelectors from './recommendations/recommendations.selectors';
 
 export interface RootState {
   loggedIn: LoginState;
@@ -87,6 +93,7 @@ export interface RootState {
   searchPlaylists: SearchPlaylistsState;
   searchTracks: SearchTracksState;
   artist: ArtistState;
+  recommendations: RecommendationsState;
 }
 
 export const appReducer = {
@@ -105,6 +112,7 @@ export const appReducer = {
   searchPlaylists: searchPlaylistsReducer,
   searchTracks: searchTracksReducer,
   artist: artistReducer,
+  recommendations: recommendationsReducer,
 };
 
 export const appEffects = [
@@ -124,6 +132,7 @@ export const appEffects = [
   SearchTracksEffects,
   ArtistEffects,
   PlaylistEffects,
+  RecommendationsEffects,
 ];
 
 export const appSelectors = [
@@ -177,4 +186,7 @@ export const appSelectors = [
   fromPlaylistSelectors.selectPlaylistData,
   fromPlaylistSelectors.selectIsError,
   fromPlaylistSelectors.selectIsLoading,
+  fromRecommendationsSelectors.selectRecommendationsData,
+  fromRecommendationsSelectors.selectIsError,
+  fromRecommendationsSelectors.selectRecommendationsData,
 ];

@@ -1,1 +1,67 @@
-<p>genres works!</p>
+<div
+  class="following-container"
+  *ngIf="recommendations$ | async as recommendations"
+>
+  <div class="following__image-data-container">
+    <div class="following__image-container">
+      <img [src]="musicGenres" alt="Genres" />
+    </div>
+    <div class="following__data-container">
+      <div class="following__type-heart-container">
+        <div class="following__type">TRACKS</div>
+      </div>
+      <div class="following__title">
+        {{ recommendations.seeds[0].id | uppercase }}
+      </div>
+      <div class="following__user-container">
+        <div>
+          <div class="following__user">Spotify recommendations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="album__tracks-container">
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Track Name</th>
+        <th>Artists</th>
+        <th>Follow</th>
+        <th>Duration</th>
+      </tr>
+      <tr *ngFor="let item of recommendations.tracks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="my-music__track-name">
+          <a (click)="goToTrack(item.id)">{{ item.name }}</a>
+        </td>
+        <td>
+          <div *ngIf="item.artists.length === 1" class="track__artists">
+            <a (click)="goToArtist(item.artists[0].id)">{{
+              item.artists[0].name
+            }}</a>
+          </div>
+          <div *ngIf="item.artists.length !== 1" class="track__artists">
+            <div *ngFor="let artist of item.artists; let i = index">
+              <label *ngIf="i === item.artists.length - 1">
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a></label
+              >
+              <label *ngIf="i < item.artists.length - 1">
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                >&nbsp;&nbsp;▪&nbsp;&nbsp;
+              </label>
+            </div>
+          </div>
+        </td>
+        <td>
+          <img
+            [src]="saveOn"
+            alt="heart"
+            title="Remove track"
+            (click)="addRemoveTrack(item.id)"
+          />
+        </td>
+        <td>{{ item.duration_ms | times }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

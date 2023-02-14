@@ -18,25 +18,13 @@ export class AlbumService {
     return this.http.get<AlbumDetail>(`${BASE_API}/albums/${id}`, this.options);
   }
   getAlbumsSaved(): Observable<AlbumsSaved> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.get<AlbumsSaved>(`${BASE_API}/me/albums`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+    return this.http.get<AlbumsSaved>(`${BASE_API}/me/albums`, this.options);
   }
   saveAlbumToLibrary(id: string): Observable<void> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
     return this.http.put<void>(
       `${BASE_API}/me/albums?ids=${id}`,
       {},
-      {
-        headers: new HttpHeaders({
-          skip: 'true',
-          Authorization: `Bearer ${token.access_token}`,
-        }),
-      }
+      this.options
     );
   }
   removeAlbumFromLibrary(id: string): Observable<void> {
