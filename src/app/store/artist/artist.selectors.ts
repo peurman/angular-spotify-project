@@ -22,3 +22,13 @@ export const selectAlbumsData = createSelector(
   selectArtistState,
   (state: ArtistState) => state.artistAlbums
 );
+
+export const selectTracks = createSelector(
+  selectArtistState,
+  (state: ArtistState) => state.tracks
+);
+
+export const selectSuggestedArtists = createSelector(
+  selectArtistState,
+  (state: ArtistState) => state.relatedArtists
+);

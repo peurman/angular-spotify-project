@@ -70,6 +70,7 @@ export interface Album {
   tracks?: Tracks;
   type: string;
   uri: string;
+  saved?: boolean;
 }
 export interface Copyright {
   text: string;
@@ -151,6 +152,7 @@ export interface Track {
   track_number: number;
   type: string;
   uri: string;
+  saved?: boolean;
 }
 export interface ExternalIDS {
   isrc: string;

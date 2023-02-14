@@ -24,12 +24,6 @@ export class PlaylistService {
     return this.http.put<void>(`${BASE_API}/playlists/${id}/followers`, {});
   }
   unfollowPlaylist(id: string): Observable<void> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.delete<void>(`${BASE_API}/playlists/${id}/followers`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+    return this.http.delete<void>(`${BASE_API}/playlists/${id}/followers`);
   }
 }

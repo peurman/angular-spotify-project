@@ -1,5 +1,5 @@
 <div class="main-artist-card">
-<img [src]="artist?.images?.[0]?.url" alt="" (click)="handleArtistClick(artist!.id)"/>
+<img [src]="artist?.images?.length ? artist?.images?.[0]?.url : defaultArtist" alt="" (click)="handleArtistClick(artist!.id)"/>
 <div class="artist-title-artists-container">
     <div class="artist-info" (click)="handleArtistClick(artist!.id)">
         <label class="artist-name">{{ artist?.name }}</label>

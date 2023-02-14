@@ -65,9 +65,77 @@
                 artist.name
               }}</label>
             </div>
+            <div class="album-following-img">
+              <img
+              class="td-image"
+              [src]="album.saved ? saveOn : saveOff"
+              alt=""
+              title="Save or remove this album"
+              (click)="saveRemoveAlbum(album.id)"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
-
+    <div class="tracks-container">
+      <div>
+        <h2>Top Tracks</h2>
+      </div>
+      <table>
+        <tr>
+          <th>Track Name</th>
+          <th>Artists</th>
+          <th>Duration</th>
+          <th>Save</th>
+        </tr>
+        <tr *ngFor="let track of (artistTracks$ | async)?.tracks">
+          <td>
+            <a (click)="goToTrack(track.id)">{{ track.name }}</a>
+          </td>
+          <td>
+            <div *ngIf="track.artists.length === 1" class="track__artists">
+              <a (click)="goToArtist(track.artists[0].id)">{{
+                track.artists[0].name
+              }}</a>
+            </div>
+            <div *ngIf="track.artists.length > 1" class="track__artists">
+              <div *ngFor="let artist of track.artists; let i = index">
+                <label *ngIf="i === track.artists.length - 1">
+                  <a (click)="goToArtist(artist.id)">{{
+                    artist.name
+                  }}</a></label
+                >
+                <label *ngIf="i < track.album.artists.length - 1">
+                  <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                  >&nbsp;&nbsp;▪&nbsp;&nbsp;
+                </label>
+              </div>
+            </div>
+          </td>
+          <td>{{ track.duration_ms | date : "mm:ss" }}</td>
+          <td><img
+            class="td-image"
+            [src]="track.saved ? saveOn : saveOff"
+            alt=""
+            title="Save or remove this album"
+            (click)="saveRemoveTrack(track.id)"
+          /></td>
+          
+        </tr>
+      </table>
+    </div>
+    <div class="top-artist">
+      <div class="title-arrows-container">
+        <h2>Related Artists</h2>
+      </div>
+      <div class="artists-card">
+        <app-artist-card
+          *ngFor="let artist of (suggestedArtist$ | async)?.artists"
+          [artist]="artist"
+          (followUnFollowEvent)="handleFollowUnfollow($event)"
+          (artistClickedEvent)="handleArtistClick($event)"
+        ></app-artist-card>
+      </div>
+    </div>
 </div>

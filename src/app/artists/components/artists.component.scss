@@ -166,7 +166,46 @@
           @include centerMeColumn;
           gap: 3px;
         }
+        .album-following-img{
+          margin-right: auto;
+          margin-left: 0;
+          img{
+            width: 15px;
+            height: 15px; 
+          }
+        }
       }
+    }
+  }
+}
+
+.tracks-container {
+  width: 800px;
+  table {
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+      .td-image{
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
     }
   }
 }

@@ -9,6 +9,7 @@ import { ArtistinfoService } from '../../services/artistinfo.service';
 })
 export class ArtistCardComponent {
   constructor(private artistService: ArtistinfoService) {}
+  defaultArtist = '../../../assets/images/defaultArtist.jpg';
   @Output() followUnFollowEvent = new EventEmitter<{
     type: string;
     id: string;
