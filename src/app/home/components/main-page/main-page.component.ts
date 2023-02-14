@@ -14,6 +14,7 @@ export class MainPageComponent {
   @Input() genresNext!: boolean;
   @Output() genresNextClick: EventEmitter<null> = new EventEmitter();
   @Output() genresPreviousClick: EventEmitter<null> = new EventEmitter();
+  @Output() goToGenreClick: EventEmitter<string> = new EventEmitter();
 
   @Input() categoriesList: Category[] = [];
   @Input() categoriesPrevious!: boolean;
@@ -54,7 +55,7 @@ export class MainPageComponent {
     this.goToCategoryClick.emit(category);
   }
   goToGenre(genre: string) {
-    console.log(genre);
+    this.goToGenreClick.emit(genre);
   }
   goToPreviousNewReleases() {
     this.newReleasesPreviousClick.emit();

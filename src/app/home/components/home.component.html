@@ -7,6 +7,7 @@
   [genresList]="currentGenres"
   [genresPrevious]="genresPrevious"
   [genresNext]="genresNext"
+  (goToGenreClick)="goToGenre($event)"
   (genresNextClick)="genresNextClick()"
   (genresPreviousClick)="genresPreviousClick()"
   [categoriesList]="categories"

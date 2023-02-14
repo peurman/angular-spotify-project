@@ -46,6 +46,7 @@ export class ArtistsComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.suggestedArtist$ = this.store.select(
       fromArtist.selectSuggestedArtists
     );
