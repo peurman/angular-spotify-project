@@ -1,16 +1,16 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import * as albumDetailActions from './album.actions';
+import * as albumActions from './album.actions';
 import { AlbumDetailState } from './album.state';
 
 export const initialAlbumState: AlbumDetailState = {
-  albumDetailData: null,
+  albumData: null,
   isLoading: false,
   isError: null,
 };
 
-const albumDetailReducerInternal = createReducer(
+const albumReducerInternal = createReducer(
   initialAlbumState,
-  on(albumDetailActions.getAlbumDetailAction, (state): AlbumDetailState => {
+  on(albumActions.getAlbumDetailAction, (state): AlbumDetailState => {
     return {
       ...state,
       isLoading: true,
@@ -18,17 +18,17 @@ const albumDetailReducerInternal = createReducer(
     };
   }),
   on(
-    albumDetailActions.getAlbumDetailSuccessAction,
+    albumActions.getAlbumDetailSuccessAction,
     (state, { data }): AlbumDetailState => {
       return {
         ...state,
-        albumDetailData: data,
+        albumData: data,
         isLoading: false,
       };
     }
   ),
   on(
-    albumDetailActions.getAlbumDetailErrorAction,
+    albumActions.getAlbumDetailErrorAction,
     (state, { message }): AlbumDetailState => {
       return {
         ...state,
@@ -38,9 +38,9 @@ const albumDetailReducerInternal = createReducer(
     }
   )
 );
-export function albumDetailReducer(
+export function albumReducer(
   state: AlbumDetailState | undefined,
   action: Action
 ) {
-  return albumDetailReducerInternal(state, action);
+  return albumReducerInternal(state, action);
 }

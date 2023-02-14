@@ -12,4 +12,7 @@ export class TrackService {
   getTrackInfo(id: string) {
     return this.http.get<Track>(`${this.BASE_API}/tracks/${id}`);
   }
+  removeTrack(id: string) {
+    return this.http.delete<Track>(`${this.BASE_API}/me/tracks?ids=${id}`);
+  }
 }

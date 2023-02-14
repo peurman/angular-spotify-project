@@ -29,14 +29,14 @@ export class AlbumsComponent implements OnInit {
   saveOff = '../../../assets/images/saveOff.png';
   following = false;
 
-  albumDetail$!: Observable<AlbumDetail | null>;
+  album$!: Observable<AlbumDetail | null>;
   albumID: string | undefined;
   albumsSaved: AlbumSavedItem[] | undefined = [];
   albumsSavedComplete!: AlbumsSaved | null;
 
   async ngOnInit() {
-    this.albumDetail$ = this.store.select(fromAlbum.selectAlbumDetailData);
-    this.albumDetail$.subscribe((res) => (this.albumID = res?.id));
+    this.album$ = this.store.select(fromAlbum.selectAlbumDetailData);
+    this.album$.subscribe((res) => (this.albumID = res?.id));
 
     this.albumsSavedComplete = await firstValueFrom(
       this.albumService.getAlbumsSaved()

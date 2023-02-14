@@ -1,4 +1,116 @@
-<div class="my-music">
-  <h2>My Music</h2>
-  <app-loading></app-loading>
+<div class="my-music-container">
+  <div class="album__image-data-container">
+    <div class="album__image-container">
+      <img [src]="myMusic" alt="My Music" />
+    </div>
+    <div class="album__data-container">
+      <div class="album__type-heart-container">
+        <div class="album__type">ALBUMS and TRACKS</div>
+      </div>
+      <div class="album__title">My Music</div>
+      <div class="album__artists-year-songs">
+        <div>
+          <div class="album__artists">{{ username$ | async }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-music__album-container">
+    <div class="my-music__title-arrows-container">
+      <h2>My Albums</h2>
+      <div
+        class="my-music__previous-next-container"
+        *ngIf="myAlbums$ | async as myAlbums"
+      >
+        <button
+          title="Previous"
+          (click)="goToPreviousMyAlbums(myAlbums.previous)"
+          [disabled]="!myAlbums.previous"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextMyAlbums(myAlbums.next)"
+          [disabled]="!myAlbums.next"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
+    <div class="my-music__album-cards">
+      <ng-container *ngIf="myAlbums$ | async as myAlbums">
+        <div
+          *ngFor="let album of myAlbums.items"
+          class="my-music__album-card"
+          [id]="album.album.id"
+        >
+          <img
+            [src]="album.album.images[0].url"
+            alt="Go to album"
+            (click)="goToAlbum(album.album.id)"
+          />
+          <div class="my-music__album-title-artists-container">
+            <label class="my-music__album-name">{{ album.album.name }}</label>
+            <div class="my-music__album-artists">
+              <label *ngFor="let artist of album.album.artists">{{
+                artist.name
+              }}</label>
+            </div>
+            <div class="my-music__heart">
+              <img
+                [src]="saveOn"
+                title="remove Album"
+                (click)="removeAlbum(album.album.id)"
+              />
+            </div>
+          </div></div
+      ></ng-container>
+    </div>
+  </div>
+  <div class="album__tracks-container" *ngIf="myTracks$ | async">
+    <h2>My Tracks</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Track Name</th>
+        <th>Artists</th>
+        <th>Follow</th>
+        <th>Duration</th>
+      </tr>
+      <tr *ngFor="let item of (myTracks$ | async)?.items; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="my-music__track-name">
+          <a (click)="goToTrack(item.track.id)">{{ item.track.name }}</a>
+        </td>
+        <td>
+          <div *ngIf="item.track.artists.length === 1" class="track__artists">
+            <a (click)="goToArtist(item.track.artists[0].id)">{{
+              item.track.artists[0].name
+            }}</a>
+          </div>
+          <div *ngIf="item.track.artists.length > 1" class="track__artists">
+            <div *ngFor="let artist of item.track.artists; let i = index">
+              <label *ngIf="i === item.track.artists.length - 1">
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a></label
+              >
+              <label *ngIf="i < item.track.artists.length - 1">
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                >&nbsp;&nbsp;▪&nbsp;&nbsp;
+              </label>
+            </div>
+          </div>
+        </td>
+        <td>
+          <img
+            [src]="saveOn"
+            alt="heart"
+            title="Remove track"
+            (click)="removeTrack(item.track.id)"
+          />
+        </td>
+        <td>{{ item.track.duration_ms | times }}</td>
+      </tr>
+    </table>
+  </div>
 </div>

@@ -9,8 +9,27 @@
     (ngModelChange)="this.searchInput.next($event)"
   />
 </div>
-<app-loading *ngIf="searchTracksIsLoading$ | async"></app-loading>
-<div class="main-container">
+<div class="loader">
+  <app-loading
+    *ngIf="
+      (searchTracksIsLoading$ | async) ||
+      (searchArtistsIsLoading$ | async) ||
+      (searchPlaylistsIsLoading$ | async) ||
+      (searchTracksIsLoading$ | async)
+    "
+  ></app-loading>
+</div>
+<div
+  class="main-container"
+  *ngIf="
+    !(
+      (searchTracksIsLoading$ | async) ||
+      (searchArtistsIsLoading$ | async) ||
+      (searchPlaylistsIsLoading$ | async) ||
+      (searchTracksIsLoading$ | async)
+    )
+  "
+>
   <div
     class="main__search-albums-container"
     *ngIf="!!searchAlbums.length && !!searchTerm"

@@ -226,3 +226,8 @@
     }
   }
 }
+
+.loader {
+  @include centerMeRow;
+  margin: 15px 0;
+}
