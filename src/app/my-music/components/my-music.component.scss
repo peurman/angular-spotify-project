@@ -146,3 +146,36 @@
     color: $main-color;
   }
 }
+
+.album__tracks-container {
+  table {
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+      img {
+        width: 20px;
+        cursor: pointer;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
+    }
+    .my-music__track-name {
+      max-width: 300px;
+    }
+  }
+}

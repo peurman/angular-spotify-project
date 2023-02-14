@@ -18,6 +18,8 @@ import {
 import * as fromLogin from 'src/app/store/login/login.selectors';
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import { AlbumService } from 'src/app/albums/services/album.service';
+import { TrackService } from 'src/app/tracks/services/track.service';
+import { getTrackAction } from 'src/app/store/track/track.actions';
 
 @Component({
   selector: 'app-my-music',
@@ -28,16 +30,14 @@ export class MyMusicComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private albumService: AlbumService
+    private albumService: AlbumService,
+    private trackService: TrackService
   ) {}
 
   saveOn = '../../../assets/images/saveOn.png';
   myMusic = '../../../assets/images/MyMusic.jpg';
 
   username$!: Observable<string | undefined>;
-
-  myPlaylists$!: Observable<PlaylistsSaved | null>;
-  myArtists$!: Observable<ArtistsFollowed | null>;
   myAlbums$!: Observable<AlbumsSaved | null>;
   myTracks$!: Observable<TracksSaved | null>;
 
@@ -46,8 +46,6 @@ export class MyMusicComponent implements OnInit {
 
   ngOnInit(): void {
     this.username$ = this.store.select(fromLogin.selectLoginUsername);
-    this.myPlaylists$ = this.store.select(fromMyMusic.selectMyPlaylistsData);
-    this.myArtists$ = this.store.select(fromMyMusic.selectMyArtistsData);
     this.myAlbums$ = this.store.select(fromMyMusic.selectMyAlbumsData);
     this.myTracks$ = this.store.select(fromMyMusic.selectMyTracksData);
   }
@@ -68,6 +66,24 @@ export class MyMusicComponent implements OnInit {
   removeAlbum(id: string) {
     this.albumService.removeAlbumFromLibrary(id).subscribe();
     this.store.dispatch(getMyAlbumsAction({ url: '' }));
+    window.scrollTo(0, 0);
+  }
+  removeTrack(id: string) {
+    this.trackService.removeTrack(id).subscribe();
+    this.store.dispatch(getMyTracksAction({ url: '' }));
+    window.scrollTo(0, 0);
+  }
+
+  goToTrack(id: string) {
+    console.log(id);
+    this.store.dispatch(getTrackAction({ id }));
+    this.router.navigate(['/tracks']);
+    window.scrollTo(0, 0);
+  }
+  goToArtist(id: string) {
+    console.log(id);
+    // this.store.dispatch(getarti({ id }));
+    this.router.navigate(['/artists']);
     window.scrollTo(0, 0);
   }
 }

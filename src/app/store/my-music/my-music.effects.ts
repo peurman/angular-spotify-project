@@ -88,7 +88,7 @@ export class MyMusicEffects {
           catchError((error) =>
             of(
               myMusicActions.getMyTracksErrorAction({
-                message: `Cannot get your albums. Error: ${error.message}`,
+                message: `Cannot get your tracks. Error: ${error.message}`,
               })
             )
           )
