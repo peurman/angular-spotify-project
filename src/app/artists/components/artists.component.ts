@@ -113,7 +113,7 @@ export class ArtistsComponent implements OnInit {
     }
   }
   SaveRemoveAlbum(id: string) {
-    console.log('test');
+    console.log(id);
   }
   SaveRemoveTrack(id: string, save: boolean | undefined) {
     save = !save;

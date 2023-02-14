@@ -7,10 +7,14 @@ export interface Artists {
   href: string;
   items: Artist[];
   limit: number;
-  next: string;
-  offset: number;
-  previous: null;
+  next: string | null;
+  offset?: number;
+  previous: string | null;
   total: number;
+  cursors?: Cursors;
+}
+export interface Cursors {
+  after: string | null;
 }
 export interface Artist {
   external_urls: ExternalUrls;
@@ -28,7 +32,7 @@ export interface ExternalUrls {
   spotify: string;
 }
 export interface Followers {
-  href: null;
+  href: string | null;
   total: number;
 }
 export interface Image {
@@ -104,6 +108,7 @@ export interface Playlist {
   tracks: Tracks;
   type: string;
   uri: string;
+  followers?: Followers;
 }
 export interface Owner {
   display_name?: string;

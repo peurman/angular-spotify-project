@@ -1,40 +1,37 @@
 <div class="album">
-  <div *ngIf="albumDetail$ | async as albumDetail" class="album-container">
+  <div *ngIf="album$ | async as album" class="album-container">
     <div class="album__image-data-container">
       <div class="album__image-container">
-        <img [src]="albumDetail.images[0].url" alt="" />
+        <img [src]="album.images[0].url" alt="" />
       </div>
       <div class="album__data-container">
         <div class="album__type-heart-container">
           <div class="album__type">
-            {{ albumDetail.album_type | uppercase }}
+            {{ album.album_type | uppercase }}
           </div>
           <div class="album__heart">
             <img
               [src]="following ? saveOn : saveOff"
               alt=""
               title="Save or remove this album"
-              (click)="saveRemoveAlbum(albumDetail.id)"
+              (click)="saveRemoveAlbum(album.id)"
             />
           </div>
         </div>
         <div class="album__title">
-          {{ albumDetail.name }}
+          {{ album.name }}
         </div>
         <div class="album__artists-year-songs">
           <div>
-            <div
-              *ngIf="albumDetail.artists.length === 1"
-              class="album__artists"
-            >
-              {{ albumDetail.artists[0].name }}
+            <div *ngIf="album.artists.length === 1" class="album__artists">
+              {{ album.artists[0].name }}
             </div>
-            <div *ngIf="albumDetail.artists.length > 1" class="album__artists">
-              <div *ngFor="let artist of albumDetail.artists; let i = index">
-                <label *ngIf="i === albumDetail.artists.length - 1">
+            <div *ngIf="album.artists.length > 1" class="album__artists">
+              <div *ngFor="let artist of album.artists; let i = index">
+                <label *ngIf="i === album.artists.length - 1">
                   {{ artist.name }}</label
                 >
-                <label *ngIf="i < albumDetail.artists.length - 1">
+                <label *ngIf="i < album.artists.length - 1">
                   {{ artist.name }}&nbsp;&nbsp;▪&nbsp;&nbsp;
                 </label>
               </div>
@@ -42,15 +39,15 @@
           </div>
           <div class="album__year">
             &nbsp;&nbsp;▪&nbsp;&nbsp;{{
-              albumDetail.release_date | date : "yyyy"
+              album.release_date | date : "yyyy"
             }}&nbsp;&nbsp;▪&nbsp;&nbsp;
           </div>
           <div class="album__songs">
-            <div *ngIf="albumDetail.tracks.items.length === 1">
-              {{ albumDetail.tracks.items.length }} song
+            <div *ngIf="album.tracks.items.length === 1">
+              {{ album.tracks.items.length }} song
             </div>
-            <div *ngIf="albumDetail.tracks.items.length > 1">
-              {{ albumDetail.tracks.items.length }} songs
+            <div *ngIf="album.tracks.items.length > 1">
+              {{ album.tracks.items.length }} songs
             </div>
           </div>
         </div>
@@ -64,7 +61,7 @@
           <th>Artists</th>
           <th>Duration</th>
         </tr>
-        <tr *ngFor="let track of albumDetail.tracks.items">
+        <tr *ngFor="let track of album.tracks.items">
           <td>{{ track.track_number }}</td>
           <td>
             <a (click)="goToTrack(track.id)">{{ track.name }}</a>
@@ -82,7 +79,7 @@
                     artist.name
                   }}</a></label
                 >
-                <label *ngIf="i < albumDetail.artists.length - 1">
+                <label *ngIf="i < album.artists.length - 1">
                   <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
                   >&nbsp;&nbsp;▪&nbsp;&nbsp;
                 </label>
@@ -90,7 +87,6 @@
             </div>
           </td>
           <td>{{ track.duration_ms | times }}</td>
-          
         </tr>
       </table>
     </div>

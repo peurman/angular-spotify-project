@@ -40,12 +40,6 @@ export class AlbumService {
     );
   }
   removeAlbumFromLibrary(id: string): Observable<void> {
-    const token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    return this.http.delete<void>(`${BASE_API}/me/albums?ids=${id}`, {
-      headers: new HttpHeaders({
-        skip: 'true',
-        Authorization: `Bearer ${token.access_token}`,
-      }),
-    });
+    return this.http.delete<void>(`${BASE_API}/me/albums?ids=${id}`);
   }
 }

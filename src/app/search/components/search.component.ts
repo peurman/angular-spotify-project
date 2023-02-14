@@ -41,22 +41,25 @@ export class SearchComponent implements OnInit {
   defaultArtist = '../../../assets/images/defaultArtist.jpg';
   searchTerm = '';
   searchInput = new Subject<string>();
-  // Artists
+
   searchArtists: Artist[] = [];
   searchArtistsNext: string | null = '';
   searchArtistsPrevious: string | null = '';
   searchArtists$!: Observable<Artists | null>;
-  // Albums
+  searchArtistsIsLoading$!: Observable<boolean>;
+
   searchAlbums: Album[] = [];
   searchAlbumsNext: string | null = '';
   searchAlbumsPrevious: string | null = '';
   searchAlbums$!: Observable<Albums | null>;
-  // Playlists
+  searchAlbumsIsLoading$!: Observable<boolean>;
+
   searchPlaylists: Playlist[] = [];
   searchPlaylistsNext: string | null = '';
   searchPlaylistsPrevious: string | null = '';
   searchPlaylists$!: Observable<Playlists | null>;
-  // Tracks
+  searchPlaylistsIsLoading$!: Observable<boolean>;
+
   searchTracks: Track[] = [];
   searchTracksNext: string | null = '';
   searchTracksPrevious: string | null = '';
@@ -66,16 +69,27 @@ export class SearchComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    // Selectors
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );
+    this.searchArtistsIsLoading$ = this.store.select(
+      fromSearchArtists.selectIsLoading
+    );
+
     this.searchAlbums$ = this.store.select(
       fromSearchAlbums.selectSearchAlbumsData
     );
+    this.searchAlbumsIsLoading$ = this.store.select(
+      fromSearchAlbums.selectIsLoading
+    );
+
     this.searchPlaylists$ = this.store.select(
       fromSearchPlaylists.selectSearchPlaylistsData
     );
+    this.searchPlaylistsIsLoading$ = this.store.select(
+      fromSearchPlaylists.selectIsLoading
+    );
+
     this.searchTracks$ = this.store.select(
       fromSearchTracks.selectSearchTracksData
     );
@@ -213,5 +227,6 @@ export class SearchComponent implements OnInit {
   goToTrack(trackId: string) {
     this.store.dispatch(getTrackAction({ id: trackId }));
     this.router.navigateByUrl('tracks');
+    window.scrollTo(0, 0);
   }
 }
