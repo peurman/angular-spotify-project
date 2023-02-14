@@ -72,9 +72,7 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeTrack(id: string) {
-    this.trackService
-      .removeTrack(id)
-      .subscribe(() => this.store.dispatch(getMyTracksAction({ url: '' })));
+    this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
   }
 
   goToTrack(id: string) {
