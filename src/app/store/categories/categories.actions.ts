@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { PlayListCategory } from 'src/app/categories/models/playlist.interface';
 import { CategoriesClass } from 'src/app/home/models/categories.interface';
 
 export const getCategoriesAction = createAction(
@@ -11,5 +12,18 @@ export const getCategoriesSuccessAction = createAction(
 );
 export const getCategoriesErrorAction = createAction(
   '[Category] Get Categories Error Action',
+  props<{ message: string }>()
+);
+
+export const getCategoriesPlaylistAction = createAction(
+  '[Category] Get Playlist',
+  props<{ id: string }>()
+);
+export const getCategoriesPlaylistSuccessAction = createAction(
+  '[Category] Get Playlist Success Action',
+  props<{ playlists: PlayListCategory }>()
+);
+export const getCategoriesPlaylistErrorAction = createAction(
+  '[Category] Get Playlist Error Action',
   props<{ message: string }>()
 );

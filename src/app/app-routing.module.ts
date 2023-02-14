@@ -58,6 +58,12 @@ const routes: Routes = [
     canActivate: [MainGuard],
   },
   {
+    path: 'categories',
+    loadChildren: () =>
+      import('./categories/categories.module').then((m) => m.CategoriesModule),
+    canActivate: [MainGuard],
+  },
+  {
     path: 'following',
     loadChildren: () =>
       import('./following/following.module').then((m) => m.FollowingModule),

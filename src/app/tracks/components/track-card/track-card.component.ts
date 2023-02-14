@@ -15,7 +15,6 @@ export class TrackCardComponent {
   @Output() selectTrack = new EventEmitter<Track>();
   handleClick() {
     if (this.track) {
-      console.log(this.track.album.id);
       this.selectTrack.emit(this.track);
     }
   }

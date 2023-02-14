@@ -10,13 +10,13 @@ export class ProfileEffects {
   getTopArtists$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(profileActions.getTopArtistsAction),
-      switchMap((res) => {
-        return this.topService.getTopArtists(res.url).pipe(
-          switchMap((response) => {
-            return this.topService.checkFollowing(response.items).pipe(
-              map((res) => {
-                response.items.forEach((artist, index) => {
-                  const artistValue = res[index];
+      switchMap((action) => {
+        return this.topService.getTopArtists(action.url).pipe(
+          switchMap((topArtists) => {
+            return this.topService.checkFollowing(topArtists.items).pipe(
+              map((booleanResponse) => {
+                topArtists.items.forEach((artist, index) => {
+                  const artistValue = booleanResponse[index];
                   if (artistValue) {
                     artist.isFollowing = true;
                   } else {
@@ -24,7 +24,7 @@ export class ProfileEffects {
                   }
                 });
                 return profileActions.getTopArtistsSuccessAction({
-                  data: response,
+                  data: topArtists,
                 });
               })
             );

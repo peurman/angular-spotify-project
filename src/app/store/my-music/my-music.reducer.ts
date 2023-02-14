@@ -1,6 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as myMusicActions from './my-music.actions';
 import { MyMusicState } from './my-music.state';
+import * as trackActions from '../track/track.actions';
+import { TracksSaved } from 'src/app/my-music/models/my-music.interface';
 
 export const initialMyMusicState: MyMusicState = {
   playlists: {
@@ -169,6 +171,50 @@ const myMusicReducerInternal = createReducer(
           isError: message,
         },
       };
+    }
+  ),
+  on(trackActions.SaveRemoveTrackAction, (state): MyMusicState => {
+    return {
+      ...state,
+      tracks: {
+        data: state.tracks.data,
+        isLoading: true,
+        isError: null,
+      },
+    };
+  }),
+  on(
+    trackActions.SaveRemoveTrackSuccessAction,
+    (state, { id }): MyMusicState => {
+      console.log('id', id);
+      console.log('tracks', state.tracks.data?.items);
+      const filteredTracks = state.tracks.data?.items.filter((item) => {
+        return item.track.id != id;
+      });
+      console.log('filtered', filteredTracks);
+      const data = { ...state.tracks.data } as TracksSaved;
+      if (data) {
+        if (filteredTracks) {
+          data.items = filteredTracks;
+        }
+        return {
+          ...state,
+          tracks: {
+            data: data,
+            isLoading: true,
+            isError: null,
+          },
+        };
+      } else {
+        return {
+          ...state,
+          tracks: {
+            data: state.tracks.data,
+            isLoading: true,
+            isError: null,
+          },
+        };
+      }
     }
   )
 );

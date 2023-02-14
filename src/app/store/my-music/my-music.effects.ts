@@ -4,6 +4,7 @@ import * as myMusicActions from './my-music.actions';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MyMusicService } from 'src/app/my-music/services/my-music.service';
+import { TracksSavedItem } from 'src/app/my-music/models/my-music.interface';
 
 @Injectable()
 export class MyMusicEffects {
@@ -18,6 +19,7 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getPlaylistsSaved(res.url).pipe(
           map((response) => {
+            console.log('respPlay', response);
             return myMusicActions.getMyPlaylistsSuccessAction({
               data: response,
             });
@@ -39,6 +41,8 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getArtistsFollowed(res.url).pipe(
           map((response) => {
+            console.log('respArtist', response);
+
             return myMusicActions.getMyArtistsSuccessAction({
               data: response,
             });
@@ -60,6 +64,7 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getAlbumsSaved(res.url).pipe(
           map((response) => {
+            console.log('respAlbum', response);
             return myMusicActions.getMyAlbumsSuccessAction({
               data: response,
             });
@@ -75,12 +80,19 @@ export class MyMusicEffects {
       )
     );
   });
-  getMyTracks$ = createEffect(() => {
+  private _getMyTracks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(myMusicActions.getMyTracksAction),
       exhaustMap((res) =>
         this.myMusicService.getTracksSaved(res.url).pipe(
           map((response) => {
+            const fixedList: TracksSavedItem[] = []; //ERROR
+            response.items.forEach((track) => {
+              if (track.track) {
+                fixedList.push(track);
+              }
+            });
+            response.items = fixedList;
             return myMusicActions.getMyTracksSuccessAction({
               data: response,
             });
@@ -96,4 +108,10 @@ export class MyMusicEffects {
       )
     );
   });
+  public get getMyTracks$() {
+    return this._getMyTracks$;
+  }
+  public set getMyTracks$(value) {
+    this._getMyTracks$ = value;
+  }
 }

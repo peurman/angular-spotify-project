@@ -7,7 +7,10 @@ import { CategoriesClass, Category } from '../models/categories.interface';
 import { Album, Albums } from '../models/new-releases.interface';
 import { Playlist, Playlists } from '../models/featured-playlists.interface';
 
-import { getCategoriesAction } from 'src/app/store/categories/categories.actions';
+import {
+  getCategoriesAction,
+  getCategoriesPlaylistAction,
+} from 'src/app/store/categories/categories.actions';
 import { getGenresAction } from 'src/app/store/genres/genres.actions';
 import { getNewReleasesAction } from 'src/app/store/new-releases/new-releases.actions';
 import { getFeaturedPlaylistsAction } from 'src/app/store/featured-playlists/featured-playlists.actions';
@@ -185,5 +188,9 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getPlaylistAction({ id }));
     this.router.navigate(['/playlists']);
     window.scrollTo(0, 0);
+  }
+  goToCategory(id: string) {
+    this.store.dispatch(getCategoriesPlaylistAction({ id }));
+    this.router.navigateByUrl('/categories');
   }
 }

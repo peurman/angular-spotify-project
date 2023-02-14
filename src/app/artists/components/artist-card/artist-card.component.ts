@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Artist } from 'src/app/home/models/new-releases.interface';
+import { ArtistinfoService } from '../../services/artistinfo.service';
 
 @Component({
   selector: 'app-artist-card',
@@ -7,10 +8,13 @@ import { Artist } from 'src/app/home/models/new-releases.interface';
   styleUrls: ['./artist-card.component.scss'],
 })
 export class ArtistCardComponent {
+  constructor(private artistService: ArtistinfoService) {}
+  defaultArtist = '../../../assets/images/defaultArtist.jpg';
   @Output() followUnFollowEvent = new EventEmitter<{
     type: string;
     id: string;
   }>();
+  @Output() artistClickedEvent = new EventEmitter<string>();
   @Input() artist!: Artist | undefined;
   handleClick() {
     if (this.artist) {
@@ -20,5 +24,8 @@ export class ArtistCardComponent {
         this.followUnFollowEvent.emit({ type: 'follow', id: this.artist.id });
       }
     }
+  }
+  handleArtistClick(id: string) {
+    this.artistClickedEvent.emit(id);
   }
 }

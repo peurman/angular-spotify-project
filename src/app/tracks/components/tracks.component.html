@@ -8,8 +8,13 @@
         <div class="playlist__type">
           {{ (track$ | async)?.type | uppercase }}
         </div>
-        <div class="album__heart">
-          <!--saveOn-->
+        <div class="album__heart" *ngIf="(track$ | async) as track">
+          <img
+            [src]="(track$ | async)?.saved ? saveOn : saveOff"
+            alt=""
+            title="Save or remove this track"
+            (click)="saveRemoveTrack(track.id, track.saved)"
+          />
         </div>
       </div>
       <div class="track__title">
@@ -70,7 +75,8 @@
             class="track__artists"
           >
             <a
-              (click)="goToArtist()"
+             *ngIf="(track$ | async) as tracks"
+              (click)="goToArtist(tracks.album.artists[0].id)"
               >{{ (track$ | async)?.album?.artists?.[0]?.name }}</a
             >
           </div>
@@ -87,10 +93,10 @@
               <label
                 *ngIf="i === ((track$ | async)?.album?.artists)!.length - 1"
               >
-                <a (click)="goToArtist()">{{ artist.name }}</a></label
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a></label
               >
               <label *ngIf="i < ((track$ | async)?.album?.artists)!.length - 1">
-                <a (click)="goToArtist()">{{ artist.name }}</a
+                <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
                 >&nbsp;&nbsp;▪&nbsp;&nbsp;
               </label>
             </div>
@@ -98,8 +104,8 @@
         </td>
         <td>{{ (track$ | async)?.duration_ms | date : "mm:ss" }}</td>
         <td>
-          <audio controls volume="0.50">
-            <source [src]="(track$ | async)?.preview_url" />
+          <audio controls volume="0.50"
+          [src]="(track$ | async)?.preview_url "type="audio/mp3">
           </audio>
         </td>
       </tr>

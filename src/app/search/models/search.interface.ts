@@ -1,3 +1,4 @@
+//MOVE TO CORE?
 //ARTISTS
 export interface SearchArtist {
   artists: Artists;
@@ -23,7 +24,7 @@ export interface Artist {
   name: string;
   type: string;
   uri: string;
-  followers?: Followers;
+  followers: Followers;
   genres?: string[];
   images: Image[];
   popularity?: number;
@@ -74,6 +75,7 @@ export interface Album {
   tracks?: Tracks;
   type: string;
   uri: string;
+  saved?: boolean;
 }
 export interface Copyright {
   text: string;
@@ -156,6 +158,7 @@ export interface Track {
   track_number: number;
   type: string;
   uri: string;
+  saved?: boolean;
 }
 export interface ExternalIDS {
   isrc: string;

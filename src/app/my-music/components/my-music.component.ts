@@ -14,7 +14,10 @@ import * as fromLogin from 'src/app/store/login/login.selectors';
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import { AlbumService } from 'src/app/albums/services/album.service';
 import { TrackService } from 'src/app/tracks/services/track.service';
-import { getTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 
 @Component({
   selector: 'app-my-music',
@@ -67,6 +70,7 @@ export class MyMusicComponent implements OnInit {
       .removeAlbumFromLibrary(id)
       .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
   }
+
   removeTrack(id: string) {
     this.trackService
       .removeTrack(id)

@@ -4,6 +4,7 @@ import { CategoriesState } from './categories.state';
 
 export const initialCategoryState: CategoriesState = {
   categoriesData: null,
+  playlists: null,
   isLoading: false,
   isError: null,
 };
@@ -29,6 +30,36 @@ const categoriesReducerInternal = createReducer(
   ),
   on(
     categoriesActions.getCategoriesErrorAction,
+    (state, { message }): CategoriesState => {
+      return {
+        ...state,
+        isLoading: false,
+        isError: message,
+      };
+    }
+  ),
+  on(
+    categoriesActions.getCategoriesPlaylistAction,
+    (state): CategoriesState => {
+      return {
+        ...state,
+        isLoading: true,
+        isError: null,
+      };
+    }
+  ),
+  on(
+    categoriesActions.getCategoriesPlaylistSuccessAction,
+    (state, { playlists }): CategoriesState => {
+      return {
+        ...state,
+        playlists: playlists,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    categoriesActions.getCategoriesPlaylistErrorAction,
     (state, { message }): CategoriesState => {
       return {
         ...state,

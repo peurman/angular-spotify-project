@@ -2,6 +2,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { TrackState } from './track.state';
 import * as trackActions from './track.actions';
+import { Track } from 'src/app/profile/model/toptracks.interface';
 
 export const initialTrackState: TrackState = {
   track: null,
@@ -12,6 +13,7 @@ export const initialTrackState: TrackState = {
 const trackReducerInternal = createReducer(
   initialTrackState,
   on(trackActions.getTrackAction, (state) => {
+    console.log('dentro de este');
     return {
       ...state,
       isLoading: true,
@@ -19,6 +21,8 @@ const trackReducerInternal = createReducer(
     };
   }),
   on(trackActions.getTrackSuccessAction, (state, { track }) => {
+    console.log('id recibida', track.id);
+    console.log('track bd', state.track?.id);
     return {
       ...state,
       track: track,
@@ -26,6 +30,38 @@ const trackReducerInternal = createReducer(
     };
   }),
   on(trackActions.getTrackErrorAction, (state, { message }) => {
+    return {
+      ...state,
+      isLoading: false,
+      isError: message,
+    };
+  }),
+  on(trackActions.SaveRemoveTrackAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      isError: null,
+    };
+  }),
+  on(trackActions.SaveRemoveTrackSuccessAction, (state, { id }) => {
+    if (id == state.track?.id) {
+      const trackUpdated = { ...state.track } as Track;
+      trackUpdated.saved = !trackUpdated.saved;
+      return {
+        ...state,
+        track: trackUpdated,
+        isLoading: false,
+      };
+    } else {
+      const track = { ...state.track } as Track;
+      return {
+        ...state,
+        track: track,
+        isLoading: false,
+      };
+    }
+  }),
+  on(trackActions.SaveRemoveTrackErrorAction, (state, { message }) => {
     return {
       ...state,
       isLoading: false,

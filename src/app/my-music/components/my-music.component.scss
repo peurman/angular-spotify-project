@@ -83,7 +83,7 @@
         .my-music__album-name {
           font-weight: bold;
           font-size: 0.9rem;
-          cursor: default;
+          cursor: pointer;
         }
         .my-music__album-artists {
           @include centerMeColumn;

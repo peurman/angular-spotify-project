@@ -51,7 +51,7 @@
             (click)="goToAlbum(album.album.id)"
           />
           <div class="my-music__album-title-artists-container">
-            <label class="my-music__album-name">{{ album.album.name }}</label>
+            <label class="my-music__album-name" (click)="goToAlbum(album.album.id)">{{ album.album.name }}</label>
             <div class="my-music__album-artists">
               <label *ngFor="let artist of album.album.artists">{{
                 artist.name
@@ -82,7 +82,9 @@
       <tr *ngFor="let item of (myTracks$ | async)?.items; let i = index">
         <td>{{ i + 1 }}</td>
         <td class="my-music__track-name">
-          <a (click)="goToTrack(item.track.id)">{{ item.track.name }}</a>
+          <a (click)="goToTrack(item.track.id)">{{ item.track.name}}</a> 
+
+
         </td>
         <td>
           <div *ngIf="item.track.artists.length === 1" class="track__artists">

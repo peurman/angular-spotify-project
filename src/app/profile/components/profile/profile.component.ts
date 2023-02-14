@@ -14,8 +14,12 @@ import {
 } from 'src/app/store/profile/profile.actions';
 import { TopArtists } from '../../model/topartists.interface';
 import { TopTracks, Track } from '../../model/toptracks.interface';
-import { getTrackSuccessAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  getTrackSuccessAction,
+} from 'src/app/store/track/track.actions';
 import { Router } from '@angular/router';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 
 @Component({
   selector: 'app-profile',
@@ -58,9 +62,13 @@ export class ProfileComponent implements OnInit {
   }
   handleSelectTrack(track: Track) {
     if (track) {
-      this.store.dispatch(getTrackSuccessAction({ track }));
+      this.store.dispatch(getTrackAction({ id: track.id }));
       this.router.navigateByUrl('tracks');
     }
+  }
+  handleArtistClick(id: string) {
+    this.store.dispatch(getArtistAction({ id: id }));
+    this.router.navigateByUrl('/artists');
   }
   handlePreviousArtist() {
     this.store.dispatch(getTopArtistsAction({ url: this.topArtistsPrevious }));

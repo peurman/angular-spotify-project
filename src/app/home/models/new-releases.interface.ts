@@ -1,3 +1,5 @@
+import { Followers } from 'src/app/search/models/search.interface';
+
 export interface NewReleases {
   albums: Albums;
 }
@@ -36,6 +38,9 @@ export interface Artist {
   type: ArtistType;
   uri: string;
   isFollowing: boolean;
+  followers: Followers;
+  genres?: string[];
+  popularity?: number;
 }
 
 export interface ExternalUrls {

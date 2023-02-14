@@ -23,6 +23,7 @@ import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopItems } from './profile/services/topitems.service';
 import { TrackService } from './tracks/services/track.service';
+import { ArtistinfoService } from './artists/services/artistinfo.service';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<RootState>
@@ -57,6 +58,7 @@ const metaReducers = [localStorageSyncReducer, storeFreeze];
     MainGuard,
     TopItems,
     TrackService,
+    ArtistinfoService,
   ],
   bootstrap: [AppComponent],
 })

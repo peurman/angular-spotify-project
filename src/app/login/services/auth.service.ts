@@ -35,7 +35,7 @@ export class AuthService {
     );
     token.expirationDate = expirationDate;
     const tokenBefore = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-    if (Object.keys(tokenBefore).length !== 0) {
+    if (tokenBefore.refresh_token) {
       token.refresh_token = tokenBefore.refresh_token;
     }
     localStorage.setItem('tokenInfo', JSON.stringify(token));

@@ -1,0 +1,212 @@
+@use "styles.scss" as *;
+.main {
+  @include centerMeColumn;
+  margin: 30px 0 15px 0;
+  width: 800px;
+}
+
+.profile-top {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: center;
+
+  .user-avatar {
+    margin-top: 10px;
+    width: 150px;
+    height: 150px;
+
+    img {
+        margin: 0 auto;
+      border-radius: 100%;
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+  }
+  .user-followers {
+    text-align: center;
+
+    .user-followers-count {
+      font-weight: 700;
+      font-size: 20px;
+      color: rgb(29, 185, 84);
+    }
+
+  }
+  .follow-button, .unFollow-button {
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+    background-color: $main-color;
+    border-radius: 3px;
+    width: 100px;
+    color: $button-color
+    }
+
+    .unFollow-button{
+      background-color: red;
+    }
+}
+.top-artist,
+.top-tracks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.artists-card {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.title-arrows-container {
+  @include centerMeRow;
+  justify-content: space-between;
+  width: 780px;
+  .previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
+    }
+  }
+}
+.artist-genders{
+    font-size: 0.9rem;
+    @include centerMeRow;
+    display: flex;
+}
+
+.user-followers-text {
+    text-align: center;
+    color: rgb(155, 155, 155);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+
+.albums-container{
+  @include centerMeColumn;
+  align-items: flex-start;
+  width: 100%;
+  .arrows-container{
+    @include centerMeRow;
+    justify-content: space-between;
+    width: 780px;
+    .main__previous-next-container {
+      @include centerMeRow;
+      justify-content: right;
+      gap: 35px;
+      button {
+        background: transparent;
+        border: none;
+        color: $button-color;
+        font: 2.4rem "Circular";
+        line-height: 0.5rem;
+        cursor: pointer;
+        &:disabled {
+          color: $background-hover;
+        }
+      }
+    }
+  }
+  .albums-cards {
+    @include centerMeRow;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+    width: 800px;
+    height: 350px;
+    overflow: hidden;
+    .album-card {
+      @include centerMeRow;
+      justify-content: space-between;
+      @include card-style(90px, 230px);
+      img {
+        width: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .album-title-artists-container {
+        @include centerMeColumn;
+        justify-content: space-evenly;
+        height: 100%;
+        label {
+          cursor: pointer;
+          font-size: 0.8rem;
+          color: $font-secondary-color;
+          text-align: left;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 130px;
+        }
+        .main__album-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+        .main__album-artists {
+          @include centerMeColumn;
+          gap: 3px;
+        }
+        .album-following-img{
+          margin-right: auto;
+          margin-left: 0;
+          img{
+            width: 15px;
+            height: 15px; 
+          }
+        }
+      }
+    }
+  }
+}
+
+.tracks-container {
+  width: 800px;
+  table {
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+      .td-image{
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
+    }
+  }
+}

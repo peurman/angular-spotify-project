@@ -57,3 +57,16 @@ export const getMyTracksErrorAction = createAction(
   '[MyTracks] Get MyTracks Error Action',
   props<{ message: string }>()
 );
+
+export const SaveRemoveTrackAction = createAction(
+  '[MyTracks] Save Remove Track Action',
+  props<{ id: string }>()
+);
+export const SaveRemoveTrackSuccessAction = createAction(
+  '[MyTracks] Save Remove Track Success Action',
+  props<{ id: string }>()
+);
+export const SaveRemoveTrackErrorAction = createAction(
+  '[MyTracks] Save Remove Track Error Action',
+  props<{ message: string }>()
+);
