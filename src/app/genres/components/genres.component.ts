@@ -20,11 +20,15 @@ export class GenresComponent implements OnInit {
   saveOff = '../../../assets/images/saveOff.png';
 
   recommendations$!: Observable<GenreRecommendations | null>;
+  recommendationsIsLoading$!: Observable<boolean | null>;
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.recommendations$ = this.store.select(
       fromRecommendations.selectRecommendationsData
+    );
+    this.recommendationsIsLoading$ = this.store.select(
+      fromRecommendations.selectIsLoading
     );
   }
 

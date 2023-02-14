@@ -1,5 +1,11 @@
 @use "styles.scss" as *;
 
+app-loading {
+  @include centerMeRow;
+  margin-top: 80px;
+  width: 800px;
+}
+
 .following-container {
   @include centerMeColumn;
   align-items: flex-start;
