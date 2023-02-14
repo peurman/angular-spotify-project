@@ -29,7 +29,15 @@ export function localStorageSyncReducer(
   reducer: ActionReducer<RootState>
 ): ActionReducer<RootState> {
   return localStorageSync({
-    keys: ['album', 'track', 'playlist', 'myMusic'],
+    keys: [
+      'album',
+      'track',
+      'playlist',
+      'myMusic',
+      'following',
+      'recommendations',
+      'profile',
+    ],
     rehydrate: true,
   })(reducer);
 }

@@ -12,9 +12,17 @@ export class CategoriesService {
   constructor(private http: HttpClient) {}
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   options = { headers: this.headers };
-  getCategoriesPlayLists(id: string): Observable<PlayListCategory> {
-    return this.http.get<PlayListCategory>(
-      `${BASE_API}browse/categories/${id}/playlists`
-    );
+  getCategoriesPlayLists(
+    id: string,
+    url: string
+  ): Observable<PlayListCategory> {
+    if (!url) {
+      return this.http.get<PlayListCategory>(
+        `${BASE_API}browse/categories/${id}/playlists?limit=10`,
+        this.options
+      );
+    } else {
+      return this.http.get<PlayListCategory>(`${url}`, this.options);
+    }
   }
 }

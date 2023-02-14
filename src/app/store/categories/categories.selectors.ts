@@ -24,3 +24,8 @@ export const selectPlayLists = createSelector(
   selectCategoryState,
   (state: CategoriesState) => state.playlists
 );
+
+export const selectCategorySelected = createSelector(
+  selectCategoryState,
+  (state: CategoriesState) => state.categorySelected
+);

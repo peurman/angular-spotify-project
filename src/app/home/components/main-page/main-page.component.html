@@ -96,7 +96,7 @@
       <div
         *ngFor="let category of categoriesList"
         class="main__category-card"
-        (click)="goToCategory(category.id)"
+        (click)="goToCategory(category)"
         [id]="category.id"
       >
         <img [src]="category.icons[0].url" alt="" />

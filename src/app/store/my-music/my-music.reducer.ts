@@ -186,12 +186,9 @@ const myMusicReducerInternal = createReducer(
   on(
     trackActions.SaveRemoveTrackSuccessAction,
     (state, { id }): MyMusicState => {
-      console.log('id', id);
-      console.log('tracks', state.tracks.data?.items);
       const filteredTracks = state.tracks.data?.items.filter((item) => {
         return item.track.id != id;
       });
-      console.log('filtered', filteredTracks);
       const data = { ...state.tracks.data } as TracksSaved;
       if (data) {
         if (filteredTracks) {

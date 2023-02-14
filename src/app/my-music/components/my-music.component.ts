@@ -18,6 +18,7 @@ import {
   getTrackAction,
   SaveRemoveTrackAction,
 } from 'src/app/store/track/track.actions';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 
 @Component({
   selector: 'app-my-music',
@@ -72,20 +73,16 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeTrack(id: string) {
-    this.trackService
-      .removeTrack(id)
-      .subscribe(() => this.store.dispatch(getMyTracksAction({ url: '' })));
+    this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
   }
 
   goToTrack(id: string) {
-    console.log(id);
     this.store.dispatch(getTrackAction({ id }));
     this.router.navigate(['/tracks']);
     window.scrollTo(0, 0);
   }
   goToArtist(id: string) {
-    console.log(id);
-    // this.store.dispatch(getarti({ id }));
+    this.store.dispatch(getArtistAction({ id }));
     this.router.navigate(['/artists']);
     window.scrollTo(0, 0);
   }

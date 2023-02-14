@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { Artist } from 'src/app/home/models/new-releases.interface';
-import { Albums } from 'src/app/search/models/search.interface';
+import { Album, Albums } from 'src/app/search/models/search.interface';
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import {
   getArtistAction,
@@ -112,8 +112,8 @@ export class ArtistsComponent implements OnInit {
       this.store.dispatch(followArtistsAction({ id: event.id }));
     }
   }
-  SaveRemoveAlbum(id: string) {
-    console.log(id);
+  SaveRemoveAlbum(album: Album) {
+    //this.store.dispatch(albums)
   }
   SaveRemoveTrack(id: string, save: boolean | undefined) {
     save = !save;

@@ -13,7 +13,6 @@ export const initialTrackState: TrackState = {
 const trackReducerInternal = createReducer(
   initialTrackState,
   on(trackActions.getTrackAction, (state) => {
-    console.log('dentro de este');
     return {
       ...state,
       isLoading: true,
@@ -21,8 +20,6 @@ const trackReducerInternal = createReducer(
     };
   }),
   on(trackActions.getTrackSuccessAction, (state, { track }) => {
-    console.log('id recibida', track.id);
-    console.log('track bd', state.track?.id);
     return {
       ...state,
       track: track,

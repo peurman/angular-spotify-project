@@ -1,6 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { PlayListCategory } from 'src/app/categories/models/playlist.interface';
-import { CategoriesClass } from 'src/app/home/models/categories.interface';
+import {
+  CategoriesClass,
+  Category,
+} from 'src/app/home/models/categories.interface';
 
 export const getCategoriesAction = createAction(
   '[Category] Get Categories Action',
@@ -17,7 +20,7 @@ export const getCategoriesErrorAction = createAction(
 
 export const getCategoriesPlaylistAction = createAction(
   '[Category] Get Playlist',
-  props<{ id: string }>()
+  props<{ category: Category; url: string }>()
 );
 export const getCategoriesPlaylistSuccessAction = createAction(
   '[Category] Get Playlist Success Action',
