@@ -20,6 +20,11 @@
       width: 60px;
     }
   }
+  &__text-logo-container {
+    img {
+      width: 140px;
+    }
+  }
   &__nav-link {
     @include centerMeColumn;
     width: calc(100% - 5px);

@@ -1,25 +1,35 @@
-@use 'styles.scss' as *;
+@use "styles.scss" as *;
 
 .login {
-    display: grid;
-    background-color: black;
-    height: 100vh;
-    place-items: center;
+  @include centerMeColumn;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: $background;
+  height: 100vh;
 
-    .logo{
-      max-width: 100%;
-      height: auto;
-      min-width: 250px;
+  &__our-logo {
+    width: 400px;
+  }
+  .login__spotify-logo-text {
+    @include centerMeRow;
+    gap: 20px;
+    margin: 40px 0;
+    label {
+      font: 0.8rem;
+      font-style: italic;
     }
-
-    a{
-      cursor: pointer;
-      color: white;
-      text-decoration: none;
-      padding: 20px;
-      border-radius: 99px;
-      font-weight: 800;
-      background-color: #1db954;
+    img {
+      width: 180px;
+      border-radius: 5px;
+      height: auto;
     }
   }
-  
+  p {
+    font-size: 1.4rem;
+    margin-top: 40px;
+    font-style: italic;
+  }
+  a {
+    @include buttonLarge;
+  }
+}

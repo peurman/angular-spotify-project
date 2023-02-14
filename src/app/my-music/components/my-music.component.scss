@@ -2,6 +2,10 @@
 
 .my-music-container {
   @include centerMeColumn;
+  align-items: flex-start;
+  margin: 30px 0 30px 0;
+  width: 800px;
+  gap: 10px;
 }
 .my-music__title-arrows-container {
   @include centerMeRow;
@@ -46,6 +50,7 @@
       }
       img {
         width: 90px;
+        height: 90px;
         object-fit: cover;
         border-radius: 5px;
         cursor: pointer;
@@ -60,6 +65,7 @@
           width: 100%;
           img {
             width: 25px;
+            height: 25px;
           }
         }
         label {
@@ -90,11 +96,11 @@
 
 .album__image-data-container {
   @include centerMeRow;
-  background: rgb(146, 158, 143);
+  background: rgb(152, 157, 165);
   background: linear-gradient(
     180deg,
-    rgba(146, 158, 143, 1) 0%,
-    rgba(89, 95, 87, 1) 38%,
+    rgb(146, 153, 167) 0%,
+    rgb(96, 99, 115) 38%,
     rgba(24, 24, 24, 1) 100%
   );
   padding: 20px;
@@ -149,7 +155,7 @@
 
 .album__tracks-container {
   table {
-    width: 100%;
+    width: calc(800px - 20px);
     padding: 0px 10px;
     font-size: 0.9rem;
     text-align: center;
@@ -168,6 +174,7 @@
       }
       img {
         width: 20px;
+        height: 20px;
         cursor: pointer;
       }
     }

@@ -35,6 +35,7 @@ export class AlbumsComponent implements OnInit {
   albumsSavedComplete!: AlbumsSaved | null;
 
   async ngOnInit() {
+    window.scrollTo(0, 0);
     this.album$ = this.store.select(fromAlbum.selectAlbumDetailData);
     this.album$.subscribe((res) => (this.albumID = res?.id));
 

@@ -38,6 +38,7 @@ import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 export class SearchComponent implements OnInit {
   defaultAlbum = '../../../assets/images/defaultAlbum.jpg';
   defaultArtist = '../../../assets/images/defaultArtist.jpg';
+  searchImage = '../../../assets/images/searchMusic.jpg';
   searchTerm = '';
   searchInput = new Subject<string>();
 
@@ -68,6 +69,7 @@ export class SearchComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.searchArtists$ = this.store.select(
       fromSearchArtists.selectSearchArtistsData
     );

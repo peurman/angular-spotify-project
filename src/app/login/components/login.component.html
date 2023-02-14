@@ -1,7 +1,13 @@
 <div class="login">
-    <img class="logo"
+  <p>Welcome to</p>
+  <img [src]="textLogo" alt="Spoti-by us" class="login__our-logo" />
+  <div class="login__spotify-logo-text">
+    <label> Powered by:</label>
+    <img
       src="https://getheavy.com/wp-content/uploads/2019/12/spotify2019-830x350.jpg"
       alt=""
     />
-    <a (click)="tryLogin()">LOGIN TO SPOTIFY</a>
+  </div>
+  <p>To use this web, you have to login with your Spotify account:</p>
+  <a (click)="tryLogin()">Login to Spotify</a>
 </div>

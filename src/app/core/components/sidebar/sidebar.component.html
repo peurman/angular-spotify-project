@@ -2,7 +2,9 @@
   <div class="sidebar__image-container">
     <img src="../../../../assets/images/logo.png" />
   </div>
-  <div>SpotyBy-us</div>
+  <div class="sidebar__text-logo-container">
+    <img [src]="textLogo" alt="SpotiBy us" />
+  </div>
   <div class="sidebar__main-nav-container">
     <a
       class="sidebar__nav-link"
@@ -24,11 +26,15 @@
     >
     <a
       class="sidebar__nav-link"
+      routerLink="/following"
+      routerLinkActive="sidebar__nav-link-active"
+      >Following</a
+    >
+    <a
+      class="sidebar__nav-link"
       routerLink="/profile"
       routerLinkActive="sidebar__nav-link-active"
       >My Profile</a
     >
   </div>
-  <!-- <hr />
-  <div class="sidebar__my-playlists">My Playlists:</div> -->
 </div>
