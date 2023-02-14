@@ -4,12 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 import * as fromMyMusic from 'src/app/store/my-music/my-music.selectors';
-import {
-  ArtistsFollowed,
-  PlaylistsSaved,
-  TracksSaved,
-  AlbumsSaved,
-} from '../models/my-music.interface';
+import { TracksSaved, AlbumsSaved } from '../models/my-music.interface';
 
 import {
   getMyAlbumsAction,
@@ -48,6 +43,10 @@ export class MyMusicComponent implements OnInit {
   myAlbumsNext = false;
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+    this.store.dispatch(getMyAlbumsAction({ url: '' }));
+    this.store.dispatch(getMyTracksAction({ url: '' }));
+
     this.username$ = this.store.select(fromLogin.selectLoginUsername);
     this.myAlbums$ = this.store.select(fromMyMusic.selectMyAlbumsData);
     this.myTracks$ = this.store.select(fromMyMusic.selectMyTracksData);
@@ -67,16 +66,15 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeAlbum(id: string) {
-    console.log(id);
-    this.albumService.removeAlbumFromLibrary(id).subscribe();
-    //this.store.dispatch()
-    this.store.dispatch(getMyAlbumsAction({ url: '' }));
-    window.scrollTo(0, 0);
+    this.albumService
+      .removeAlbumFromLibrary(id)
+      .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
   }
 
   removeTrack(id: string) {
-    const save = false;
-    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
+    this.trackService
+      .removeTrack(id)
+      .subscribe(() => this.store.dispatch(getMyTracksAction({ url: '' })));
   }
 
   goToTrack(id: string) {

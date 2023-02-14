@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.store.dispatch(getTopArtistsAction({ url: '' }));
     this.store.dispatch(getTopTracksAction({ url: '' }));
     this.profileInfo$ = this.store.select(fromLogin.selectProfileInfo);

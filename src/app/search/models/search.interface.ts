@@ -15,6 +15,7 @@ export interface Artists {
 }
 export interface Cursors {
   after: string | null;
+  before: string | null;
 }
 export interface Artist {
   external_urls: ExternalUrls;
@@ -90,7 +91,7 @@ export interface Playlists {
   limit: number;
   next: string;
   offset: number;
-  previous: null;
+  previous: string;
   total: number;
 }
 export interface Playlist {

@@ -63,7 +63,12 @@ const routes: Routes = [
       import('./categories/categories.module').then((m) => m.CategoriesModule),
     canActivate: [MainGuard],
   },
-
+  {
+    path: 'following',
+    loadChildren: () =>
+      import('./following/following.module').then((m) => m.FollowingModule),
+    canActivate: [MainGuard],
+  },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

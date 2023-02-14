@@ -32,6 +32,7 @@ export class PlaylistsComponent implements OnInit {
   playlistsSavedComplete!: PlaylistsSaved | null;
 
   async ngOnInit() {
+    window.scrollTo(0, 0);
     this.playlist$ = this.store.select(fromPlaylist.selectPlaylistData);
     this.playlist$.subscribe((res) => (this.playlistID = res?.id));
 
