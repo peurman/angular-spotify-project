@@ -15,13 +15,9 @@ const BASE_API = 'https://api.spotify.com/v1';
 })
 export class MyMusicService {
   constructor(private http: HttpClient) {}
-  token = JSON.parse(localStorage.getItem('tokenInfo') || '{}');
-  options = {
-    headers: new HttpHeaders({
-      skip: 'true',
-      Authorization: `Bearer ${this.token.access_token}`,
-    }),
-  };
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  options = { headers: this.headers };
 
   getAlbumsSaved(url: string | null): Observable<AlbumsSaved> {
     if (!url) {
