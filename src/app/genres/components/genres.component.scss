@@ -1,0 +1,108 @@
+@use "styles.scss" as *;
+
+app-loading {
+  @include centerMeRow;
+  margin-top: 80px;
+  width: 800px;
+}
+
+.following-container {
+  @include centerMeColumn;
+  align-items: flex-start;
+  margin: 30px 0 30px 0;
+  width: 800px;
+  gap: 10px;
+}
+
+.following__image-data-container {
+  @include centerMeRow;
+  background: rgb(168, 149, 156);
+  background: linear-gradient(
+    180deg,
+    rgb(172, 141, 156) 0%,
+    rgb(120, 96, 104) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .following__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .following__type-heart-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      .following__type {
+        font-size: 1.1rem;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+    .following__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+  }
+}
+.following__user-container {
+  @include centerMeRow;
+  padding-left: 10px;
+  color: $font-secondary-color;
+  font-size: 1.4rem;
+  .following__user {
+    @include centerMeRow;
+    color: $main-color;
+  }
+}
+
+.album__tracks-container {
+  table {
+    width: calc(800px - 20px);
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
+    }
+    .my-music__track-name {
+      max-width: 300px;
+    }
+  }
+}

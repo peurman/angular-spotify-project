@@ -29,6 +29,7 @@ import {
   getMyArtistsAction,
   getMyTracksAction,
 } from 'src/app/store/my-music/my-music.actions';
+import { getRecommendationsAction } from 'src/app/store/recommendations/recommendations.actions';
 
 @Component({
   selector: 'app-home',
@@ -192,5 +193,9 @@ export class HomeComponent implements OnInit {
   goToCategory(id: string) {
     this.store.dispatch(getCategoriesPlaylistAction({ id }));
     this.router.navigateByUrl('/categories');
+  }
+  goToGenre(genreName: string) {
+    this.store.dispatch(getRecommendationsAction({ genreName }));
+    this.router.navigateByUrl('/genres');
   }
 }

@@ -62,7 +62,6 @@ export class MyMusicComponent implements OnInit {
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigate(['/albums']);
-    window.scrollTo(0, 0);
   }
 
   removeAlbum(id: string) {
@@ -72,16 +71,13 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeTrack(id: string) {
-    this.trackService
-      .removeTrack(id)
-      .subscribe(() => this.store.dispatch(getMyTracksAction({ url: '' })));
+    this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
   }
 
   goToTrack(id: string) {
     console.log(id);
     this.store.dispatch(getTrackAction({ id }));
     this.router.navigate(['/tracks']);
-    window.scrollTo(0, 0);
   }
   goToArtist(id: string) {
     console.log(id);
