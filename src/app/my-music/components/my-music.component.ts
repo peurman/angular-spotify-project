@@ -64,14 +64,14 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeAlbum(id: string) {
-    this.albumService.removeAlbumFromLibrary(id).subscribe();
-    this.store.dispatch(getMyAlbumsAction({ url: '' }));
-    window.scrollTo(0, 0);
+    this.albumService
+      .removeAlbumFromLibrary(id)
+      .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
   }
   removeTrack(id: string) {
-    this.trackService.removeTrack(id).subscribe();
-    this.store.dispatch(getMyTracksAction({ url: '' }));
-    window.scrollTo(0, 0);
+    this.trackService
+      .removeTrack(id)
+      .subscribe(() => this.store.dispatch(getMyTracksAction({ url: '' })));
   }
 
   goToTrack(id: string) {

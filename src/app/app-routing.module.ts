@@ -57,7 +57,12 @@ const routes: Routes = [
       import('./my-music/my-music.module').then((m) => m.MyMusicModule),
     canActivate: [MainGuard],
   },
-
+  {
+    path: 'following',
+    loadChildren: () =>
+      import('./following/following.module').then((m) => m.FollowingModule),
+    canActivate: [MainGuard],
+  },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

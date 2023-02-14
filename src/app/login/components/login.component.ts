@@ -8,6 +8,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   constructor(private auth: AuthService) {}
+
+  textLogo = '../../../assets/images/SpotyByUs.png';
+
   tryLogin() {
     this.auth.OpenSpotifyWindow();
   }

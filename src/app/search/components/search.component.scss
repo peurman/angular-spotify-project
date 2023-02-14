@@ -3,10 +3,14 @@
 .search {
   @include centerMeColumn;
   align-items: flex-start;
+  margin: 30px 0 15px 0;
   width: 800px;
   gap: 10px;
-
-  &__input {
+}
+.search__input-container {
+  @include centerMeRow;
+  width: 100%;
+  input {
     font: italic 1.2rem "Circular";
     padding: 5px 10px;
     border-radius: 5px;
@@ -14,6 +18,53 @@
     height: 30px;
     background-color: $background-hover;
     color: $main-color;
+    &:focus {
+      outline: 2px solid $main-color;
+    }
+  }
+}
+
+.search__image-data-container {
+  @include centerMeRow;
+  background: rgb(158, 157, 143);
+  background: linear-gradient(
+    180deg,
+    rgb(192, 182, 150) 0%,
+    rgb(101, 99, 82) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .search__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .search__type-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      .search__type {
+        font-size: 1.1rem;
+      }
+    }
+    .search__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
   }
 }
 
