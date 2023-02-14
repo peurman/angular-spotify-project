@@ -38,36 +38,38 @@
         </button>
       </div>
     </div>
-    <div class="my-music__album-cards" *ngIf="myAlbums$ | async as myAlbums">
-      <div
-        *ngFor="let album of myAlbums.items"
-        class="my-music__album-card"
-        [id]="album.album.id"
-      >
-        <img
-          [src]="album.album.images[0].url"
-          alt="Go to album"
-          (click)="goToAlbum(album.album.id)"
-        />
-        <div class="my-music__album-title-artists-container">
-          <label class="my-music__album-name">{{ album.album.name }}</label>
-          <div class="my-music__album-artists">
-            <label *ngFor="let artist of album.album.artists">{{
-              artist.name
-            }}</label>
-          </div>
-          <div class="my-music__heart">
-            <img
-              [src]="saveOn"
-              title="remove Album"
-              (click)="removeAlbum(album.album.id)"
-            />
-          </div>
-        </div>
-      </div>
+    <div class="my-music__album-cards">
+      <ng-container *ngIf="myAlbums$ | async as myAlbums">
+        <div
+          *ngFor="let album of myAlbums.items"
+          class="my-music__album-card"
+          [id]="album.album.id"
+        >
+          <img
+            [src]="album.album.images[0].url"
+            alt="Go to album"
+            (click)="goToAlbum(album.album.id)"
+          />
+          <div class="my-music__album-title-artists-container">
+            <label class="my-music__album-name">{{ album.album.name }}</label>
+            <div class="my-music__album-artists">
+              <label *ngFor="let artist of album.album.artists">{{
+                artist.name
+              }}</label>
+            </div>
+            <div class="my-music__heart">
+              <img
+                [src]="saveOn"
+                title="remove Album"
+                (click)="removeAlbum(album.album.id)"
+              />
+            </div>
+          </div></div
+      ></ng-container>
     </div>
   </div>
   <div class="album__tracks-container" *ngIf="myTracks$ | async">
+    <h2>My Tracks</h2>
     <table>
       <tr>
         <th>#</th>
