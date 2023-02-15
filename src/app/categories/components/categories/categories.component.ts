@@ -35,7 +35,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   goToPlaylist(id: string) {
-    this.store.dispatch(getPlaylistAction({ id }));
+    this.store.dispatch(getPlaylistAction({ id, url: '' }));
     this.router.navigateByUrl('playlists');
   }
   handlePreviousPlaylists() {

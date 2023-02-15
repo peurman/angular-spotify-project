@@ -3,7 +3,7 @@ import { Playlist } from 'src/app/playlists/models/playlists.interface';
 
 export const getPlaylistAction = createAction(
   '[Playlist] Get Playlist Action',
-  props<{ id: string }>()
+  props<{ id: string | null; url: string | null }>()
 );
 export const getPlaylistSuccessAction = createAction(
   '[Playlist] Get Playlist Success Action',

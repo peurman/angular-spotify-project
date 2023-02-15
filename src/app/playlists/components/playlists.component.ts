@@ -9,6 +9,7 @@ import { getTrackAction } from 'src/app/store/track/track.actions';
 import { PlaylistService } from '../services/playlists.service';
 import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
+import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 
 @Component({
   selector: 'app-playlists',
@@ -28,13 +29,14 @@ export class PlaylistsComponent implements OnInit {
   following = false;
 
   playlist$!: Observable<Playlist | null>;
+  playlistIsLoading$!: Observable<boolean>;
   playlistID: string | undefined;
-  // albumsSaved: AlbumSavedItem[] | undefined = [];
   playlistsSavedComplete!: PlaylistsSaved | null;
 
   async ngOnInit() {
     window.scrollTo(0, 0);
     this.playlist$ = this.store.select(fromPlaylist.selectPlaylistData);
+    this.playlistIsLoading$ = this.store.select(fromPlaylist.selectIsLoading);
     this.playlist$.subscribe((res) => (this.playlistID = res?.id));
 
     this.playlistsSavedComplete = await firstValueFrom(
@@ -59,6 +61,12 @@ export class PlaylistsComponent implements OnInit {
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
     this.router.navigate(['/artists']);
+  }
+  goToPreviousMyTracks(url: string | null) {
+    this.store.dispatch(getPlaylistAction({ id: '', url }));
+  }
+  goToNextMyTracks(url: string | null) {
+    this.store.dispatch(getPlaylistAction({ id: '', url }));
   }
 
   followUnfollowPlaylist(playlistId: string) {

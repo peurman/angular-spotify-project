@@ -154,6 +154,7 @@
 }
 
 .album__tracks-container {
+  scroll-behavior: smooth;
   table {
     width: calc(800px - 20px);
     padding: 0px 10px;

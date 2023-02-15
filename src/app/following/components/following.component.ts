@@ -72,7 +72,7 @@ export class FollowingComponent implements OnInit {
     this.store.dispatch(getMyPlaylistsAction({ url }));
   }
   goToPlaylist(id: string) {
-    this.store.dispatch(getPlaylistAction({ id }));
+    this.store.dispatch(getPlaylistAction({ id, url: '' }));
     this.router.navigate(['/playlists']);
   }
 
