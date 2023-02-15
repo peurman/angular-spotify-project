@@ -7,8 +7,10 @@ import * as ArtistActions from '../../store/artist/artist.actions';
 import { ArtistsComponent } from './artists.component';
 import * as fromArtist from '../../store/artist/artist.selectors';
 import {
+  Album,
   Artist,
   ArtistType,
+  ExternalUrls,
   Image,
 } from 'src/app/home/models/new-releases.interface';
 import {
@@ -16,6 +18,9 @@ import {
   unFollowArtistsAction,
 } from 'src/app/store/profile/profile.actions';
 import { saveRemoveAlbumAction } from 'src/app/store/album/album.actions';
+import { SaveRemoveTrackAction } from 'src/app/store/track/track.actions';
+import { Track } from 'src/app/profile/model/toptracks.interface';
+import { Followers } from 'src/app/search/models/search.interface';
 describe('ArtistsComponent', () => {
   let component: ArtistsComponent;
   let fixture: ComponentFixture<ArtistsComponent>;
@@ -156,6 +161,80 @@ describe('ArtistsComponent', () => {
     );
     expect(store.dispatch).toHaveBeenCalledWith(
       saveRemoveAlbumAction({ id: album.id, save: false })
+    );
+  });
+  it('should dispatch saveRemoveTrackAction with correct arguments', () => {
+    spyOn(component, 'SaveRemoveTrack').and.callThrough();
+    spyOn(store, 'dispatch');
+    const externalUrls: ExternalUrls = {
+      spotify: 'string',
+    };
+    const images: Image[] = [
+      {
+        height: 120,
+        url: 'string',
+        width: 120,
+      },
+    ];
+    const followers: Followers = {
+      href: null,
+      total: 120,
+    };
+    const artists: Artist[] = [
+      {
+        images: images,
+        external_urls: externalUrls,
+        href: 'string',
+        id: 'string',
+        name: 'string',
+        type: ArtistType.Artist,
+        uri: 'string',
+        isFollowing: false,
+        followers: followers,
+        genres: ['string'],
+        popularity: 2,
+      },
+    ];
+    const album: Album = {
+      album_type: 'string',
+      artists: artists,
+      available_markets: ['string'],
+      external_urls: externalUrls,
+      href: 'string',
+      id: 'string',
+      images: images,
+      name: 'string',
+      release_date: new Date(),
+      release_date_precision: 'string',
+      total_tracks: 2,
+      type: 'string',
+      uri: 'string',
+    };
+    const track: Track = {
+      album: album,
+      name: 'test',
+      preview_url: 'test',
+      duration_ms: 2,
+      type: 'test',
+      saved: false,
+      id: '1',
+    };
+    fixture.detectChanges();
+    component.SaveRemoveTrack(track.id, !track.saved);
+    expect(component.SaveRemoveTrack).toHaveBeenCalledWith(track.id, true);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      SaveRemoveTrackAction({ id: track.id, save: false })
+    );
+  });
+  it('should dispatch getArtistAction on handleArtistClick', () => {
+    spyOn(component, 'handleArtistClick').and.callThrough();
+    spyOn(store, 'dispatch');
+    const artist = { id: '1' };
+    fixture.detectChanges();
+    component.handleArtistClick(artist.id);
+    expect(component.handleArtistClick).toHaveBeenCalledWith(artist.id);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      ArtistActions.getArtistAction({ id: artist.id })
     );
   });
 });
