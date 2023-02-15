@@ -40,7 +40,7 @@ export class MyMusicService {
   getTracksSaved(url: string | null): Observable<TracksSaved> {
     if (!url) {
       return this.http.get<TracksSaved>(
-        `${BASE_API}/me/tracks?limit=50`,
+        `${BASE_API}/me/tracks?limit=15`,
         this.options
       );
     }

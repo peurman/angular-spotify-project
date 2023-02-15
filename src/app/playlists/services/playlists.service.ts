@@ -14,8 +14,15 @@ export class PlaylistService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   options = { headers: this.headers };
 
-  getPlaylist(id: string): Observable<Playlist> {
-    return this.http.get<Playlist>(`${BASE_API}/playlists/${id}`, this.options);
+  getPlaylist(id: string | null, url: string | null): Observable<Playlist> {
+    if (!url) {
+      return this.http.get<Playlist>(
+        `${BASE_API}/playlists/${id}`,
+        this.options
+      );
+    }
+    console.log('ENTRA ACA???: GET:', url);
+    return this.http.get<Playlist>(url, this.options);
   }
   getPlaylistsSaved(): Observable<PlaylistsSaved> {
     return this.http.get<PlaylistsSaved>(`${BASE_API}/me/playlists?limit=50`);

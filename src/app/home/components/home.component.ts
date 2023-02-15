@@ -62,9 +62,15 @@ export class HomeComponent implements OnInit {
   newReleases$!: Observable<Albums | null>;
   featuredPlaylists$!: Observable<Playlists | null>;
 
+  categoriesIsLoading$!: Observable<boolean>;
+  genresIsLoading$!: Observable<boolean>;
+  newReleasesIsLoading$!: Observable<boolean>;
+  featuredPlaylistsIsLoading$!: Observable<boolean>;
+
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.username$ = this.store.select(fromLogin.selectLoginUsername);
 
     this.store.dispatch(getCategoriesAction({ url: '' }));
@@ -119,6 +125,17 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getMyAlbumsAction({ url: '' }));
     this.store.dispatch(getMyArtistsAction({ url: '' }));
     this.store.dispatch(getMyTracksAction({ url: '' }));
+
+    this.featuredPlaylistsIsLoading$ = this.store.select(
+      fromFeaturedPlaylists.selectIsLoading
+    );
+    this.newReleasesIsLoading$ = this.store.select(
+      fromNewReleases.selectIsLoading
+    );
+    this.categoriesIsLoading$ = this.store.select(
+      fromCategories.selectIsLoading
+    );
+    this.genresIsLoading$ = this.store.select(fromGenres.selectIsLoading);
   }
 
   categoriesPreviousClick() {
@@ -172,7 +189,6 @@ export class HomeComponent implements OnInit {
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigateByUrl('albums');
-    window.scrollTo(0, 0);
   }
 
   featuredPlaylistsPreviousClick() {
@@ -186,9 +202,8 @@ export class HomeComponent implements OnInit {
     );
   }
   goToPlaylist(id: string) {
-    this.store.dispatch(getPlaylistAction({ id }));
+    this.store.dispatch(getPlaylistAction({ id, url: '' }));
     this.router.navigateByUrl('playlists');
-    window.scrollTo(0, 0);
   }
   goToCategory(category: Category) {
     this.store.dispatch(getCategoriesPlaylistAction({ category, url: '' }));

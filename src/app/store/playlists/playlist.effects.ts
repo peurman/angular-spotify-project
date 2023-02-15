@@ -16,7 +16,7 @@ export class PlaylistEffects {
     return this.actions$.pipe(
       ofType(playlistActions.getPlaylistAction),
       exhaustMap((res) =>
-        this.playlistService.getPlaylist(res.id).pipe(
+        this.playlistService.getPlaylist(res.id, res.url).pipe(
           map((response) => {
             return playlistActions.getPlaylistSuccessAction({
               data: response,

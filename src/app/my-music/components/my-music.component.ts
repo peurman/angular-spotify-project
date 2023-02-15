@@ -61,6 +61,13 @@ export class MyMusicComponent implements OnInit {
     this.store.dispatch(getMyAlbumsAction({ url }));
   }
 
+  goToPreviousMyTracks(url: string | null) {
+    this.store.dispatch(getMyTracksAction({ url }));
+  }
+  goToNextMyTracks(url: string | null) {
+    this.store.dispatch(getMyTracksAction({ url }));
+  }
+
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigateByUrl('albums');
@@ -83,6 +90,5 @@ export class MyMusicComponent implements OnInit {
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
     this.router.navigateByUrl('artists');
-    window.scrollTo(0, 0);
   }
 }

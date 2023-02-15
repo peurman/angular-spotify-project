@@ -74,7 +74,28 @@
     </div>
   </div>
   <div class="album__tracks-container" *ngIf="myTracks$ | async">
-    <h2>My Tracks</h2>
+    <div class="my-music__title-arrows-container">
+      <h2>My Tracks</h2>
+      <div
+        class="my-music__previous-next-container"
+        *ngIf="myTracks$ | async as myTracks"
+      >
+        <button
+          title="Previous"
+          (click)="goToPreviousMyTracks(myTracks.previous)"
+          [disabled]="!myTracks.previous"
+        >
+          &#8249;
+        </button>
+        <button
+          title="Next"
+          (click)="goToNextMyTracks(myTracks.next)"
+          [disabled]="!myTracks.next"
+        >
+          &#8250;
+        </button>
+      </div>
+    </div>
     <table>
       <tr>
         <th>#</th>

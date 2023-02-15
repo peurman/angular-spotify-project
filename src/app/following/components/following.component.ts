@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import * as fromMyMusic from 'src/app/store/my-music/my-music.selectors';
 import {
@@ -62,7 +63,6 @@ export class FollowingComponent implements OnInit {
   goToArtist(id: string) {
     // this.store.dispatch(getArtistDetail({ id }));
     this.router.navigateByUrl('artists');
-    window.scrollTo(0, 0);
   }
 
   goToPreviousMyPlaylists(url: string | null) {
@@ -72,20 +72,21 @@ export class FollowingComponent implements OnInit {
     this.store.dispatch(getMyPlaylistsAction({ url }));
   }
   goToPlaylist(id: string) {
-    this.store.dispatch(getPlaylistAction({ id }));
+    this.store.dispatch(getPlaylistAction({ id, url: '' }));
     this.router.navigateByUrl('playlists');
-    window.scrollTo(0, 0);
   }
 
   unfollowArtist(id: string) {
     this.checkerService
       .followUnfollowArtist(false, 'artist', id)
       .subscribe(() => this.store.dispatch(getMyArtistsAction({ url: '' })));
+    Swal.fire('Artist successfully unfollowed!');
   }
 
   unfollowPlaylist(id: string) {
-    this.playlistService
-      .unfollowPlaylist(id)
-      .subscribe(() => this.store.dispatch(getMyPlaylistsAction({ url: '' })));
+    this.playlistService.unfollowPlaylist(id).subscribe(() => {
+      this.store.dispatch(getMyPlaylistsAction({ url: '' }));
+      Swal.fire('Playlist successfully unfollowed!');
+    });
   }
 }

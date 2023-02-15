@@ -5,6 +5,11 @@ import { AuthToken } from '../models/authtoken.interface';
 import { User } from 'src/app/store/login/login.state';
 import { Store } from '@ngrx/store';
 
+if (window.location.host.indexOf('localhost') !== -1) {
+  environment.isLocal = true;
+} else {
+  environment.isLocal = false;
+}
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
@@ -14,6 +19,10 @@ export class AuthService {
     `${environment.credentials.clientId}:${environment.credentials.clientSecret}`
   );
 
+  currentUrl = environment.isLocal
+    ? 'http://localhost:4200'
+    : 'https://final-project-spotify-applaudo.vercel.app';
+
   configUrl = {
     authorize:
       'https://accounts.spotify.com/es-ES/authorize?client_id=' +
@@ -21,7 +30,7 @@ export class AuthService {
       '&response_type=code' +
       '&scope=user-read-recently-played,user-top-read,user-read-playback-position,user-read-playback-state,user-follow-read,user-follow-modify,user-modify-playback-state, user-read-currently-playing,streaming,playlist-modify-public,playlist-modify-private,playlist-read-private,playlist-read-collaborative,user-library-modify,user-library-read,user-read-email,user-read-private' +
       '&redirect_uri=' +
-      encodeURIComponent('http://localhost:4200/login/callback') +
+      encodeURIComponent(`${this.currentUrl}/login/callback`) +
       '&expires_in=3600',
   };
 
@@ -59,7 +68,7 @@ export class AuthService {
   GetTokenFromCode(accessCode: string) {
     const body = new URLSearchParams();
     body.set('code', accessCode);
-    body.set('redirect_uri', 'http://localhost:4200/login/callback');
+    body.set('redirect_uri', `${this.currentUrl}/login/callback`);
     body.set('grant_type', 'authorization_code');
     return this.http.post<AuthToken>(
       'https://accounts.spotify.com/api/token',

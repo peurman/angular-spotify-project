@@ -1,97 +1,124 @@
 <div class="playlist">
-  <div *ngIf="playlist$ | async as playlist" class="playlist-container">
-    <div class="playlist__image-data-container">
-      <div class="playlist__image-container">
-        <img
-          [src]="playlist.images.length ? playlist.images[0].url : defaultAlbum"
-          alt=""
-        />
-      </div>
-      <div class="playlist__data-container">
-        <div class="playlist__type-heart-container">
-          <div class="playlist__type">
-            {{ playlist.type | uppercase }}
-          </div>
-          <div class="playlist__heart">
-            <img
-              [src]="following ? saveOn : saveOff"
-              alt=""
-              title="Follow or unfollow this playlist"
-              (click)="followUnfollowPlaylist(playlist.id)"
-            />
-          </div>
+  <app-loading *ngIf="playlistIsLoading$ | async"></app-loading>
+  <ng-container *ngIf="!!!(playlistIsLoading$ | async)">
+    <div *ngIf="playlist$ | async as playlist" class="playlist-container">
+      <div class="playlist__image-data-container">
+        <div class="playlist__image-container">
+          <img
+            [src]="
+              playlist.images.length ? playlist.images[0].url : defaultAlbum
+            "
+            alt=""
+          />
         </div>
-        <div class="playlist__title">
-          {{ playlist.name }}
-        </div>
-        <div class="playlist__artists-year-songs">
-          <div>
-            <div class="playlist__artists">
-              {{ playlist.owner.display_name }}
+        <div class="playlist__data-container">
+          <div class="playlist__type-heart-container">
+            <div class="playlist__type">
+              {{ playlist.type | uppercase }}
+            </div>
+            <div class="playlist__heart">
+              <img
+                [src]="following ? saveOn : saveOff"
+                alt=""
+                title="Follow or unfollow this playlist"
+                (click)="followUnfollowPlaylist(playlist.id)"
+              />
             </div>
           </div>
-          <div class="playlist__year">
-            &nbsp;&nbsp;▪&nbsp;&nbsp;Followers:
-            <em> {{ playlist.followers.total | thousands }}</em
-            >&nbsp;&nbsp;▪&nbsp;&nbsp;
+          <div class="playlist__title">
+            {{ playlist.name }}
           </div>
-          <div class="playlist__songs">
-            <div *ngIf="playlist.tracks?.items?.length === 1">
-              {{ playlist.tracks.items?.length }} song
-            </div>
-            <div *ngIf="playlist.tracks?.items?.length !== 1">
-              {{ playlist.tracks.items?.length }} songs
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="playlist__tracks-container">
-      <table>
-        <tr>
-          <th>#</th>
-          <th>Track Name</th>
-          <th>Artists</th>
-          <th>Duration</th>
-        </tr>
-        <tr *ngFor="let trackList of playlist.tracks.items; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>
-            <a (click)="goToTrack(trackList.track.id)">{{
-              trackList.track.name
-            }}</a>
-          </td>
-          <td>
-            <div
-              *ngIf="trackList.track.artists.length === 1"
-              class="track__artists"
-            >
-              <a (click)="goToArtist(trackList.track.artists[0].id)">{{
-                trackList.track.artists[0].name
-              }}</a>
-            </div>
-            <div
-              *ngIf="trackList.track.artists.length > 1"
-              class="track__artists"
-            >
-              <div
-                *ngFor="let artist of trackList.track.artists; let i = index"
-              >
-                <label *ngIf="i === trackList.track.artists.length - 1">
-                  <a (click)="goToArtist(artist.id)">{{
-                    artist.name
-                  }}</a></label
-                >
-                <label *ngIf="i < trackList.track.artists.length - 1">
-                  <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
-                  >&nbsp;&nbsp;▪&nbsp;&nbsp;
-                </label>
+          <div class="playlist__artists-year-songs">
+            <div>
+              <div class="playlist__artists">
+                {{ playlist.owner.display_name }}
               </div>
             </div>
-          </td>
-          <td>{{ trackList.track.duration_ms | times }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+            <div class="playlist__year">
+              &nbsp;&nbsp;▪&nbsp;&nbsp;Followers:
+              <em> {{ playlist.followers.total | thousands }}</em
+              >&nbsp;&nbsp;▪&nbsp;&nbsp;
+            </div>
+            <div class="playlist__songs">
+              <div *ngIf="playlist.tracks.total === 1">
+                {{ playlist.tracks.total }} song
+              </div>
+              <div *ngIf="playlist.tracks.total !== 1">
+                {{ playlist.tracks.total }} songs
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="playlist__tracks-container">
+        <div class="my-music__title-arrows-container">
+          <h2>Tracks</h2>
+          <div
+            class="my-music__previous-next-container"
+            *ngIf="playlist$ | async as playlist"
+          >
+            <button
+              title="Previous"
+              (click)="goToPreviousMyTracks(playlist.tracks.previous)"
+              [disabled]="!playlist.tracks.previous"
+            >
+              &#8249;
+            </button>
+            <button
+              title="Next"
+              (click)="goToNextMyTracks(playlist.tracks.next)"
+              [disabled]="!playlist.tracks.next"
+            >
+              &#8250;
+            </button>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>#</th>
+            <th>Track Name</th>
+            <th>Artists</th>
+            <th>Duration</th>
+          </tr>
+          <tr *ngFor="let trackList of playlist.tracks.items; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <a (click)="goToTrack(trackList.track.id)">{{
+                trackList.track.name
+              }}</a>
+            </td>
+            <td>
+              <div
+                *ngIf="trackList.track.artists.length === 1"
+                class="track__artists"
+              >
+                <a (click)="goToArtist(trackList.track.artists[0].id)">{{
+                  trackList.track.artists[0].name
+                }}</a>
+              </div>
+              <div
+                *ngIf="trackList.track.artists.length > 1"
+                class="track__artists"
+              >
+                <div
+                  *ngFor="let artist of trackList.track.artists; let i = index"
+                >
+                  <label *ngIf="i === trackList.track.artists.length - 1">
+                    <a (click)="goToArtist(artist.id)">{{
+                      artist.name
+                    }}</a></label
+                  >
+                  <label *ngIf="i < trackList.track.artists.length - 1">
+                    <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                    >&nbsp;&nbsp;▪&nbsp;&nbsp;
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>{{ trackList.track.duration_ms | times }}</td>
+          </tr>
+        </table>
+      </div>
+    </div></ng-container
+  >
 </div>

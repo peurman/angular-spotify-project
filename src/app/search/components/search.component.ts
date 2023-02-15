@@ -185,7 +185,6 @@ export class SearchComponent implements OnInit {
   goToAlbum(albumId: string) {
     this.store.dispatch(getAlbumDetailAction({ id: albumId }));
     this.router.navigateByUrl('albums');
-    window.scrollTo(0, 0);
   }
   // Playlists
   goToPreviousSearchPlaylists() {
@@ -205,9 +204,8 @@ export class SearchComponent implements OnInit {
     );
   }
   goToPlaylist(playlistId: string) {
-    this.store.dispatch(getPlaylistAction({ id: playlistId }));
+    this.store.dispatch(getPlaylistAction({ id: playlistId, url: '' }));
     this.router.navigateByUrl('playlists');
-    window.scrollTo(0, 0);
   }
   // Tracks
   goToPreviousSearchTracks() {
@@ -229,6 +227,5 @@ export class SearchComponent implements OnInit {
   goToTrack(trackId: string) {
     this.store.dispatch(getTrackAction({ id: trackId }));
     this.router.navigateByUrl('tracks');
-    window.scrollTo(0, 0);
   }
 }

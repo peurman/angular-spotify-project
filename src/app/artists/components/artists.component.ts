@@ -101,13 +101,12 @@ export class ArtistsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
   goToAlbum(id: string) {
-    window.scrollTo(0, 0);
     this.store.dispatch(getAlbumDetailAction({ id }));
     this.router.navigateByUrl('albums');
   }
   handleArtistClick(id: string) {
-    window.scrollTo(0, 0);
     this.store.dispatch(getArtistAction({ id }));
+    window.scrollTo(0, 0);
   }
   handleFollowUnfollow(event: { type: string; id: string }) {
     if (event.type == 'unfollow') {
