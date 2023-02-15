@@ -20,7 +20,7 @@ export class ArtistinfoService {
   getArtistAlbums(id: string | null, url: string | null): Observable<Albums> {
     if (!url) {
       return this.http.get<Albums>(
-        `	https://api.spotify.com/v1/artists/${id}/albums?limit=9`
+        `https://api.spotify.com/v1/artists/${id}/albums?limit=9`
       );
     } else {
       return this.http.get<Albums>(url);

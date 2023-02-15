@@ -97,8 +97,8 @@ export class ArtistsComponent implements OnInit {
     this.router.navigateByUrl('/tracks');
   }
   goToArtist(id: string) {
-    window.scrollTo(0, 0);
     this.store.dispatch(getArtistAction({ id }));
+    window.scrollTo(0, 0);
   }
   goToAlbum(id: string) {
     window.scrollTo(0, 0);

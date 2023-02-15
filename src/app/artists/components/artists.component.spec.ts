@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RootState } from 'src/app/store';
-import { getArtistAlbumsAction } from 'src/app/store/artist/artist.actions';
 import * as ArtistActions from '../../store/artist/artist.actions';
 import { ArtistsComponent } from './artists.component';
 import * as fromArtist from '../../store/artist/artist.selectors';
@@ -17,16 +16,31 @@ import {
   followArtistsAction,
   unFollowArtistsAction,
 } from 'src/app/store/profile/profile.actions';
-import { saveRemoveAlbumAction } from 'src/app/store/album/album.actions';
-import { SaveRemoveTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getAlbumDetailAction,
+  saveRemoveAlbumAction,
+} from 'src/app/store/album/album.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 import { Track } from 'src/app/profile/model/toptracks.interface';
 import { Followers } from 'src/app/search/models/search.interface';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TracksComponent } from 'src/app/tracks/components/tracks.component';
+import { AlbumsComponent } from 'src/app/albums/components/albums.component';
 describe('ArtistsComponent', () => {
   let component: ArtistsComponent;
   let fixture: ComponentFixture<ArtistsComponent>;
   let store: MockStore<RootState>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'tracks', component: TracksComponent },
+          { path: 'albums', component: AlbumsComponent },
+        ]),
+      ],
       declarations: [ArtistsComponent],
       providers: [provideMockStore({})],
     }).compileComponents();
@@ -235,6 +249,39 @@ describe('ArtistsComponent', () => {
     expect(component.handleArtistClick).toHaveBeenCalledWith(artist.id);
     expect(store.dispatch).toHaveBeenCalledWith(
       ArtistActions.getArtistAction({ id: artist.id })
+    );
+  });
+  it('should dispatch getTrackAction on goToTrack', () => {
+    spyOn(component, 'goToTrack').and.callThrough();
+    spyOn(store, 'dispatch');
+    const track = { id: '1' };
+    fixture.detectChanges();
+    component.goToTrack(track.id);
+    expect(component.goToTrack).toHaveBeenCalledWith(track.id);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      getTrackAction({ id: track.id })
+    );
+  });
+  it('should dispatch getArtistAction on goToArtist', () => {
+    spyOn(component, 'goToArtist').and.callThrough();
+    spyOn(store, 'dispatch');
+    const artist = { id: '1' };
+    fixture.detectChanges();
+    component.goToArtist(artist.id);
+    expect(component.goToArtist).toHaveBeenCalledWith(artist.id);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      ArtistActions.getArtistAction({ id: artist.id })
+    );
+  });
+  it('should dispatch getAlbumDetailAction on goToAlbum', () => {
+    spyOn(component, 'goToAlbum').and.callThrough();
+    spyOn(store, 'dispatch');
+    const album = { id: '1' };
+    fixture.detectChanges();
+    component.goToAlbum(album.id);
+    expect(component.goToAlbum).toHaveBeenCalledWith(album.id);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      getAlbumDetailAction({ id: album.id })
     );
   });
 });
