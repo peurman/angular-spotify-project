@@ -3,7 +3,7 @@ import { CategoriesClass } from 'src/app/home/models/categories.interface';
 
 describe('Categories actions', () => {
   it('should create an action to retrieve the categories', () => {
-    const action = fromActions.getCategoriesAction();
+    const action = fromActions.getCategoriesAction({ url: '' });
     expect(action.type).toEqual('[Category] Get Categories Action');
   });
 

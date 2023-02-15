@@ -58,10 +58,10 @@
           </td>
           <td>
             <img
-              [src]="saveOn"
+              [src]="item.saved ? saveOn : saveOff"
               alt="heart"
               title="Remove track"
-              (click)="addRemoveTrack(item.id)"
+              (click)="addRemoveTrack(item.id, (item.saved ? true : false))"
             />
           </td>
           <td>{{ item.duration_ms | times }}</td>

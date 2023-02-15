@@ -72,7 +72,7 @@
               [src]="album.saved ? saveOn : saveOff"
               alt=""
               title="Save or remove this album"
-              (click)="SaveRemoveAlbum(album)"
+              (click)="SaveRemoveAlbum(album.id, (album.saved ? true : false))"
               />
             </div>
           </div>
@@ -87,8 +87,8 @@
         <tr>
           <th>Track Name</th>
           <th>Artists</th>
-          <th>Duration</th>
           <th>Save</th>
+          <th>Duration</th>
         </tr>
         <tr *ngFor="let track of (artistTracks$ | async)?.tracks">
           <td>
@@ -114,7 +114,6 @@
               </div>
             </div>
           </td>
-          <td>{{ track.duration_ms | date : "mm:ss" }}</td>
           <td><img
             class="td-image"
             [src]="track.saved ? saveOn : saveOff"
@@ -122,6 +121,7 @@
             title="Save or remove this album"
             (click)="SaveRemoveTrack(track.id, track.saved)"
           /></td>
+          <td>{{ track.duration_ms | date : "mm:ss" }}</td>
           
         </tr>
       </table>

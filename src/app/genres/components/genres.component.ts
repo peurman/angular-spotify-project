@@ -6,7 +6,10 @@ import { GenreRecommendations } from '../models/genres.interface';
 
 import * as fromRecommendations from 'src/app/store/recommendations/recommendations.selectors';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
-import { getTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 @Component({
   selector: 'app-genres',
   templateUrl: './genres.component.html',
@@ -43,7 +46,8 @@ export class GenresComponent implements OnInit {
     this.router.navigate(['/tracks']);
   }
 
-  addRemoveTrack(id: string) {
-    console.log('ADD OR REMOVE');
+  addRemoveTrack(id: string, saved: boolean) {
+    const save = !saved;
+    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
   }
 }

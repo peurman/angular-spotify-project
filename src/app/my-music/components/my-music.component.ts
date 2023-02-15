@@ -19,6 +19,7 @@ import {
   SaveRemoveTrackAction,
 } from 'src/app/store/track/track.actions';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
+import { CheckerService } from 'src/app/core/services/checker.service';
 
 @Component({
   selector: 'app-my-music',
@@ -29,7 +30,7 @@ export class MyMusicComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private albumService: AlbumService,
+    private checkerService: CheckerService,
     private trackService: TrackService
   ) {}
 
@@ -66,8 +67,8 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeAlbum(id: string) {
-    this.albumService
-      .removeAlbumFromLibrary(id)
+    this.checkerService
+      .saveRemoveAlbumFromLibrary(id, true)
       .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
   }
 

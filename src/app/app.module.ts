@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopItems } from './profile/services/topitems.service';
 import { TrackService } from './tracks/services/track.service';
 import { ArtistinfoService } from './artists/services/artistinfo.service';
+import { CheckerService } from './core/services/checker.service';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<RootState>
@@ -38,6 +39,7 @@ export function localStorageSyncReducer(
       'recommendations',
       'profile',
       'artist',
+      'categories',
     ],
     rehydrate: true,
   })(reducer);
@@ -68,6 +70,7 @@ const metaReducers = [localStorageSyncReducer, storeFreeze];
     TopItems,
     TrackService,
     ArtistinfoService,
+    CheckerService,
   ],
   bootstrap: [AppComponent],
 })
