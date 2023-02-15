@@ -289,4 +289,7 @@ describe('AlbumsComponent', () => {
       false
     );
   });
+  // it('should update this.following on items > 0', () => {
+  //   component.albumsSavedComplete =
+  // })
 });
