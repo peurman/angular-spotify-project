@@ -36,6 +36,7 @@ export function localStorageSyncReducer(
       'myMusic',
       'following',
       'recommendations',
+      'profile',
     ],
     rehydrate: true,
   })(reducer);

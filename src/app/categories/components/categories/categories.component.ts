@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 import { PlayListCategory } from '../../models/playlist.interface';
 import * as fromCategories from 'src/app/store/categories/categories.selectors';
-import { Categories } from 'src/app/home/models/categories.interface';
+import { Categories, Category } from 'src/app/home/models/categories.interface';
+import { getCategoriesPlaylistAction } from 'src/app/store/categories/categories.actions';
 
 @Component({
   selector: 'app-categories',
@@ -13,34 +14,45 @@ import { Categories } from 'src/app/home/models/categories.interface';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  categories$!: Observable<Categories>;
+  category$!: Observable<Category | null>;
   playLists$!: Observable<PlayListCategory | null>;
   playListsNext: string | null = '';
   playListsPrevious: string | null = '';
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    //this.store.dispatch(getPlaylistAction({id:}))
-
+    this.category$ = this.store.select(fromCategories.selectCategorySelected);
     this.playLists$ = this.store.select(fromCategories.selectPlayLists);
     this.playLists$.subscribe({
       next: (res) => {
         if (res) {
           this.playListsNext = res.playlists.next;
           this.playListsPrevious = res.playlists.previous;
-          console.log('data', res);
         }
       },
     });
+  }
 
-    // this.topArtists$ = this.store.select(fromProfile.selectTopArtists);
-    // this.topArtists$.subscribe({
-    //   next: (res) => {
-    //     if (res) {
-    //       this.topArtistsNext = res.next;
-    //       this.topArtistsPrevious = res.previous;
-    //     }
-    //   },
-    // });
+  goToPlaylist(id: string) {
+    this.store.dispatch(getPlaylistAction({ id }));
+    this.router.navigateByUrl('playlists');
+  }
+  handlePreviousPlaylists() {
+    this.category$.subscribe((category) => {
+      const url = this.playListsPrevious;
+
+      if (category && url) {
+        this.store.dispatch(getCategoriesPlaylistAction({ category, url }));
+      }
+    });
+  }
+  handleNextPlaylists() {
+    this.category$.subscribe((category) => {
+      const url = this.playListsNext;
+
+      if (category && url) {
+        this.store.dispatch(getCategoriesPlaylistAction({ category, url }));
+      }
+    });
   }
 }

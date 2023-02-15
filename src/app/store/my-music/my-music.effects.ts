@@ -19,7 +19,6 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getPlaylistsSaved(res.url).pipe(
           map((response) => {
-            console.log('respPlay', response);
             return myMusicActions.getMyPlaylistsSuccessAction({
               data: response,
             });
@@ -41,8 +40,6 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getArtistsFollowed(res.url).pipe(
           map((response) => {
-            console.log('respArtist', response);
-
             return myMusicActions.getMyArtistsSuccessAction({
               data: response,
             });
@@ -64,7 +61,6 @@ export class MyMusicEffects {
       exhaustMap((res) =>
         this.myMusicService.getAlbumsSaved(res.url).pipe(
           map((response) => {
-            console.log('respAlbum', response);
             return myMusicActions.getMyAlbumsSuccessAction({
               data: response,
             });
