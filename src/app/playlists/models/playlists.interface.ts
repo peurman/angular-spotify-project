@@ -28,9 +28,9 @@ export interface Tracks {
   href: string;
   items?: Item[];
   limit?: number;
-  next?: null;
+  next: null;
   offset?: number;
-  previous?: null;
+  previous: null;
   total: number;
 }
 export interface Item {

@@ -33,6 +33,24 @@
     @include scale-up-center();
   }
 }
+@mixin buttonSmall {
+  border: none;
+  background-color: $main-color;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  color: $button-color;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: 0.4s;
+  cursor: pointer;
+  @include centerMeRow;
+  &:hover {
+    background-color: $button-color;
+    color: $main-color;
+    @include scale-up-center();
+  }
+}
 @mixin buttonLabel {
   border: none;
   background-color: $main-color;

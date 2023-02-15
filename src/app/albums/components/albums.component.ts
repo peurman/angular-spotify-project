@@ -13,6 +13,7 @@ import * as fromAlbum from 'src/app/store/album/album.selectors';
 import { getTrackAction } from 'src/app/store/track/track.actions';
 import { Router } from '@angular/router';
 import { CheckerService } from 'src/app/core/services/checker.service';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 
 @Component({
   selector: 'app-albums',
@@ -60,7 +61,8 @@ export class AlbumsComponent implements OnInit {
     this.router.navigateByUrl('/tracks');
   }
   goToArtist(artistId: string) {
-    console.log('ARTIST ID: ', artistId);
+    this.store.dispatch(getArtistAction({ id: artistId }));
+    this.router.navigateByUrl('/artists');
   }
   saveRemoveAlbum(albumId: string) {
     if (this.following) {

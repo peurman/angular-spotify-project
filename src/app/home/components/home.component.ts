@@ -202,7 +202,7 @@ export class HomeComponent implements OnInit {
     );
   }
   goToPlaylist(id: string) {
-    this.store.dispatch(getPlaylistAction({ id }));
+    this.store.dispatch(getPlaylistAction({ id, url: '' }));
     this.router.navigate(['/playlists']);
   }
   goToCategory(category: Category) {

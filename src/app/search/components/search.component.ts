@@ -204,7 +204,7 @@ export class SearchComponent implements OnInit {
     );
   }
   goToPlaylist(playlistId: string) {
-    this.store.dispatch(getPlaylistAction({ id: playlistId }));
+    this.store.dispatch(getPlaylistAction({ id: playlistId, url: '' }));
     this.router.navigate(['/playlists']);
   }
   // Tracks

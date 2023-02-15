@@ -101,3 +101,25 @@ audio {
     background-color: $main-color;
   }
 }
+
+.my-music__title-arrows-container {
+  @include centerMeRow;
+  justify-content: space-between;
+  width: 780px;
+  .my-music__previous-next-container {
+    @include centerMeRow;
+    justify-content: right;
+    gap: 35px;
+    button {
+      background: transparent;
+      border: none;
+      color: $button-color;
+      font: 2.4rem "Circular";
+      line-height: 0.5rem;
+      cursor: pointer;
+      &:disabled {
+        color: $background-hover;
+      }
+    }
+  }
+}
