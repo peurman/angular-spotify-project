@@ -284,3 +284,33 @@
   @include centerMeRow;
   margin: 15px 0;
 }
+
+@media (max-width: 768px) {
+  .search {
+    width: 300px;
+    gap: 0;
+  }
+  .search__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .search__data-container {
+      width: 150px;
+      @include centerMeColumn;
+      align-items: flex-start;
+      gap: 25px;
+      .search__type-container {
+        @include centerMeRow;
+        .search__type {
+          font-size: 1rem;
+        }
+      }
+      .search__title {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
