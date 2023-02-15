@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthToken } from '../../login/models/authtoken.interface';
 import { AuthService } from '../../login/services/auth.service';
 import { getUserRequest, login, logout } from '../../store/login/login.actions';
@@ -16,7 +16,7 @@ export class MainGuard implements CanActivate {
     private _snackBar: MatSnackBar,
     private store: Store
   ) {}
-  canActivate() {
+  canActivate(): Observable<boolean> {
     const tokenInfo = localStorage.getItem('tokenInfo');
     if (tokenInfo) {
       const tokenAuth = JSON.parse(tokenInfo) as AuthToken;
@@ -47,7 +47,7 @@ export class MainGuard implements CanActivate {
       );
     } else {
       this.router.navigateByUrl('/login');
-      return false;
+      return of(false);
     }
   }
 }
