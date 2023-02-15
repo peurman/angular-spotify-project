@@ -60,7 +60,6 @@ export class FollowingComponent implements OnInit {
   goToArtist(id: string) {
     // this.store.dispatch(getArtistDetail({ id }));
     this.router.navigate(['/artists']);
-    window.scrollTo(0, 0);
   }
 
   goToPreviousMyPlaylists(url: string | null) {
@@ -72,7 +71,6 @@ export class FollowingComponent implements OnInit {
   goToPlaylist(id: string) {
     this.store.dispatch(getPlaylistAction({ id }));
     this.router.navigate(['/playlists']);
-    window.scrollTo(0, 0);
   }
 
   unfollowArtist(id: string) {

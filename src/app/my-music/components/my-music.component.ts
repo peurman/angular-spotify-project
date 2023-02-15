@@ -82,6 +82,5 @@ export class MyMusicComponent implements OnInit {
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
     this.router.navigate(['/artists']);
-    window.scrollTo(0, 0);
   }
 }

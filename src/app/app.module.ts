@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
-import { LoginGuard } from './guards/login.guard';
+import { LoginGuard } from './login/guards/login.guard';
 import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopItems } from './profile/services/topitems.service';
@@ -37,6 +37,7 @@ export function localStorageSyncReducer(
       'following',
       'recommendations',
       'profile',
+      'artist',
     ],
     rehydrate: true,
   })(reducer);
