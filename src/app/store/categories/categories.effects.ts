@@ -39,20 +39,22 @@ export class CategoriesEffects {
     return this.actions$.pipe(
       ofType(categoriesActions.getCategoriesPlaylistAction),
       exhaustMap((res) =>
-        this.categoriesService.getCategoriesPlayLists(res.id).pipe(
-          map((playlists) => {
-            return categoriesActions.getCategoriesPlaylistSuccessAction({
-              playlists,
-            });
-          }),
-          catchError((error) =>
-            of(
-              categoriesActions.getCategoriesPlaylistErrorAction({
-                message: `Cannot get categories. Error: ${error.message}`,
-              })
+        this.categoriesService
+          .getCategoriesPlayLists(res.category.id, res.url)
+          .pipe(
+            map((playlists) => {
+              return categoriesActions.getCategoriesPlaylistSuccessAction({
+                playlists,
+              });
+            }),
+            catchError((error) =>
+              of(
+                categoriesActions.getCategoriesPlaylistErrorAction({
+                  message: `Cannot get categories. Error: ${error.message}`,
+                })
+              )
             )
           )
-        )
       )
     );
   });

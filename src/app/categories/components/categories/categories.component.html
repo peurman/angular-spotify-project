@@ -1,1 +1,57 @@
-<p>this works</p>
+<div *ngIf="category$ | async as category" class="playlist-container">
+    <div class="playlist-data-container">
+      <div>
+        <img [src]="category.icons[0].url" alt="" />
+      </div>
+      <div class="playlist__data-container">
+        <div class="playlist__type-heart-container">
+          <div class="playlist__type">
+            {{ 'Category' | uppercase }}
+          </div>
+        </div>
+        <div class="playlist__title">
+          {{ category.name }}
+        </div>
+        <div class="title-arrows-container">
+            <div class="previous-next-container">
+              <button
+                title="Previous"
+                (click)="handlePreviousPlaylists()"
+                [disabled]="playListsPrevious === null"
+              >
+                &#8249;
+              </button>
+              <button
+                title="Next"
+                (click)="handleNextPlaylists()"
+                [disabled]="playListsNext === null"
+              >
+                &#8250;
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="playlist__tracks-container">
+      <table>
+        <tr>
+          <th>Playlist Name</th>
+          <th>Owner</th>
+          <th>Description</th>
+        </tr>
+        <tr *ngFor="let playlist of (playLists$ | async)?.playlists?.items">
+          <td>
+            <a (click)="goToPlaylist(playlist.id)">{{ playlist.name }}</a>
+          </td>
+          <td>
+            <div class="track__artists">
+              <a>{{
+                playlist.owner.display_name
+              }}</a>
+            </div>
+          </td>
+          <td>{{ playlist.description}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>

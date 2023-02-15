@@ -8,6 +8,7 @@ import { getTrackAction } from 'src/app/store/track/track.actions';
 
 import { PlaylistService } from '../services/playlists.service';
 import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 
 @Component({
   selector: 'app-playlists',
@@ -56,8 +57,10 @@ export class PlaylistsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  goToArtist(artistId: string) {
-    console.log('ARTIST ID: ', artistId);
+  goToArtist(id: string) {
+    this.store.dispatch(getArtistAction({ id }));
+    this.router.navigate(['/artists']);
+    window.scrollTo(0, 0);
   }
 
   followUnfollowPlaylist(playlistId: string) {

@@ -167,8 +167,9 @@
           gap: 3px;
         }
         .album-following-img{
-          margin-right: auto;
-          margin-left: 0;
+          @include centerMeRow;
+          justify-content: flex-end;
+          width: 100%;
           img{
             width: 15px;
             height: 15px; 

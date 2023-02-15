@@ -190,8 +190,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/playlists']);
     window.scrollTo(0, 0);
   }
-  goToCategory(id: string) {
-    this.store.dispatch(getCategoriesPlaylistAction({ id }));
+  goToCategory(category: Category) {
+    this.store.dispatch(getCategoriesPlaylistAction({ category, url: '' }));
     this.router.navigateByUrl('/categories');
   }
   goToGenre(genreName: string) {
