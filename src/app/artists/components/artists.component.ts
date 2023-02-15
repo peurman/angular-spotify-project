@@ -5,7 +5,10 @@ import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { Artist } from 'src/app/home/models/new-releases.interface';
 import { Album, Albums } from 'src/app/search/models/search.interface';
-import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
+import {
+  getAlbumDetailAction,
+  saveRemoveAlbumAction,
+} from 'src/app/store/album/album.actions';
 import {
   getArtistAction,
   getArtistAlbumsAction,
@@ -113,8 +116,9 @@ export class ArtistsComponent implements OnInit {
       this.store.dispatch(followArtistsAction({ id: event.id }));
     }
   }
-  SaveRemoveAlbum(album: Album) {
-    //this.store.dispatch(albums)
+  SaveRemoveAlbum(id: string, saved: boolean) {
+    const save = !saved;
+    this.store.dispatch(saveRemoveAlbumAction({ id, save }));
   }
   SaveRemoveTrack(id: string, save: boolean | undefined) {
     save = !save;

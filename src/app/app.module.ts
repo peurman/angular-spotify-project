@@ -18,12 +18,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './login/services/auth.service';
-import { LoginGuard } from './guards/login.guard';
+import { LoginGuard } from './login/guards/login.guard';
 import { MainGuard } from './core/guards/main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopItems } from './profile/services/topitems.service';
 import { TrackService } from './tracks/services/track.service';
 import { ArtistinfoService } from './artists/services/artistinfo.service';
+import { CheckerService } from './core/services/checker.service';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<RootState>
@@ -37,6 +38,8 @@ export function localStorageSyncReducer(
       'following',
       'recommendations',
       'profile',
+      'categories',
+      'artist',
     ],
     rehydrate: true,
   })(reducer);
@@ -67,6 +70,7 @@ const metaReducers = [localStorageSyncReducer, storeFreeze];
     TopItems,
     TrackService,
     ArtistinfoService,
+    CheckerService,
   ],
   bootstrap: [AppComponent],
 })

@@ -3,11 +3,13 @@ import { ArtistState } from './artist.state';
 import * as artistActions from './artist.actions';
 import * as profileActions from '../profile/profile.actions';
 import * as trackActions from '../track/track.actions';
+import * as albumActions from '../album/album.actions';
 import { Artist } from 'src/app/home/models/new-releases.interface';
 import {
   ArtistTracks,
   RelatedArtist,
 } from 'src/app/artists/models/topartistracks.interface';
+import { Albums } from 'src/app/search/models/search.interface';
 
 export const initialArtistState: ArtistState = {
   artist: null,
@@ -174,7 +176,6 @@ const artistReducerInternal = createReducer(
   on(
     trackActions.SaveRemoveTrackSuccessAction,
     (state, { id }): ArtistState => {
-      //const tracksUpdated = { ...state.tracks } as ArtistTracks;
       const tracksUpdated = state.tracks?.tracks?.map((track) => {
         const trackFixed = { ...track };
         if (track.id == id) {
@@ -190,6 +191,28 @@ const artistReducerInternal = createReducer(
       return {
         ...state,
         tracks: data,
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    albumActions.saveRemoveAlbumSuccessAction,
+    (state, { id }): ArtistState => {
+      const albumsUpdated = state.artistAlbums?.items.map((album) => {
+        const albumFixed = { ...album };
+        if (album.id == id) {
+          albumFixed.saved = !album.saved;
+        }
+        return albumFixed;
+      });
+
+      const data = { ...state.artistAlbums } as Albums;
+      if (albumsUpdated) {
+        data.items = albumsUpdated;
+      }
+      return {
+        ...state,
+        artistAlbums: data,
         isLoading: false,
       };
     }

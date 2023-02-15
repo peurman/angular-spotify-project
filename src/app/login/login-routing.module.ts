@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CallbackGuard } from '../guards/callback.guard';
+import { CallbackGuard } from './guards/callback.guard';
 import { CallbackComponent } from './components/callback/callback.component';
 
 import { LoginComponent } from './components/login.component';
