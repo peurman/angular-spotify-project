@@ -3,9 +3,9 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { catchError, map, of } from 'rxjs';
-import { AuthToken } from '../login/models/authtoken.interface';
-import { AuthService } from '../login/services/auth.service';
-import { login, logout } from '../store/login/login.actions';
+import { AuthToken } from '../models/authtoken.interface';
+import { AuthService } from '../services/auth.service';
+import { login, logout } from '../../store/login/login.actions';
 
 @Injectable()
 export class CallbackGuard implements CanActivate {

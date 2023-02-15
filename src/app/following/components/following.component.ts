@@ -16,6 +16,8 @@ import {
 import * as fromLogin from 'src/app/store/login/login.selectors';
 import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 import { PlaylistService } from 'src/app/playlists/services/playlists.service';
+import { unFollowArtistsAction } from 'src/app/store/profile/profile.actions';
+import { CheckerService } from 'src/app/core/services/checker.service';
 // import { Artist } from 'src/app/tracks/services/track.service';
 // import { getTrackAction } from 'src/app/store/track/track.actions';
 
@@ -28,7 +30,8 @@ export class FollowingComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private playlistService: PlaylistService // private artistService: ArtistService
+    private playlistService: PlaylistService,
+    private checkerService: CheckerService
   ) {}
 
   saveOn = '../../../assets/images/saveOn.png';
@@ -75,9 +78,9 @@ export class FollowingComponent implements OnInit {
   }
 
   unfollowArtist(id: string) {
-    console.log('UNFOLLOW ID: ', id);
-    // this.artistService.unfollowArtist(id)
-    //   .subscribe(() => this.store.dispatch(getMyArtistsAction({ url: '' })));
+    this.checkerService
+      .followUnfollowArtist(false, 'artist', id)
+      .subscribe(() => this.store.dispatch(getMyArtistsAction({ url: '' })));
   }
 
   unfollowPlaylist(id: string) {

@@ -12,6 +12,7 @@ import { AlbumService } from '../services/album.service';
 import * as fromAlbum from 'src/app/store/album/album.selectors';
 import { getTrackAction } from 'src/app/store/track/track.actions';
 import { Router } from '@angular/router';
+import { CheckerService } from 'src/app/core/services/checker.service';
 
 @Component({
   selector: 'app-albums',
@@ -22,7 +23,8 @@ export class AlbumsComponent implements OnInit {
   constructor(
     private store: Store,
     private albumService: AlbumService,
-    private router: Router
+    private router: Router,
+    private checkerService: CheckerService
   ) {}
 
   saveOn = '../../../assets/images/saveOn.png';
@@ -62,9 +64,13 @@ export class AlbumsComponent implements OnInit {
   }
   saveRemoveAlbum(albumId: string) {
     if (this.following) {
-      this.albumService.removeAlbumFromLibrary(albumId).subscribe();
+      this.checkerService
+        .saveRemoveAlbumFromLibrary(albumId, !this.following)
+        .subscribe();
     } else {
-      this.albumService.saveAlbumToLibrary(albumId).subscribe();
+      this.checkerService
+        .saveRemoveAlbumFromLibrary(albumId, !this.following)
+        .subscribe();
     }
     this.following = !this.following;
   }

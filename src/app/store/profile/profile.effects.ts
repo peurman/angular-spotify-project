@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { CheckerService } from 'src/app/core/services/checker.service';
 import { TopItems } from 'src/app/profile/services/topitems.service';
 import * as profileActions from './profile.actions';
 @Injectable()
 export class ProfileEffects {
-  constructor(private actions$: Actions, private topService: TopItems) {}
+  constructor(
+    private actions$: Actions,
+    private topService: TopItems,
+    private checkerService: CheckerService
+  ) {}
 
   getTopArtists$ = createEffect(() => {
     return this.actions$.pipe(
@@ -13,7 +18,7 @@ export class ProfileEffects {
       switchMap((action) => {
         return this.topService.getTopArtists(action.url).pipe(
           switchMap((topArtists) => {
-            return this.topService.checkFollowing(topArtists.items).pipe(
+            return this.checkerService.checkFollowing(topArtists.items).pipe(
               map((booleanResponse) => {
                 topArtists.items.forEach((artist, index) => {
                   const artistValue = booleanResponse[index];
@@ -65,7 +70,7 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(profileActions.unFollowArtistsAction),
       switchMap((res) => {
-        return this.topService
+        return this.checkerService
           .followUnfollowArtist(false, 'artist', res.id)
           .pipe(
             map(() => {
@@ -88,7 +93,7 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(profileActions.followArtistsAction),
       switchMap((res) => {
-        return this.topService
+        return this.checkerService
           .followUnfollowArtist(true, 'artist', res.id)
           .pipe(
             map(() => {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { ArtistinfoService } from 'src/app/artists/services/artistinfo.service';
+import { CheckerService } from 'src/app/core/services/checker.service';
 import { TopItems } from 'src/app/profile/services/topitems.service';
 import * as artistActions from './artist.actions';
 
@@ -10,7 +11,7 @@ export class ArtistEffects {
   constructor(
     private actions$: Actions,
     private artistService: ArtistinfoService,
-    private topService: TopItems
+    private checkerService: CheckerService
   ) {}
 
   getArtistInfo = createEffect(() => {
@@ -19,7 +20,7 @@ export class ArtistEffects {
       switchMap((res) =>
         this.artistService.getArtistInfo(res.id).pipe(
           switchMap((response) => {
-            return this.topService.checkFollowing([response]).pipe(
+            return this.checkerService.checkFollowing([response]).pipe(
               map((followingResponse) => {
                 response.isFollowing = followingResponse[0];
                 return artistActions.getArtistSucessAction({
@@ -45,15 +46,11 @@ export class ArtistEffects {
       switchMap((res) =>
         this.artistService.getArtistAlbums(res.id, res.url).pipe(
           switchMap((response) => {
-            return this.topService.checkSavedAlbum(response).pipe(
+            return this.checkerService.checkSavedAlbum(response).pipe(
               map((booleanResponse) => {
                 response.items.forEach((album, index) => {
-                  const albumValue = booleanResponse[index];
-                  if (albumValue) {
-                    album.saved = true;
-                  } else {
-                    album.saved = false;
-                  }
+                  const albumBooleanValue = booleanResponse[index];
+                  album.saved = albumBooleanValue;
                 });
                 return artistActions.getArtistAlbumsSucessAction({
                   data: response,
@@ -78,7 +75,7 @@ export class ArtistEffects {
       switchMap((res) =>
         this.artistService.getArtistTopTracks(res.id).pipe(
           switchMap((tracks) => {
-            return this.topService.checkSavedTracks(tracks.tracks).pipe(
+            return this.checkerService.checkSavedTracks(tracks.tracks).pipe(
               map((booleanResponse) => {
                 tracks.tracks.forEach((track, index) => {
                   const trackValue = booleanResponse[index];
@@ -111,7 +108,7 @@ export class ArtistEffects {
       switchMap((res) =>
         this.artistService.getSuggestedArtist(res.id).pipe(
           switchMap((artists) => {
-            return this.topService.checkFollowing(artists.artists).pipe(
+            return this.checkerService.checkFollowing(artists.artists).pipe(
               map((booleanResponse) => {
                 artists.artists.forEach((artist, index) => {
                   const artistValue = booleanResponse[index];

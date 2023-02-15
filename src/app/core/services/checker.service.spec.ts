@@ -1,23 +1,27 @@
 import { inject, TestBed } from '@angular/core/testing';
+import { CheckerService } from './checker.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { AuthService } from './auth.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('CheckerService', () => {
+  let service: CheckerService;
   let httpMock: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService],
+      providers: [CheckerService],
       imports: [HttpClientTestingModule],
     });
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(AuthService);
+    service = TestBed.inject(CheckerService);
   });
 
-  it('should be created', inject([AuthService], (service: AuthService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [CheckerService],
+    (service: CheckerService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

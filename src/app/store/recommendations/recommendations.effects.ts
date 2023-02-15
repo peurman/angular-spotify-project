@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as recommendationsActions from './recommendations.actions';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { GenresService } from 'src/app/genres/services/genres.service';
+import { CheckerService } from 'src/app/core/services/checker.service';
 
 @Injectable()
 export class RecommendationsEffects {
   constructor(
     private actions$: Actions,
-    private recommendationsService: GenresService
+    private recommendationsService: GenresService,
+    private checkerService: CheckerService
   ) {}
 
   getRecommendations$ = createEffect(() => {
@@ -19,10 +21,20 @@ export class RecommendationsEffects {
         this.recommendationsService
           .getRecommendationsByGenre(res.genreName)
           .pipe(
-            map((response) => {
-              return recommendationsActions.getRecommendationsSuccessAction({
-                data: response,
-              });
+            switchMap((response) => {
+              return this.checkerService.checkSavedTracks(response.tracks).pipe(
+                map((booleanResponse) => {
+                  response.tracks.forEach((track, index) => {
+                    const trackBooleanValue = booleanResponse[index];
+                    track.saved = trackBooleanValue;
+                  });
+                  return recommendationsActions.getRecommendationsSuccessAction(
+                    {
+                      data: response,
+                    }
+                  );
+                })
+              );
             }),
             catchError((error) =>
               of(

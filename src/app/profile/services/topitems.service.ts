@@ -1,12 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArtistTracks } from 'src/app/artists/models/topartistracks.interface';
-import { Artist } from 'src/app/home/models/new-releases.interface';
-import { Albums } from 'src/app/search/models/search.interface';
 import { TopArtists } from '../model/topartists.interface';
-import { TopTracks, Track as TopTrack } from '../model/toptracks.interface';
-import { Track } from 'src/app/search/models/search.interface';
+import { TopTracks } from '../model/toptracks.interface';
 
 const BASE_API = 'https://api.spotify.com/v1/me';
 
@@ -34,40 +30,5 @@ export class TopItems {
       );
     }
     return this.http.get<TopTracks>(url, this.options);
-  }
-
-  //MoveToCore
-  checkFollowing(artistList: Artist[]): Observable<boolean[]> {
-    const ids: string[] = [];
-    artistList.forEach((artist) => {
-      ids.push(artist.id);
-    });
-    return this.http.get<boolean[]>(
-      `${BASE_API}/following/contains?type=artist&ids=${ids.join(',')}`
-    );
-  }
-  checkSavedAlbum(albumList: Albums): Observable<boolean[]> {
-    const ids: string[] = [];
-    albumList.items.forEach((album) => {
-      ids.push(album.id);
-    });
-    return this.http.get<boolean[]>(
-      `${BASE_API}/albums/contains?ids=${ids.join(',')}`
-    );
-  }
-  checkSavedTracks(tracks: Track[]): Observable<boolean[]> {
-    const ids: string[] = [];
-    tracks.forEach((track) => {
-      ids.push(track.id);
-    });
-    return this.http.get<boolean[]>(
-      `${BASE_API}/tracks/contains?ids=${ids.join(',')}`
-    );
-  }
-  followUnfollowArtist(follow: boolean, type: string, id: string) {
-    if (!follow) {
-      return this.http.delete(`${BASE_API}/following?type=${type}&ids=${id}`);
-    }
-    return this.http.put(`${BASE_API}/following?type=${type}&ids=${id}`, {});
   }
 }

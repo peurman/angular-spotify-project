@@ -20,14 +20,4 @@ export class AlbumService {
   getAlbumsSaved(): Observable<AlbumsSaved> {
     return this.http.get<AlbumsSaved>(`${BASE_API}/me/albums`, this.options);
   }
-  saveAlbumToLibrary(id: string): Observable<void> {
-    return this.http.put<void>(
-      `${BASE_API}/me/albums?ids=${id}`,
-      {},
-      this.options
-    );
-  }
-  removeAlbumFromLibrary(id: string): Observable<void> {
-    return this.http.delete<void>(`${BASE_API}/me/albums?ids=${id}`);
-  }
 }

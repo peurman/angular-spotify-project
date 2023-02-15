@@ -13,3 +13,16 @@ export const getAlbumDetailErrorAction = createAction(
   '[AlbumDetail] Get Album Detail Error Action',
   props<{ message: string }>()
 );
+
+export const saveRemoveAlbumAction = createAction(
+  '[Album] Save/Remove Action',
+  props<{ id: string; save: boolean }>()
+);
+export const saveRemoveAlbumSuccessAction = createAction(
+  '[Album] Save/Remove Success Action',
+  props<{ id: string }>()
+);
+export const saveRemoveAlbumErrorAction = createAction(
+  '[Album] Save/Remove Error Action',
+  props<{ message: string }>()
+);
