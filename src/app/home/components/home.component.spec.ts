@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AlbumsComponent } from 'src/app/albums/components/albums.component';
+import { CategoriesComponent } from 'src/app/categories/components/categories/categories.component';
+import { GenresComponent } from 'src/app/genres/components/genres.component';
+import { PlaylistsComponent } from 'src/app/playlists/components/playlists.component';
 import { RootState } from 'src/app/store';
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import {
@@ -23,6 +28,26 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent, MainPageComponent],
+      imports: [
+        RouterTestingModule.withRoutes([
+          {
+            path: 'albums',
+            component: AlbumsComponent,
+          },
+          {
+            path: 'playlists',
+            component: PlaylistsComponent,
+          },
+          {
+            path: 'categories',
+            component: CategoriesComponent,
+          },
+          {
+            path: 'genres',
+            component: GenresComponent,
+          },
+        ]),
+      ],
       providers: [provideMockStore({})],
     }).compileComponents();
     store = TestBed.inject(MockStore);

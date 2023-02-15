@@ -9,7 +9,7 @@ export class LoginGuard implements CanActivate {
     if (!tokenInfo) {
       return true;
     } else {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('home');
       return false;
     }
   }

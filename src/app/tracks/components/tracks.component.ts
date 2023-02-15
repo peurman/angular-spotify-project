@@ -24,7 +24,7 @@ export class TracksComponent implements OnInit {
   }
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id: id }));
-    this.router.navigateByUrl('/artists');
+    this.router.navigateByUrl('artists');
   }
   saveRemoveTrack(id: string, saved: boolean | undefined) {
     if (saved) {

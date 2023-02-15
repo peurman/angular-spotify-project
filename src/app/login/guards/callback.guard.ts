@@ -21,11 +21,11 @@ export class CallbackGuard implements CanActivate {
       return this.auth.GetTokenFromCode(param).pipe(
         map((token: AuthToken) => {
           this.auth.SaveToken(token);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('home');
           return true;
         }),
         catchError(() => {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('login');
           this.auth.LogOut();
           this.store.dispatch(logout());
           const config = new MatSnackBarConfig();
@@ -41,7 +41,7 @@ export class CallbackGuard implements CanActivate {
         })
       );
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('login');
       return false;
     }
   }

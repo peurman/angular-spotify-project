@@ -9,6 +9,9 @@ import { RootState } from 'src/app/store';
 import { getRecommendationsAction } from 'src/app/store/recommendations/recommendations.actions';
 import { getTrackAction } from 'src/app/store/track/track.actions';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ArtistsComponent } from 'src/app/artists/components/artists.component';
+import { TracksComponent } from 'src/app/tracks/components/tracks.component';
 
 describe('PlaylistsComponent', () => {
   let component: PlaylistsComponent;
@@ -20,7 +23,13 @@ describe('PlaylistsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PlaylistsComponent],
       providers: [provideMockStore({})],
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'artists', component: ArtistsComponent },
+          { path: 'tracks', component: TracksComponent },
+        ]),
+      ],
     }).compileComponents();
     store = TestBed.inject(MockStore);
 

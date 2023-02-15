@@ -30,7 +30,7 @@ export class MainGuard implements CanActivate {
             //token expired, inteceptor will fix it
             return of(true);
           }
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('login');
           this.store.dispatch(logout());
           this.auth.LogOut();
           const config = new MatSnackBarConfig();
@@ -46,7 +46,7 @@ export class MainGuard implements CanActivate {
         })
       );
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('login');
       return of(false);
     }
   }

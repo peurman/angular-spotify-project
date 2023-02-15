@@ -7,6 +7,8 @@ import {
 import { MainGuard } from './main.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideMockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoginComponent } from 'src/app/login/components/login.component';
 
 describe('MainGuard', () => {
   let guard: MainGuard;
@@ -15,7 +17,13 @@ describe('MainGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [MainGuard, AuthService, provideMockStore({})],
-      imports: [HttpClientTestingModule, MatSnackBarModule],
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        RouterTestingModule.withRoutes([
+          { path: 'login', component: LoginComponent },
+        ]),
+      ],
     });
     httpMock = TestBed.inject(HttpTestingController);
     guard = TestBed.inject(MainGuard);

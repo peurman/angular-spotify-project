@@ -7,6 +7,9 @@ import {
 import { CallbackGuard } from './callback.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideMockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from 'src/app/home/components/home.component';
+import { LoginComponent } from '../components/login.component';
 
 describe('CallbackGuard', () => {
   let guard: CallbackGuard;
@@ -14,7 +17,14 @@ describe('CallbackGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatSnackBarModule],
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        RouterTestingModule.withRoutes([
+          { path: 'home', component: HomeComponent },
+          { path: 'login', component: LoginComponent },
+        ]),
+      ],
       providers: [CallbackGuard, AuthService, provideMockStore({})],
     });
     httpMock = TestBed.inject(HttpTestingController);

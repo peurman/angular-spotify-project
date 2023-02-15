@@ -277,4 +277,16 @@ describe('AlbumsComponent', () => {
       true
     );
   });
+  it('should call checkerService.saveRemoveAlbumFromLibrary when clicking on remove album', () => {
+    spyOn(checkerServiceStub, 'saveRemoveAlbumFromLibrary').and.returnValue(
+      of({})
+    );
+    component.following = true;
+    const albumId = '1';
+    component.saveRemoveAlbum(albumId);
+    expect(checkerServiceStub.saveRemoveAlbumFromLibrary).toHaveBeenCalledWith(
+      albumId,
+      false
+    );
+  });
 });

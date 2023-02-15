@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
   handleArtistClick(id: string) {
     this.store.dispatch(getArtistAction({ id: id }));
-    this.router.navigateByUrl('/artists');
+    this.router.navigateByUrl('artists');
   }
   handlePreviousArtist() {
     this.store.dispatch(getTopArtistsAction({ url: this.topArtistsPrevious }));

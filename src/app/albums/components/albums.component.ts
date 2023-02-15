@@ -51,7 +51,7 @@ export class AlbumsComponent implements OnInit {
 
   goToTrack(trackId: string) {
     this.store.dispatch(getTrackAction({ id: trackId }));
-    this.router.navigateByUrl('/tracks');
+    this.router.navigateByUrl('tracks');
   }
   saveRemoveAlbum(albumId: string) {
     if (this.following) {
