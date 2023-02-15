@@ -37,7 +37,7 @@ describe('ArtistCardComponent', () => {
   });
   it('should emit followUnFollowEvent on handleClick with follow type', () => {
     spyOn(component, 'handleClick').and.callThrough();
-    spyOn(component.followUnFollowEvent, 'emit').and.callThrough();
+    spyOn(component.followUnFollowEvent, 'emit');
     const artist: Artist = {
       id: '1',
       name: 'Test Artist',
@@ -59,7 +59,7 @@ describe('ArtistCardComponent', () => {
   });
   it('should emit followUnFollowEvent on handleClick with unfollow type', () => {
     spyOn(component, 'handleClick').and.callThrough();
-    spyOn(component.followUnFollowEvent, 'emit').and.callThrough();
+    spyOn(component.followUnFollowEvent, 'emit');
     const artist: Artist = {
       id: '1',
       name: 'Test Artist',
@@ -81,7 +81,7 @@ describe('ArtistCardComponent', () => {
   });
   it('should emit artistClickedEvent on handleArtistClick', () => {
     spyOn(component, 'handleArtistClick').and.callThrough();
-    spyOn(component.artistClickedEvent, 'emit').and.callThrough();
+    spyOn(component.artistClickedEvent, 'emit');
     const artist: Artist = {
       id: '1',
       name: 'Test Artist',
