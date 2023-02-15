@@ -38,8 +38,8 @@ export function localStorageSyncReducer(
       'following',
       'recommendations',
       'profile',
-      'categories',
       'artist',
+      'categories',
     ],
     rehydrate: true,
   })(reducer);

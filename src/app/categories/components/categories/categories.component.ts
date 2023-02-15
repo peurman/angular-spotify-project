@@ -21,6 +21,7 @@ export class CategoriesComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.category$ = this.store.select(fromCategories.selectCategorySelected);
     this.playLists$ = this.store.select(fromCategories.selectPlayLists);
     this.playLists$.subscribe({

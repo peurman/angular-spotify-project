@@ -1,0 +1,7 @@
+@use "styles.scss" as *;
+
+:host {
+  @include centerMeRow;
+  width: 800px;
+  margin-top: 50px;
+}

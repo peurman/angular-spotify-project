@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromLogin from 'src/app/store/login/login.selectors';
 import * as fromProfile from 'src/app/store/profile/profile.selectors';
+import Swal from 'sweetalert2';
 
 import { User } from 'src/app/store/login/login.state';
 import {
@@ -81,9 +82,22 @@ export class ProfileComponent implements OnInit {
   }
   handleFollowUnfollow(event: { type: string; id: string }) {
     if (event.type == 'unfollow') {
-      this.store.dispatch(unFollowArtistsAction({ id: event.id }));
+      Swal.fire({
+        title: 'Are you sure you want to unfollow this artist?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, unfollow!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(unFollowArtistsAction({ id: event.id }));
+          Swal.fire('Artist successfully unfollowed!');
+        }
+      });
     } else {
       this.store.dispatch(followArtistsAction({ id: event.id }));
+      Swal.fire('Artist successfully followed!');
     }
   }
 }

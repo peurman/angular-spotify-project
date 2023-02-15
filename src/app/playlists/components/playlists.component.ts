@@ -54,13 +54,11 @@ export class PlaylistsComponent implements OnInit {
   goToTrack(trackId: string) {
     this.store.dispatch(getTrackAction({ id: trackId }));
     this.router.navigateByUrl('/tracks');
-    window.scrollTo(0, 0);
   }
 
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
     this.router.navigate(['/artists']);
-    window.scrollTo(0, 0);
   }
 
   followUnfollowPlaylist(playlistId: string) {

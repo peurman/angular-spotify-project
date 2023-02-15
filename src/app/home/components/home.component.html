@@ -3,7 +3,23 @@
     >Welcome <em *ngIf="username$ | async as username">{{ username }}</em></i
   >
 </h1>
+<app-loading
+  *ngIf="
+    (categoriesIsLoading$ | async) ||
+    (genresIsLoading$ | async) ||
+    (newReleasesIsLoading$ | async) ||
+    (featuredPlaylistsIsLoading$ | async)
+  "
+></app-loading>
 <app-main-page
+  *ngIf="
+    !(
+      (categoriesIsLoading$ | async) ||
+      (genresIsLoading$ | async) ||
+      (newReleasesIsLoading$ | async) ||
+      (featuredPlaylistsIsLoading$ | async)
+    )
+  "
   [genresList]="currentGenres"
   [genresPrevious]="genresPrevious"
   [genresNext]="genresNext"
