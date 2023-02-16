@@ -145,8 +145,9 @@ audio {
   .tracks-container {
     @include centerMeRow;
     justify-content: flex-start;
+    width: 350px;
     table {
-      width: 600px;
+      width: 500px;
       font-size: 0.8rem;
     }
   }
