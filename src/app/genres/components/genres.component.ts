@@ -41,7 +41,6 @@ export class GenresComponent implements OnInit {
   }
 
   goToTrack(id: string) {
-    console.log(id);
     this.store.dispatch(getTrackAction({ id }));
     this.router.navigateByUrl('tracks');
   }

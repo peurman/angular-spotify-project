@@ -279,13 +279,12 @@
     }
   }
 }
-
 .loader {
   @include centerMeRow;
   margin: 15px 0;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .search {
     width: 300px;
     gap: 0;
@@ -298,9 +297,8 @@
       height: 150px;
     }
     .search__data-container {
-      width: 150px;
-      @include centerMeColumn;
-      align-items: flex-start;
+      width: 300px;
+      align-items: center;
       gap: 25px;
       .search__type-container {
         @include centerMeRow;
@@ -309,7 +307,102 @@
         }
       }
       .search__title {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .search__input-container {
+    margin-top: 10px;
+    input {
+      font: italic 1.2rem "Circular";
+      text-align: center;
+      width: 300px;
+      height: 30px;
+    }
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .main-container {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .main__title-arrows-container {
+    width: 300px;
+    gap: 10px;
+    .main__previous-next-container {
+      gap: 10px;
+      button {
+        font: 1.8rem "Circular";
+      }
+    }
+  }
+  .main__search-albums-container {
+    align-items: center;
+    .main__search-albums-cards {
+      align-content: center;
+      width: 300px;
+      height: auto;
+    }
+  }
+  .main__search-artists-container {
+    align-items: center;
+    width: auto;
+    .main__search-artists-cards {
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .main__search-artists-card {
+        @include card-style(150px, 125px);
+        img {
+          width: 115px;
+          height: 115px;
+        }
+        .main__search-artists-title-artists-container {
+          height: auto;
+        }
+      }
+    }
+  }
+  .main__search-playlists-container {
+    align-items: center;
+    width: auto;
+    .main__search-playlists-cards {
+      flex-wrap: wrap;
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .main__search-playlists-card {
+        @include card-style(90px, 230px);
+        img {
+          width: 90px;
+          height: 90px;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+        .main__search-playlists-title-artists-container {
+          height: auto;
+        }
+      }
+    }
+  }
+  .main__search-tracks-container {
+    align-items: center;
+    width: auto;
+    .main__search-tracks-cards {
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .main__search-tracks-card {
+        @include card-style(150px, 125px);
+        img {
+          width: 115px;
+          height: 115px;
+        }
+        .main__search-tracks-title-tracks-container {
+          height: auto;
+        }
       }
     }
   }

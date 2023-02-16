@@ -171,3 +171,100 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  h2 {
+    font-size: 1.2rem;
+  }
+  .main-container {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .main__title-arrows-container {
+    width: 300px;
+    gap: 10px;
+    .main__previous-next-container {
+      gap: 10px;
+      button {
+        font: 1.8rem "Circular";
+      }
+    }
+  }
+  .main__new-releases-container {
+    width: auto;
+    align-items: center;
+    .main__new-releases-cards {
+      justify-content: center;
+      width: 250px;
+      height: auto;
+      overflow: hidden;
+      flex-wrap: wrap;
+      .main__new-releases-card {
+        @include card-style(90px, 200px);
+        img {
+          width: 70px;
+          height: 70px;
+        }
+        .main__new-releases-title-artists-container {
+          label {
+            font-size: 0.7rem;
+            width: 120px;
+          }
+          .main__album-name {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  .main__featured-playlists-container {
+    .main__featured-playlists-cards {
+      width: 300px;
+      height: auto;
+      flex-wrap: wrap;
+      .main__featured-playlists-card {
+        @include card-style(160px, 115px);
+        img {
+          width: 100px;
+          height: 100px;
+        }
+        .main__featured-playlists-title-artists-container {
+          label {
+            font-size: 0.8rem;
+            width: 100px;
+          }
+          .main__album-name {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  .main__categories-container {
+    .main__category-cards {
+      width: 300px;
+      height: auto;
+      .main__category-card {
+        @include card-style(135px, 115px);
+        img {
+          width: 110px;
+          height: 110px;
+        }
+        label {
+          font-size: 0.75rem;
+          width: 110px;
+        }
+      }
+    }
+  }
+  .main__genres-container {
+    align-items: center;
+    .main__genres-list {
+      width: 300px;
+      height: auto;
+      button {
+        @include buttonLabelSmall;
+      }
+    }
+  }
+}

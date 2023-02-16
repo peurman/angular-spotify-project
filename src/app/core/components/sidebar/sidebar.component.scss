@@ -46,15 +46,60 @@
     font-size: 1rem;
   }
 }
-@media (max-width: 768px) {
+.sidebarBurger {
+  visibility: hidden;
+  background-color: $background-darker;
+  @include centerMeColumn;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 20px 0;
+  .sidebarBurger__main-nav-container {
+    @include centerMeColumn;
+    width: 100%;
+  }
+  &__image-container {
+    img {
+      width: 50px;
+    }
+  }
+  &__text-logo-container {
+    img {
+      width: 60px;
+    }
+  }
+  &__nav-link {
+    @include centerMeColumn;
+    width: 90px;
+    height: 60px;
+    font-size: 0.8rem;
+    &-active {
+      background-color: $background;
+      border: none;
+      border-left: 10px solid $main-color;
+    }
+  }
+}
+.hamburger-container {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    visibility: hidden;
+  }
+  .sidebarBurger,
+  .hamburger-container {
+    visibility: visible;
+  }
+
   :host {
     width: auto;
     min-width: auto;
   }
-  .sidebar__nav-link--hidden {
+  .sidebarBurger__nav-link--hidden {
     display: none;
   }
-  .sidebar__nav-link--visible {
+  .sidebarBurger__nav-link--visible {
     display: block;
   }
   .sidebar {
@@ -62,7 +107,7 @@
     min-width: unset;
     position: fixed;
     top: 0;
-    left: -100%;
+    left: -10%;
     transition: left 0.3s ease-in-out;
     z-index: 1;
   }
@@ -93,23 +138,25 @@
   .sidebar__image-container {
     display: none;
   }
-  .sidebar.open {
+  .sidebarBurger.open {
     left: 0;
+    margin-left: 40px;
   }
-  .hamburger-menu {
+  .hamburger {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    width: 60px;
+    background-color: $main-color;
+    height: 20px;
+    width: 30px;
     cursor: pointer;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    left: 70px;
     z-index: 2;
   }
 
-  .hamburger-menu__line {
+  .hamburger__line {
     height: 3px;
     width: 30px;
     background-color: white;
@@ -117,19 +164,19 @@
     transition: transform 0.3s ease-in-out;
   }
 
-  .hamburger-menu__line:first-child {
+  .hamburger__line:first-child {
     transform-origin: top left;
   }
 
-  .hamburger-menu__line:last-child {
+  .hamburger__line:last-child {
     transform-origin: bottom left;
   }
 
-  .hamburger-menu.open .hamburger-menu__line:first-child {
+  .hamburger.open .hamburger-menu__line:first-child {
     transform: rotate(45deg);
   }
 
-  .hamburger-menu.open .hamburger-menu__line:last-child {
+  .hamburger.open .hamburger-menu__line:last-child {
     transform: rotate(-45deg);
   }
 

@@ -98,3 +98,57 @@ audio {
     background-color: $main-color;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .main {
+    align-items: center;
+    width: 300px;
+  }
+  .track-image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    gap: 10px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .track__data-container {
+      width: 280px;
+      @include centerMeColumn;
+      align-items: center;
+      gap: 15px;
+      .track__type-heart-container {
+        @include centerMeRow;
+        padding-right: 0;
+        justify-content: space-between;
+        width: 100%;
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .track__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .track__artists-year-songs {
+    @include centerMeRow;
+    padding-left: 10px;
+    color: $font-secondary-color;
+    font-size: 0.9rem;
+    .track__artists {
+      @include centerMeRow;
+    }
+  }
+  .tracks-container {
+    @include centerMeRow;
+    justify-content: flex-start;
+    width: 350px;
+    table {
+      width: 500px;
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -187,3 +187,84 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .my-music-container {
+    align-items: center;
+    width: 300px;
+    gap: 0;
+  }
+  .album__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .album__data-container {
+      width: 300px;
+      align-items: center;
+      gap: 15px;
+      .album__type-heart-container {
+        @include centerMeRow;
+        padding-right: 0;
+        .album__type {
+          font-size: 1.1rem;
+          text-align: center;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .album__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .my-music__title-arrows-container {
+    width: 300px;
+    .my-music__previous-next-container {
+      gap: 10px;
+      button {
+        font: 1.8rem "Circular";
+      }
+    }
+  }
+  .my-music__album-container {
+    align-items: center;
+    width: auto;
+    .my-music__album-cards {
+      @include centerMeRow;
+      gap: 10px;
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .my-music__album-card {
+        @include centerMeRow;
+        justify-content: space-around;
+        .my-music__album-title-artists-container {
+          height: 100%;
+          .my-music__heart {
+            img {
+              width: 15px;
+              height: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .album__tracks-container {
+    @include centerMeColumn;
+    align-items: center;
+    table {
+      align-items: flex-start;
+      padding-left: 0;
+      width: 350px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+}
