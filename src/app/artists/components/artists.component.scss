@@ -19,7 +19,7 @@
     height: 150px;
 
     img {
-        margin: 0 auto;
+      margin: 0 auto;
       border-radius: 100%;
       width: 100%;
       height: 150px;
@@ -36,21 +36,21 @@
       font-size: 20px;
       color: rgb(29, 185, 84);
     }
-
   }
-  .follow-button, .unFollow-button {
+  .follow-button,
+  .unFollow-button {
     margin-bottom: 5px;
     text-align: center;
     text-decoration: none;
     background-color: $main-color;
     border-radius: 3px;
     width: 100px;
-    color: $button-color
-    }
+    color: $button-color;
+  }
 
-    .unFollow-button{
-      background-color: red;
-    }
+  .unFollow-button {
+    background-color: red;
+  }
 }
 .top-artist,
 .top-tracks {
@@ -85,26 +85,26 @@
     }
   }
 }
-.artist-genders{
-    font-size: 0.9rem;
-    @include centerMeRow;
-    display: flex;
+.artist-genders {
+  font-size: 0.9rem;
+  @include centerMeRow;
+  display: flex;
 }
 
 .user-followers-text {
-    text-align: center;
-    color: rgb(155, 155, 155);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 5px;
-  }
+  text-align: center;
+  color: rgb(155, 155, 155);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
 
-.albums-container{
+.albums-container {
   @include centerMeColumn;
   align-items: flex-start;
   width: 100%;
-  .arrows-container{
+  .arrows-container {
     @include centerMeRow;
     justify-content: space-between;
     width: 780px;
@@ -166,13 +166,13 @@
           @include centerMeColumn;
           gap: 3px;
         }
-        .album-following-img{
+        .album-following-img {
           @include centerMeRow;
           justify-content: flex-end;
           width: 100%;
-          img{
+          img {
             width: 15px;
-            height: 15px; 
+            height: 15px;
           }
         }
       }
@@ -200,7 +200,7 @@
       &:nth-child(2) {
         font-weight: bold;
       }
-      .td-image{
+      .td-image {
         width: 25px;
         height: 25px;
         cursor: pointer;
@@ -208,6 +208,77 @@
     }
     .track__artists {
       @include centerMeRow;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main {
+    width: 300px;
+  }
+  .albums-container {
+    align-items: center;
+    width: 300px;
+    .arrows-container {
+      justify-content: space-between;
+      width: 300px;
+      .main__previous-next-container {
+        justify-content: center;
+        gap: 10px;
+        button {
+          font: 1.8rem "Circular";
+        }
+      }
+    }
+    .albums-cards {
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .album-card {
+        @include card-style(90px, 230px);
+        img {
+          width: 90px;
+        }
+        .album-title-artists-container {
+          @include centerMeColumn;
+          justify-content: space-evenly;
+          width: auto;
+          height: auto;
+          label {
+            font-size: 0.7rem;
+            width: 130px;
+          }
+          .main__album-name {
+            font-weight: bold;
+            font-size: 0.8rem;
+          }
+          .main__album-artists {
+            @include centerMeColumn;
+            gap: 3px;
+          }
+          .album-following-img {
+            @include centerMeRow;
+            justify-content: flex-end;
+            width: 100%;
+            img {
+              width: 15px;
+              height: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tracks-container {
+    width: 350px;
+    @include centerMeColumn;
+    align-items: center;
+    table {
+      align-items: flex-start;
+      padding-left: 0;
+      width: 340px;
+      font-size: 0.8rem;
+      text-align: center;
     }
   }
 }

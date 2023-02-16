@@ -77,3 +77,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .title-arrows-container {
+    width: 300px;
+    gap: 10px;
+    .previous-next-container {
+      gap: 10px;
+      button {
+        font: 1.8rem "Circular";
+      }
+    }
+  }
+  .artists-card {
+    width: 300px;
+  }
+}

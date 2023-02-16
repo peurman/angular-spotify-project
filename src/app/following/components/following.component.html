@@ -19,25 +19,6 @@
     <div class="main__my-artists-container">
       <div class="main__title-arrows-container">
         <h2>Artists</h2>
-        <!-- <div
-          class="main__previous-next-container"
-          *ngIf="(myArtists$ | async)?.artists as myArtists"
-        >
-          <button
-            title="Previous"
-            (click)="goToPreviousMyArtists(myArtists.previous)"
-            [disabled]="!myArtists.previous"
-          >
-            &#8249;
-          </button>
-          <button
-            title="Next"
-            (click)="goToNextMyArtists(myArtists.next)"
-            [disabled]="!myArtists.next"
-          >
-            &#8250;
-          </button>
-        </div> -->
       </div>
       <div class="main__my-artists-cards">
         <ng-container *ngIf="(myArtists$ | async)?.artists as myArtists">

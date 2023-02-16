@@ -42,12 +42,6 @@ export class PlaylistsComponent implements OnInit {
     this.playlistsSavedComplete = await firstValueFrom(
       this.playlistService.getPlaylistsSaved()
     );
-    console.log(
-      'PLAYLISTS SAVED: ',
-      this.playlistsSavedComplete.items,
-      '- PLAYLIST ID: ',
-      this.playlistID
-    );
     this.playlistsSavedComplete.items.forEach((el) => {
       if (el.id === this.playlistID) this.following = true;
     });
@@ -62,15 +56,14 @@ export class PlaylistsComponent implements OnInit {
     this.store.dispatch(getArtistAction({ id }));
     this.router.navigate(['/artists']);
   }
-  goToPreviousMyTracks(url: string | null) {
+  goToPreviousTracks(url: string | null) {
     this.store.dispatch(getPlaylistAction({ id: '', url }));
   }
-  goToNextMyTracks(url: string | null) {
+  goToNextTracks(url: string | null) {
     this.store.dispatch(getPlaylistAction({ id: '', url }));
   }
 
   followUnfollowPlaylist(playlistId: string) {
-    console.log('ARG ID: ', playlistId, '- PLAYLIST ID: ', this.playlistID);
     if (this.following) {
       this.playlistService.unfollowPlaylist(playlistId).subscribe();
     } else {

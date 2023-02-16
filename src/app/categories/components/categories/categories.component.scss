@@ -1,37 +1,122 @@
 @use "styles.scss" as *;
 
 .playlist-data-container {
-    @include centerMeRow;
-    background: rgb(146, 158, 143);
-    background: linear-gradient(
-      180deg,
-      rgba(146, 158, 143, 1) 0%,
-      rgba(89, 95, 87, 1) 38%,
-      rgba(24, 24, 24, 1) 100%
-    );
-    padding: 20px;
-    width: calc(800px - 40px);
+  @include centerMeRow;
+  background: rgb(146, 158, 143);
+  background: linear-gradient(
+    180deg,
+    rgba(146, 158, 143, 1) 0%,
+    rgba(89, 95, 87, 1) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  margin: 30px 0 30px 0;
+  width: calc(800px - 40px);
+  border-radius: 3px;
+  gap: 15px;
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     border-radius: 3px;
-    gap: 15px;
+  }
+  .playlist__data-container {
+    width: 540px;
+    @include centerMeColumn;
+    align-items: flex-start;
+    gap: 25px;
+    .playlist__type-heart-container {
+      @include centerMeRow;
+      padding-right: 10px;
+      justify-content: space-between;
+      width: 100%;
+      color: $font-secondary-color;
+      .playlist__type {
+        font-size: 1.1rem;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+    .playlist__title {
+      font-size: 4rem;
+      text-size-adjust: auto;
+      font-family: "Circular Bold";
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .title-arrows-container {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+
+      .previous-next-container {
+        @include centerMeRow;
+        justify-content: right;
+        gap: 35px;
+        button {
+          background: transparent;
+          border: none;
+          color: $button-color;
+          font: 2.4rem "Circular";
+          line-height: 0.5rem;
+          cursor: pointer;
+          &:disabled {
+            color: $background-hover;
+          }
+        }
+      }
+    }
+  }
+}
+.playlist__tracks-container {
+  table {
+    width: 800px;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-spacing: 0;
+    tr th {
+      padding: 10px 5px;
+      border-bottom: 1px solid $font-tertiary-color;
+      color: $font-tertiary-color;
+    }
+    tr td {
+      padding: 10px 5px;
+      border-bottom: 1px groove $font-tertiary-color;
+      color: $font-secondary-color;
+      &:nth-child(2) {
+        font-weight: bold;
+      }
+    }
+    .track__artists {
+      @include centerMeRow;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .playlist-data-container {
+    @include centerMeColumn;
+    align-items: center;
+    width: calc(300px - 40px);
+    gap: 10px;
     img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 3px;
+      width: 150px;
+      height: 150px;
     }
     .playlist__data-container {
-      width: 540px;
-      @include centerMeColumn;
-      align-items: flex-start;
-      gap: 25px;
+      width: 260px;
+      align-items: center;
+      gap: 15px;
       .playlist__type-heart-container {
-        @include centerMeRow;
-        padding-right: 10px;
-        justify-content: space-between;
+        padding-right: 0;
+        justify-content: center;
         width: 100%;
-        color: $font-secondary-color;
         .playlist__type {
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
         img {
           width: 40px;
@@ -40,58 +125,29 @@
         }
       }
       .playlist__title {
-        font-size: 4rem;
-        text-size-adjust: auto;
-        font-family: "Circular Bold";
-        letter-spacing: -2px;
-        line-height: 1;
+        font-size: 2.3rem;
+        text-align: center;
       }
-      .title-arrows-container{
+      .title-arrows-container {
         display: flex;
-        width: 100%;
+        width: 280px;
         justify-content: flex-end;
-        
         .previous-next-container {
           @include centerMeRow;
           justify-content: right;
-          gap: 35px;
+          gap: 15px;
           button {
-            background: transparent;
-            border: none;
-            color: $button-color;
             font: 2.4rem "Circular";
-            line-height: 0.5rem;
-            cursor: pointer;
-            &:disabled {
-              color: $background-hover;
-            }
           }
         }
       }
     }
   }
-.playlist__tracks-container {
-table {
-    width: 800px;
-    padding: 0px 10px;
-    font-size: 0.9rem;
-    text-align: center;
-    border-spacing: 0;
-    tr th {
-    padding: 10px 5px;
-    border-bottom: 1px solid $font-tertiary-color;
-    color: $font-tertiary-color;
+  .playlist__tracks-container {
+    table {
+      width: 350px;
+      font-size: 0.8rem;
+      padding-left: 0px;
     }
-    tr td {
-    padding: 10px 5px;
-    border-bottom: 1px groove $font-tertiary-color;
-    color: $font-secondary-color;
-    &:nth-child(2) {
-        font-weight: bold;
-    }
-    }
-    .track__artists {
-    @include centerMeRow;
-    }
-}
+  }
 }

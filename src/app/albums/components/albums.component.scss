@@ -91,13 +91,40 @@
   }
 }
 
-audio {
-  width: 250px;
-  height: 30px;
-  &::-webkit-media-controls-panel {
-    background-color: $main-color;
+@media only screen and (max-width: 768px) {
+  .album {
+    align-items: center;
+    width: 300px;
   }
-  &::-moz-media-controls-panel {
-    background-color: $main-color;
+  .album__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    gap: 15px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .album__data-container {
+      width: calc(300px - 40px);
+      align-items: center;
+      gap: 15px;
+      .album__type-heart-container {
+        padding-right: 0;
+        .album__type {
+          font-size: 1rem;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .album__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .album__artists-year-songs {
+    font-size: 0.8rem;
   }
 }

@@ -45,12 +45,6 @@ export class AlbumsComponent implements OnInit {
     this.albumsSavedComplete = await firstValueFrom(
       this.albumService.getAlbumsSaved()
     );
-    console.log(
-      'ALBUMS SAVED: ',
-      this.albumsSavedComplete.items,
-      '- ALBUM ID: ',
-      this.albumID
-    );
     this.albumsSavedComplete.items.forEach((el) => {
       if (el.album.id === this.albumID) this.following = true;
     });

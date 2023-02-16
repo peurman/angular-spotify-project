@@ -21,7 +21,6 @@ export class PlaylistService {
         this.options
       );
     }
-    console.log('ENTRA ACA???: GET:', url);
     return this.http.get<Playlist>(url, this.options);
   }
   getPlaylistsSaved(): Observable<PlaylistsSaved> {

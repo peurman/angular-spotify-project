@@ -1,61 +1,4 @@
-<div class="hamburger-container" *ngIf="showHamburger">
-  <button class="hamburger" (click)="toggleMenu()">☰</button>
-</div>
-<div class="sidebar" [ngClass]="{ open: isMenuOpen }">
-  <div
-    class="sidebar__image-container"
-    [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-  >
-    <img src="../../../../assets/images/logo.png" />
-  </div>
-  <div
-    class="sidebar__text-logo-container"
-    [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-  >
-    <img [src]="textLogo" alt="SpotiBy us" />
-  </div>
-  <div
-    class="sidebar__main-nav-container"
-    [ngClass]="{ 'sidebar__main-nav-container--hidden': !isMenuOpen }"
-  >
-    <a
-      class="sidebar__nav-link"
-      routerLink="/home"
-      routerLinkActive="sidebar__nav-link-active"
-      [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-      >Home</a
-    >
-    <a
-      class="sidebar__nav-link"
-      routerLink="/search"
-      routerLinkActive="sidebar__nav-link-active"
-      [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-      >Search</a
-    >
-    <a
-      class="sidebar__nav-link"
-      routerLink="/myMusic"
-      routerLinkActive="sidebar__nav-link-active"
-      [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-      >My Music</a
-    >
-    <a
-      class="sidebar__nav-link"
-      routerLink="/following"
-      routerLinkActive="sidebar__nav-link-active"
-      [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-      >Following</a
-    >
-    <a
-      class="sidebar__nav-link"
-      routerLink="/profile"
-      routerLinkActive="sidebar__nav-link-active"
-      [ngClass]="{ 'sidebar__nav-link--hidden': !isMenuOpen }"
-      >My Profile</a
-    >
-  </div>
-</div>
-<div class="sidebar" *ngIf="!showHamburger">
+<div class="sidebar">
   <div class="sidebar__image-container">
     <img src="../../../../assets/images/logo.png" />
   </div>
@@ -91,6 +34,63 @@
       class="sidebar__nav-link"
       routerLink="/profile"
       routerLinkActive="sidebar__nav-link-active"
+      >My Profile</a
+    >
+  </div>
+</div>
+<div class="hamburger-container">
+  <button class="hamburger" (click)="toggleMenu()">☰</button>
+</div>
+<div class="sidebarBurger" [ngClass]="{ open: isMenuOpen }">
+  <div
+    class="sidebarBurger__image-container"
+    [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+  >
+    <img src="../../../../assets/images/logo.png" />
+  </div>
+  <div
+    class="sidebarBurger__text-logo-container"
+    [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+  >
+    <img [src]="textLogo" alt="SpotiBy us" />
+  </div>
+  <div
+    class="sidebarBurger__main-nav-container"
+    [ngClass]="{ 'sidebar__main-nav-container--hidden': !isMenuOpen }"
+  >
+    <a
+      class="sidebarBurger__nav-link"
+      routerLink="/home"
+      routerLinkActive="sidebarBurger__nav-link-active"
+      [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+      >Home</a
+    >
+    <a
+      class="sidebarBurger__nav-link"
+      routerLink="/search"
+      routerLinkActive="sidebarBurger__nav-link-active"
+      [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+      >Search</a
+    >
+    <a
+      class="sidebarBurger__nav-link"
+      routerLink="/myMusic"
+      routerLinkActive="sidebarBurger__nav-link-active"
+      [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+      >My Music</a
+    >
+    <a
+      class="sidebarBurger__nav-link"
+      routerLink="/following"
+      routerLinkActive="sidebarBurger__nav-link-active"
+      [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
+      >Following</a
+    >
+    <a
+      class="sidebarBurger__nav-link"
+      routerLink="/profile"
+      routerLinkActive="sidebarBurger__nav-link-active"
+      [ngClass]="{ 'sidebarBurger__nav-link--hidden': !isMenuOpen }"
       >My Profile</a
     >
   </div>
