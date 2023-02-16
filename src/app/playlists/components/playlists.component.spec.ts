@@ -12,6 +12,7 @@ import { getArtistAction } from 'src/app/store/artist/artist.actions';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ArtistsComponent } from 'src/app/artists/components/artists.component';
 import { TracksComponent } from 'src/app/tracks/components/tracks.component';
+import { PlaylistService } from '../services/playlists.service';
 
 describe('PlaylistsComponent', () => {
   let component: PlaylistsComponent;
@@ -22,7 +23,10 @@ describe('PlaylistsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PlaylistsComponent],
-      providers: [provideMockStore({})],
+      providers: [
+        provideMockStore({}),
+        { provide: PlaylistService, useValue: {} },
+      ],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([

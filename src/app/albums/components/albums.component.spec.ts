@@ -47,6 +47,7 @@ describe('AlbumsComponent', () => {
       providers: [
         provideMockStore({ initialState }),
         { provide: CheckerService, useValue: checkerServiceStub },
+        { provide: AlbumService, useValue: {} },
       ],
     }).compileComponents();
     store = TestBed.inject(MockStore);
