@@ -6,6 +6,10 @@ import {
 } from '@angular/common/http/testing';
 import { FollowingComponent } from './following.component';
 import { CheckerService } from 'src/app/core/services/checker.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ArtistsComponent } from 'src/app/artists/components/artists.component';
+import { PlaylistsComponent } from 'src/app/playlists/components/playlists.component';
+import { PlaylistService } from 'src/app/playlists/services/playlists.service';
 
 describe('FollowingComponent', () => {
   let component: FollowingComponent;
@@ -15,9 +19,19 @@ describe('FollowingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'artists', component: ArtistsComponent },
+          { path: 'playlists', component: PlaylistsComponent },
+        ]),
+      ],
       declarations: [FollowingComponent],
-      providers: [provideMockStore({}), CheckerService],
+      providers: [
+        provideMockStore({}),
+        CheckerService,
+        { provide: PlaylistService, useValue: {} },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FollowingComponent);

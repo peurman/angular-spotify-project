@@ -70,7 +70,7 @@ export class MyMusicComponent implements OnInit {
 
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
-    this.router.navigate(['/albums']);
+    this.router.navigateByUrl('albums');
   }
 
   removeAlbum(id: string) {
@@ -85,10 +85,10 @@ export class MyMusicComponent implements OnInit {
 
   goToTrack(id: string) {
     this.store.dispatch(getTrackAction({ id }));
-    this.router.navigate(['/tracks']);
+    this.router.navigateByUrl('tracks');
   }
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
-    this.router.navigate(['/artists']);
+    this.router.navigateByUrl('artists');
   }
 }

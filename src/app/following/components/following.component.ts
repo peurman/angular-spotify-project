@@ -62,7 +62,7 @@ export class FollowingComponent implements OnInit {
   }
   goToArtist(id: string) {
     // this.store.dispatch(getArtistDetail({ id }));
-    this.router.navigate(['/artists']);
+    this.router.navigateByUrl('artists');
   }
 
   goToPreviousMyPlaylists(url: string | null) {
@@ -73,7 +73,7 @@ export class FollowingComponent implements OnInit {
   }
   goToPlaylist(id: string) {
     this.store.dispatch(getPlaylistAction({ id, url: '' }));
-    this.router.navigate(['/playlists']);
+    this.router.navigateByUrl('playlists');
   }
 
   unfollowArtist(id: string) {

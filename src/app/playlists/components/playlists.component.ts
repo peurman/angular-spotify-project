@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { Observable, firstValueFrom } from 'rxjs';
 
 import * as fromPlaylist from 'src/app/store/playlists/playlist.selectors';
-import { getTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 
 import { PlaylistService } from '../services/playlists.service';
 import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
@@ -54,7 +57,7 @@ export class PlaylistsComponent implements OnInit {
 
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
-    this.router.navigate(['/artists']);
+    this.router.navigateByUrl('artists');
   }
   goToPreviousTracks(url: string | null) {
     this.store.dispatch(getPlaylistAction({ id: '', url }));

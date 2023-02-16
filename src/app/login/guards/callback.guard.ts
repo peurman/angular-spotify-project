@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthToken } from '../models/authtoken.interface';
 import { AuthService } from '../services/auth.service';
 import { login, logout } from '../../store/login/login.actions';
@@ -15,17 +15,17 @@ export class CallbackGuard implements CanActivate {
     private _snackBar: MatSnackBar,
     private store: Store
   ) {}
-  canActivate(childRoute: ActivatedRouteSnapshot) {
+  canActivate(childRoute: ActivatedRouteSnapshot): Observable<boolean> {
     const param = childRoute.queryParamMap.get('code');
     if (param) {
       return this.auth.GetTokenFromCode(param).pipe(
         map((token: AuthToken) => {
           this.auth.SaveToken(token);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('home');
           return true;
         }),
         catchError(() => {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('login');
           this.auth.LogOut();
           this.store.dispatch(logout());
           const config = new MatSnackBarConfig();
@@ -41,8 +41,8 @@ export class CallbackGuard implements CanActivate {
         })
       );
     } else {
-      this.router.navigateByUrl('/login');
-      return false;
+      this.router.navigateByUrl('login');
+      return of(false);
     }
   }
 }

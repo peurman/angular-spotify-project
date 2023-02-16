@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Playlist } from 'src/app/playlists/models/playlists.interface';
+import { Playlist, Tracks } from 'src/app/playlists/models/playlists.interface';
 
 export const getPlaylistAction = createAction(
   '[Playlist] Get Playlist Action',
@@ -12,4 +12,9 @@ export const getPlaylistSuccessAction = createAction(
 export const getPlaylistErrorAction = createAction(
   '[Playlist] Get Playlist Error Action',
   props<{ message: string }>()
+);
+
+export const updatePlaylistsTracks = createAction(
+  '[Playlist] Update Playlist Tracks',
+  props<{ data: Tracks }>()
 );

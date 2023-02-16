@@ -37,16 +37,15 @@ export class GenresComponent implements OnInit {
 
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
-    this.router.navigate(['/artists']);
+    this.router.navigateByUrl('artists');
   }
 
   goToTrack(id: string) {
     this.store.dispatch(getTrackAction({ id }));
-    this.router.navigate(['/tracks']);
+    this.router.navigateByUrl('tracks');
   }
 
   addRemoveTrack(id: string, saved: boolean) {
-    const save = !saved;
-    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
+    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
   }
 }

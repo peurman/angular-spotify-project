@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as albumActions from './album.actions';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AlbumService } from 'src/app/albums/services/album.service';
 import { CheckerService } from 'src/app/core/services/checker.service';
@@ -19,10 +19,20 @@ export class AlbumDetailEffects {
       ofType(albumActions.getAlbumDetailAction),
       exhaustMap((res) =>
         this.albumService.getAlbumDetail(res.id).pipe(
-          map((response) => {
-            return albumActions.getAlbumDetailSuccessAction({
-              data: response,
-            });
+          switchMap((response) => {
+            return this.checkerService
+              .checkSavedTracks(response.tracks.items)
+              .pipe(
+                map((booleanResponse) => {
+                  response.tracks.items.forEach((track, index) => {
+                    const booleanValue = booleanResponse[index];
+                    track.saved = booleanValue;
+                  });
+                  return albumActions.getAlbumDetailSuccessAction({
+                    data: response,
+                  });
+                })
+              );
           }),
           catchError((error) =>
             of(

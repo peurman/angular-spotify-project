@@ -28,6 +28,9 @@
           <div class="playlist__title">
             {{ playlist.name }}
           </div>
+          <div>
+            {{playlist.description}}
+          </div>
           <div class="playlist__artists-year-songs">
             <div>
               <div class="playlist__artists">
@@ -115,6 +118,7 @@
                 </div>
               </div>
             </td>
+            
             <td>{{ trackList.track.duration_ms | times }}</td>
           </tr>
         </table>

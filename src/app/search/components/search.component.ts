@@ -166,7 +166,7 @@ export class SearchComponent implements OnInit {
   }
   goToArtist(artistId: string) {
     this.store.dispatch(getArtistAction({ id: artistId }));
-    this.router.navigateByUrl('/artists');
+    this.router.navigateByUrl('artists');
   }
   // Albums
   goToPreviousSearchAlbums() {
@@ -184,7 +184,7 @@ export class SearchComponent implements OnInit {
   }
   goToAlbum(albumId: string) {
     this.store.dispatch(getAlbumDetailAction({ id: albumId }));
-    this.router.navigate(['/albums']);
+    this.router.navigateByUrl('albums');
   }
   // Playlists
   goToPreviousSearchPlaylists() {
@@ -205,7 +205,7 @@ export class SearchComponent implements OnInit {
   }
   goToPlaylist(playlistId: string) {
     this.store.dispatch(getPlaylistAction({ id: playlistId, url: '' }));
-    this.router.navigate(['/playlists']);
+    this.router.navigateByUrl('playlists');
   }
   // Tracks
   goToPreviousSearchTracks() {

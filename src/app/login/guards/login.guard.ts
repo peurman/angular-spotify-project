@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
-  canActivate() {
+  canActivate(): Observable<boolean> {
     const tokenInfo = localStorage.getItem('tokenInfo');
     if (!tokenInfo) {
-      return true;
+      return of(true);
     } else {
-      this.router.navigateByUrl('/home');
-      return false;
+      this.router.navigateByUrl('home');
+      return of(false);
     }
   }
 }

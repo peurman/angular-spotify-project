@@ -85,6 +85,11 @@
         font-weight: bold;
       }
     }
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
     .track__artists {
       @include centerMeRow;
     }

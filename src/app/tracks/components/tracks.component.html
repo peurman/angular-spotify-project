@@ -20,6 +20,9 @@
       <div class="track__title">
         {{ (track$ | async)?.name }}
       </div>
+      <div *ngIf="(track$ | async) as album">
+        <a (click)="goToAlbum(album.id)">Album: {{(track$ | async)?.album?.name}}</a>
+      </div>
       <div class="track__artists-year-songs">
         <div>
           <div

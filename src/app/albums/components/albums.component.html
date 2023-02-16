@@ -31,7 +31,7 @@
                 <label *ngIf="i === album.artists.length - 1">
                   {{ artist.name }}</label
                 >
-                <label *ngIf="i < album.artists.length - 1">
+                <label  *ngIf="i < album.artists.length - 1">
                   {{ artist.name }}&nbsp;&nbsp;▪&nbsp;&nbsp;
                 </label>
               </div>
@@ -59,6 +59,7 @@
           <th>#</th>
           <th>Track Name</th>
           <th>Artists</th>
+          <th>Save</th>
           <th>Duration</th>
         </tr>
         <tr *ngFor="let track of album.tracks.items">
@@ -80,13 +81,21 @@
                   }}</a></label
                 >
                 <label *ngIf="i < album.artists.length - 1">
-                  <a (click)="goToArtist(artist.id)">{{ artist.name }}</a
+                  <a>{{ artist.name }}</a
                   >&nbsp;&nbsp;▪&nbsp;&nbsp;
                 </label>
               </div>
             </div>
           </td>
-          <td>{{ track.duration_ms | times }}</td>
+          <td>
+            <img
+              [src]="track.saved ? saveOn : saveOff"
+              alt="heart"
+              [title]="track.saved ? 'Remove track' : 'Add track'"
+              (click)="addRemoveTrack(track.id, track.saved ? true : false)"
+            />
+          </td>
+          <td>{{ track.duration_ms | date : "mm:ss" }}</td>
         </tr>
       </table>
     </div>

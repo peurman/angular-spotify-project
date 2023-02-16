@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthToken } from '../../login/models/authtoken.interface';
 import { AuthService } from '../../login/services/auth.service';
 import { getUserRequest, login, logout } from '../../store/login/login.actions';
@@ -16,7 +16,7 @@ export class MainGuard implements CanActivate {
     private _snackBar: MatSnackBar,
     private store: Store
   ) {}
-  canActivate() {
+  canActivate(): Observable<boolean> {
     const tokenInfo = localStorage.getItem('tokenInfo');
     if (tokenInfo) {
       const tokenAuth = JSON.parse(tokenInfo) as AuthToken;
@@ -27,10 +27,9 @@ export class MainGuard implements CanActivate {
         }),
         catchError((error: HttpErrorResponse) => {
           if (error.status == 401) {
-            //token expired, inteceptor will fix it
             return of(true);
           }
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('login');
           this.store.dispatch(logout());
           this.auth.LogOut();
           const config = new MatSnackBarConfig();
@@ -46,8 +45,8 @@ export class MainGuard implements CanActivate {
         })
       );
     } else {
-      this.router.navigateByUrl('/login');
-      return false;
+      this.router.navigateByUrl('login');
+      return of(false);
     }
   }
 }

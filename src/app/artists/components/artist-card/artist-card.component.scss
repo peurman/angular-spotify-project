@@ -6,11 +6,12 @@
   img {
     width: 115px;
     height: 115px;
+    object-fit: cover;
+
   }
   .artist-title-artists-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     height: 100%;
     width: 100%;

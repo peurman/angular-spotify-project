@@ -94,7 +94,7 @@ export class ArtistsComponent implements OnInit {
   }
   goToTrack(id: string) {
     this.store.dispatch(getTrackAction({ id }));
-    this.router.navigateByUrl('/tracks');
+    this.router.navigateByUrl('tracks');
   }
   goToArtist(id: string) {
     this.store.dispatch(getArtistAction({ id }));
@@ -102,7 +102,7 @@ export class ArtistsComponent implements OnInit {
   }
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
-    this.router.navigateByUrl('/albums');
+    this.router.navigateByUrl('albums');
   }
   handleArtistClick(id: string) {
     this.store.dispatch(getArtistAction({ id }));

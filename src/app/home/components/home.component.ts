@@ -188,7 +188,7 @@ export class HomeComponent implements OnInit {
   }
   goToAlbum(id: string) {
     this.store.dispatch(getAlbumDetailAction({ id }));
-    this.router.navigate(['/albums']);
+    this.router.navigateByUrl('albums');
   }
 
   featuredPlaylistsPreviousClick() {
@@ -203,14 +203,14 @@ export class HomeComponent implements OnInit {
   }
   goToPlaylist(id: string) {
     this.store.dispatch(getPlaylistAction({ id, url: '' }));
-    this.router.navigate(['/playlists']);
+    this.router.navigateByUrl('playlists');
   }
   goToCategory(category: Category) {
     this.store.dispatch(getCategoriesPlaylistAction({ category, url: '' }));
-    this.router.navigateByUrl('/categories');
+    this.router.navigateByUrl('categories');
   }
   goToGenre(genreName: string) {
     this.store.dispatch(getRecommendationsAction({ genreName }));
-    this.router.navigateByUrl('/genres');
+    this.router.navigateByUrl('genres');
   }
 }

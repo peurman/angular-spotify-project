@@ -2,7 +2,6 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as recommendationsActions from './recommendations.actions';
 import { RecommendationsState } from './recommendations.state';
 import * as trackActions from '../track/track.actions';
-import { Track, Tracks } from 'src/app/search/models/search.interface';
 import { GenreRecommendations } from 'src/app/genres/models/genres.interface';
 
 export const initialCategoryState: RecommendationsState = {
