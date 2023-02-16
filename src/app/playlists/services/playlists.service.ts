@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
+import {
+  Playlist,
+  PlaylistsSaved,
+  Tracks,
+} from '../models/playlists.interface';
 
 const BASE_API = 'https://api.spotify.com/v1';
 
@@ -14,15 +18,18 @@ export class PlaylistService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   options = { headers: this.headers };
 
-  getPlaylist(id: string | null, url: string | null): Observable<Playlist> {
+  getPlaylist(
+    id: string | null,
+    url: string | null
+  ): Observable<Playlist | Tracks> {
+    //error because it only gets 100 tracks
     if (!url) {
       return this.http.get<Playlist>(
         `${BASE_API}/playlists/${id}`,
         this.options
       );
     }
-    console.log('ENTRA ACA???: GET:', url);
-    return this.http.get<Playlist>(url, this.options);
+    return this.http.get<Tracks>(url, this.options);
   }
   getPlaylistsSaved(): Observable<PlaylistsSaved> {
     return this.http.get<PlaylistsSaved>(`${BASE_API}/me/playlists?limit=50`);

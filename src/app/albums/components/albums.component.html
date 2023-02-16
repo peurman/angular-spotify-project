@@ -59,6 +59,7 @@
           <th>#</th>
           <th>Track Name</th>
           <th>Artists</th>
+          <th>Save</th>
           <th>Duration</th>
         </tr>
         <tr *ngFor="let track of album.tracks.items">
@@ -85,6 +86,14 @@
                 </label>
               </div>
             </div>
+          </td>
+          <td>
+            <img
+              [src]="track.saved ? saveOn : saveOff"
+              alt="heart"
+              [title]="track.saved ? 'Remove track' : 'Add track'"
+              (click)="addRemoveTrack(track.id, track.saved ? true : false)"
+            />
           </td>
           <td>{{ track.duration_ms | date : "mm:ss" }}</td>
         </tr>

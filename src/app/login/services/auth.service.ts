@@ -82,6 +82,7 @@ export class AuthService {
     );
   }
   VerifyToken(accessToken: string) {
+    console.log('acces', accessToken);
     return this.http.get('https://api.spotify.com/v1/me', {
       headers: new HttpHeaders({
         skip: 'true',

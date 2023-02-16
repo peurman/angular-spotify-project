@@ -10,7 +10,10 @@ import {
 import { AlbumService } from '../services/album.service';
 
 import * as fromAlbum from 'src/app/store/album/album.selectors';
-import { getTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 import { Router } from '@angular/router';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
@@ -50,8 +53,12 @@ export class AlbumsComponent implements OnInit {
     });
   }
 
-  goToTrack(trackId: string) {
-    this.store.dispatch(getTrackAction({ id: trackId }));
+  addRemoveTrack(id: string, saved: boolean) {
+    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
+  }
+
+  goToTrack(id: string) {
+    this.store.dispatch(getTrackAction({ id }));
     this.router.navigateByUrl('tracks');
   }
   goToArtist(artistId: string) {

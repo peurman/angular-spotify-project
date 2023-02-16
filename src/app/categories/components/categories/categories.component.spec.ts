@@ -40,7 +40,9 @@ describe('CategoriesComponent', () => {
     const id = '1';
     component.goToPlaylist(id);
     expect(component.goToPlaylist).toHaveBeenCalledWith(id);
-    expect(store.dispatch).toHaveBeenCalledWith(getPlaylistAction({ id }));
+    expect(store.dispatch).toHaveBeenCalledWith(
+      getPlaylistAction({ id, url: '' })
+    );
   });
   it('should dispatch getCategoriesPlaylistAction on handlePreviousPlaylists', () => {
     spyOn(component, 'handlePreviousPlaylists').and.callThrough();

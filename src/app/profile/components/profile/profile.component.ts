@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, unfollow!',
-      }).then((result) => {
+      }).then((result: any) => {
         if (result.isConfirmed) {
           this.store.dispatch(unFollowArtistsAction({ id: event.id }));
           Swal.fire('Artist successfully unfollowed!');

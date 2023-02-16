@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { Observable, firstValueFrom } from 'rxjs';
 
 import * as fromPlaylist from 'src/app/store/playlists/playlist.selectors';
-import { getTrackAction } from 'src/app/store/track/track.actions';
+import {
+  getTrackAction,
+  SaveRemoveTrackAction,
+} from 'src/app/store/track/track.actions';
 
 import { PlaylistService } from '../services/playlists.service';
 import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
@@ -67,6 +70,10 @@ export class PlaylistsComponent implements OnInit {
   }
   goToNextMyTracks(url: string | null) {
     this.store.dispatch(getPlaylistAction({ id: '', url }));
+  }
+
+  addRemoveTrack(id: string, saved: boolean) {
+    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
   }
 
   followUnfollowPlaylist(playlistId: string) {

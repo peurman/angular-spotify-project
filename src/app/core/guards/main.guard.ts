@@ -27,7 +27,6 @@ export class MainGuard implements CanActivate {
         }),
         catchError((error: HttpErrorResponse) => {
           if (error.status == 401) {
-            //token expired, inteceptor will fix it
             return of(true);
           }
           this.router.navigateByUrl('login');

@@ -149,6 +149,7 @@ describe('HomeComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       getPlaylistAction({
         id: 'testPlaylist',
+        url: '',
       })
     );
   });

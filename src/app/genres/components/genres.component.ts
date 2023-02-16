@@ -47,7 +47,6 @@ export class GenresComponent implements OnInit {
   }
 
   addRemoveTrack(id: string, saved: boolean) {
-    const save = !saved;
-    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
+    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
   }
 }
