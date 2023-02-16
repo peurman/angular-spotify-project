@@ -91,17 +91,6 @@
   }
 }
 
-audio {
-  width: 250px;
-  height: 30px;
-  &::-webkit-media-controls-panel {
-    background-color: $main-color;
-  }
-  &::-moz-media-controls-panel {
-    background-color: $main-color;
-  }
-}
-
 .my-music__title-arrows-container {
   @include centerMeRow;
   justify-content: space-between;
@@ -119,6 +108,66 @@ audio {
       cursor: pointer;
       &:disabled {
         color: $background-hover;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .playlist {
+    align-items: center;
+    width: 300px;
+  }
+  .playlist__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    gap: 10px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .playlist__data-container {
+      width: 280px;
+      align-items: center;
+      gap: 15px;
+      .playlist__type-heart-container {
+        padding-right: 0;
+        justify-content: space-between;
+        width: 100%;
+        .playlist__type {
+          font-size: 1rem;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+        }
+      }
+      .playlist__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .playlist__artists-year-songs {
+    font-size: 0.8rem;
+  }
+  .playlist__tracks-container {
+    @include centerMeColumn;
+    align-items: flex-start;
+    width: 350px;
+    table {
+      font-size: 0.8rem;
+    }
+    .my-music__title-arrows-container {
+      width: 300px;
+      .my-music__previous-next-container {
+        @include centerMeRow;
+        justify-content: right;
+        gap: 15px;
+        button {
+          font: 1.8rem "Circular";
+        }
       }
     }
   }

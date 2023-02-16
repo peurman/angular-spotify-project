@@ -1,0 +1,10 @@
+@use "styles.scss" as *;
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    @include centerMeRow;
+    font-size: 1.3rem;
+    width: auto;
+    text-align: left;
+  }
+}

@@ -106,3 +106,63 @@ app-loading {
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .following-container {
+    align-items: center;
+    width: 300px;
+  }
+  .following__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    gap: 10px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .following__data-container {
+      width: 280px;
+      align-items: center;
+      gap: 15px;
+      .following__type-heart-container {
+        padding-right: 0;
+        justify-content: center;
+        .following__type {
+          font-size: 1rem;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+        }
+      }
+      .following__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .following__user-container {
+    padding-left: 0;
+    font-size: 1.2rem;
+  }
+  .album__tracks-container {
+    width: 350px;
+    table {
+      width: calc(350px - 20px);
+      font-size: 0.8rem;
+      tr td {
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+      .track__artists {
+        @include centerMeRow;
+      }
+      .my-music__track-name {
+        max-width: 300px;
+      }
+    }
+  }
+}

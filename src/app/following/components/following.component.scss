@@ -202,3 +202,95 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .following-container {
+    align-items: center;
+    width: 300px;
+  }
+  .following__image-data-container {
+    @include centerMeColumn;
+    width: calc(300px - 40px);
+    gap: 10px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    .following__data-container {
+      width: 300px;
+      align-items: center;
+      gap: 15px;
+      .following__type-heart-container {
+        @include centerMeRow;
+        padding-right: 0;
+        .following__type {
+          font-size: 1.1rem;
+          text-align: center;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .following__title {
+        font-size: 2.3rem;
+        text-align: center;
+      }
+    }
+  }
+  .main-container {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .main__title-arrows-container {
+    width: 300px;
+    gap: 10px;
+    .main__previous-next-container {
+      gap: 10px;
+      button {
+        font: 1.8rem "Circular";
+      }
+    }
+  }
+  .main__search-playlists-container {
+    align-items: center;
+    width: auto;
+    .main__search-playlists-cards {
+      flex-wrap: wrap;
+      align-content: center;
+      width: 300px;
+      height: auto;
+      .main__search-playlists-card {
+        @include card-style(90px, 230px);
+        img {
+          width: 90px;
+          height: 90px;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+        .main__search-playlists-title-artists-container {
+          height: auto;
+        }
+      }
+    }
+  }
+  .main__my-artists-container {
+    align-items: center;
+    width: auto;
+    .main__my-artists-cards {
+      align-content: center;
+      width: 300px;
+      .main__my-artists-card {
+        @include card-style(150px, 125px);
+        img {
+          width: 115px;
+          height: 115px;
+        }
+        .main__my-artists-title-artists-container {
+          width: 130px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
