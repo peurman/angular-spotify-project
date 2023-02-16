@@ -61,7 +61,6 @@ const playlistReducerInternal = createReducer(
     (state, { id }): PlaylistState => {
       const itemsUpdated = state.playlistData?.tracks.items?.map((track) => {
         const trackFixed = { ...track };
-        console.log(trackFixed);
         if (track.track.id == id) {
           trackFixed.track.saved = !track.track.saved;
         }

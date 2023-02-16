@@ -66,10 +66,6 @@ export class PlaylistsComponent implements OnInit {
     this.store.dispatch(getPlaylistAction({ id: '', url }));
   }
 
-  addRemoveTrack(id: string, saved: boolean) {
-    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
-  }
-
   followUnfollowPlaylist(playlistId: string) {
     if (this.following) {
       this.playlistService.unfollowPlaylist(playlistId).subscribe();

@@ -5,9 +5,7 @@ import { AlbumDetail, AlbumsSaved } from '../models/albums.interface';
 
 const BASE_API = 'https://api.spotify.com/v1';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AlbumService {
   constructor(private http: HttpClient) {}
 

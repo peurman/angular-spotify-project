@@ -10,9 +10,7 @@ import {
 
 const BASE_API = 'https://api.spotify.com/v1';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MyMusicService {
   constructor(private http: HttpClient) {}
 

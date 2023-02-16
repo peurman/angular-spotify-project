@@ -31,7 +31,7 @@
                 <label *ngIf="i === album.artists.length - 1">
                   {{ artist.name }}</label
                 >
-                <label *ngIf="i < album.artists.length - 1">
+                <label  *ngIf="i < album.artists.length - 1">
                   {{ artist.name }}&nbsp;&nbsp;▪&nbsp;&nbsp;
                 </label>
               </div>
@@ -69,14 +69,14 @@
           </td>
           <td>
             <div *ngIf="track.artists.length === 1" class="track__artists">
-              <a>{{
+              <a (click)="goToArtist(track.artists[0].id)">{{
                 track.artists[0].name
               }}</a>
             </div>
             <div *ngIf="track.artists.length > 1" class="track__artists">
               <div *ngFor="let artist of track.artists; let i = index">
                 <label *ngIf="i === track.artists.length - 1">
-                  <a>{{
+                  <a (click)="goToArtist(artist.id)">{{
                     artist.name
                   }}</a></label
                 >

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as playlistActions from './playlist.actions';
-import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PlaylistService } from 'src/app/playlists/services/playlists.service';
 import {
@@ -25,32 +25,18 @@ export class PlaylistEffects {
       ofType(playlistActions.getPlaylistAction),
       exhaustMap((res) =>
         this.playlistService.getPlaylist(res.id, res.url).pipe(
-          switchMap((response) => {
+          map((response) => {
+            let responseFixed;
             if ('tracks' in response) {
-              const responsePlaylist = response as Playlist;
-              const test: Track[] = [];
-              response.tracks.items?.forEach((item) => {
-                test.push(item.track);
+              responseFixed = response as Playlist;
+              return playlistActions.getPlaylistSuccessAction({
+                data: responseFixed,
               });
-              return this.checkerService.checkSavedTracks(test).pipe(
-                map((booleanResponse) => {
-                  console.log('bool', booleanResponse);
-                  response.tracks.items?.forEach((track, index) => {
-                    const booleanValue = booleanResponse[index];
-                    track.track.saved = booleanValue;
-                  });
-                  return playlistActions.getPlaylistSuccessAction({
-                    data: responsePlaylist,
-                  });
-                })
-              );
             } else {
-              const responsePlaylist = response as Tracks;
-              return of(
-                playlistActions.updatePlaylistsTracks({
-                  data: responsePlaylist,
-                })
-              );
+              responseFixed = response as Tracks;
+              return playlistActions.updatePlaylistsTracks({
+                data: responseFixed,
+              });
             }
           }),
           catchError((error) =>

@@ -5,9 +5,7 @@ import { GenreRecommendations } from '../models/genres.interface';
 
 const BASE_API = 'https://api.spotify.com/v1';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GenresService {
   constructor(private http: HttpClient) {}
 

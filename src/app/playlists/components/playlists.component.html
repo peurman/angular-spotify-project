@@ -81,7 +81,6 @@
             <th>#</th>
             <th>Track Name</th>
             <th>Artists</th>
-            <th>Save</th>
             <th>Duration</th>
           </tr>
           <tr *ngFor="let trackList of playlist.tracks.items; let i = index">
@@ -119,14 +118,7 @@
                 </div>
               </div>
             </td>
-            <td>
-              <img
-                [src]="trackList.track.saved ? saveOn : saveOff"
-                alt="heart"
-                [title]="trackList.track.saved ? 'Remove track' : 'Add track'"
-                (click)="addRemoveTrack(trackList.track.id, trackList.track.saved ? true : false)"
-              />
-            </td>
+            
             <td>{{ trackList.track.duration_ms | times }}</td>
           </tr>
         </table>

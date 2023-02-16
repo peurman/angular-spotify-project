@@ -25,6 +25,12 @@ import { TopItems } from './profile/services/topitems.service';
 import { TrackService } from './tracks/services/track.service';
 import { ArtistinfoService } from './artists/services/artistinfo.service';
 import { CheckerService } from './core/services/checker.service';
+import { MainService } from './home/services/main.service';
+import { MyMusicService } from './my-music/services/my-music.service';
+import { AlbumService } from './albums/services/album.service';
+import { PlaylistService } from './playlists/services/playlists.service';
+import { SearchService } from './search/services/search.service';
+import { GenresService } from './genres/services/genres.service';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<RootState>
@@ -71,6 +77,12 @@ const metaReducers = [localStorageSyncReducer, storeFreeze];
     TrackService,
     ArtistinfoService,
     CheckerService,
+    MainService,
+    MyMusicService,
+    AlbumService,
+    PlaylistService,
+    SearchService,
+    GenresService,
   ],
   bootstrap: [AppComponent],
 })
