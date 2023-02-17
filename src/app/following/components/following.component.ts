@@ -19,6 +19,7 @@ import { getPlaylistAction } from 'src/app/store/playlists/playlist.actions';
 import { PlaylistService } from 'src/app/playlists/services/playlists.service';
 import { unFollowArtistsAction } from 'src/app/store/profile/profile.actions';
 import { CheckerService } from 'src/app/core/services/checker.service';
+import { getArtistAction } from 'src/app/store/artist/artist.actions';
 // import { Artist } from 'src/app/tracks/services/track.service';
 // import { getTrackAction } from 'src/app/store/track/track.actions';
 
@@ -61,7 +62,7 @@ export class FollowingComponent implements OnInit {
     this.store.dispatch(getMyArtistsAction({ url }));
   }
   goToArtist(id: string) {
-    // this.store.dispatch(getArtistDetail({ id }));
+    this.store.dispatch(getArtistAction({ id }));
     this.router.navigateByUrl('artists');
   }
 
