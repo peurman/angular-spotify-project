@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
+import Swal from 'sweetalert2';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { TopItems } from 'src/app/profile/services/topitems.service';
 import * as profileActions from './profile.actions';
@@ -74,6 +75,7 @@ export class ProfileEffects {
           .followUnfollowArtist(false, 'artist', res.id)
           .pipe(
             map(() => {
+              Swal.fire('Artist successfully unfollowed!');
               return profileActions.unFollowArtistsSuccessAction({
                 id: res.id,
               });
@@ -97,6 +99,7 @@ export class ProfileEffects {
           .followUnfollowArtist(true, 'artist', res.id)
           .pipe(
             map(() => {
+              Swal.fire('Artist successfully followed!');
               return profileActions.followArtistsSuccessAction({
                 id: res.id,
               });

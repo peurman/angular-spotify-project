@@ -75,7 +75,7 @@ export class MyMusicComponent implements OnInit {
 
   removeAlbum(id: string) {
     this.checkerService
-      .saveRemoveAlbumFromLibrary(id, true)
+      .saveRemoveAlbumFromLibrary(id, false)
       .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
   }
 

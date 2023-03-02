@@ -87,17 +87,15 @@ export class ProfileComponent implements OnInit {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, unfollow!',
-      }).then((result: any) => {
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, unfollow',
+      }).then((result) => {
         if (result.isConfirmed) {
           this.store.dispatch(unFollowArtistsAction({ id: event.id }));
-          Swal.fire('Artist successfully unfollowed!');
         }
       });
     } else {
       this.store.dispatch(followArtistsAction({ id: event.id }));
-      Swal.fire('Artist successfully followed!');
     }
   }
 }
