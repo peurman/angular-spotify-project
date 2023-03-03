@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, firstValueFrom } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import {
   AlbumDetail,
@@ -17,6 +18,7 @@ import {
 import { Router } from '@angular/router';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
+import { getMyTracksAction } from 'src/app/store/my-music/my-music.actions';
 
 @Component({
   selector: 'app-albums',
@@ -54,7 +56,24 @@ export class AlbumsComponent implements OnInit {
   }
 
   addRemoveTrack(id: string, saved: boolean) {
-    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
+    if (saved) {
+      Swal.fire({
+        title: 'Are you sure you want to remove this track?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+          }
+        })
+        .then(() => {
+          this.store.dispatch(getMyTracksAction({ url: '' }));
+        });
+    } else this.store.dispatch(SaveRemoveTrackAction({ id, save: true }));
   }
 
   goToTrack(id: string) {
@@ -67,14 +86,45 @@ export class AlbumsComponent implements OnInit {
   }
   saveRemoveAlbum(albumId: string) {
     if (this.following) {
-      this.checkerService
-        .saveRemoveAlbumFromLibrary(albumId, !this.following)
-        .subscribe();
+      Swal.fire({
+        title: 'Are you sure you want to remove this album?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.checkerService
+              .saveRemoveAlbumFromLibrary(albumId, false)
+              .subscribe(() => {
+                Swal.fire({
+                  title: 'Album successfully removed!',
+                  timer: 1500,
+                  position: 'top-right',
+                  icon: 'success',
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              });
+          }
+        })
+        .then(() => (this.following = !this.following));
     } else {
       this.checkerService
-        .saveRemoveAlbumFromLibrary(albumId, !this.following)
-        .subscribe();
+        .saveRemoveAlbumFromLibrary(albumId, true)
+        .subscribe(() => {
+          Swal.fire({
+            title: 'Album successfully added!',
+            timer: 1500,
+            position: 'top-right',
+            icon: 'success',
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
+          this.following = !this.following;
+        });
     }
-    this.following = !this.following;
   }
 }

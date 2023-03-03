@@ -4,20 +4,15 @@
 .main-track-card {
   @include centerMeColumn;
   gap: 10px;
-  @include card-style(210px, 165px);
+  @include card-style(180px, 165px);
   img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 5px;
-    margin-top: 20px;
   }
   .track-title-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+    @include centerMeColumn;
     width: 100%;
 
     .track-info {
@@ -58,14 +53,19 @@
 }
 @media only screen and (max-width: 768px) {
   .main-track-card {
-    @include card-style(160px, 125px);
+    @include card-style(140px, 125px);
     img {
       width: 115px;
       height: 115px;
     }
-  }
-  .track-name {
-    font-weight: bold;
-    font-size: 0.8rem;
+    .track-title-container {
+      label {
+        width: 115px;
+      }
+      .track-name {
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+    }
   }
 }

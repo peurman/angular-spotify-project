@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable, firstValueFrom } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import * as fromPlaylist from 'src/app/store/playlists/playlist.selectors';
-import {
-  getTrackAction,
-  SaveRemoveTrackAction,
-} from 'src/app/store/track/track.actions';
+import { getTrackAction } from 'src/app/store/track/track.actions';
 
 import { PlaylistService } from '../services/playlists.service';
 import { Playlist, PlaylistsSaved } from '../models/playlists.interface';
@@ -69,9 +67,41 @@ export class PlaylistsComponent implements OnInit {
   followUnfollowPlaylist(playlistId: string) {
     if (this.following) {
       this.playlistService.unfollowPlaylist(playlistId).subscribe();
+
+      Swal.fire({
+        title: 'Are you sure you want to unfollow this playlist?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, unfollow',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.playlistService.unfollowPlaylist(playlistId).subscribe(() => {
+            Swal.fire({
+              title: 'Playlist successfully unfollowed!',
+              timer: 1500,
+              position: 'top-right',
+              icon: 'success',
+              timerProgressBar: true,
+              showConfirmButton: false,
+            });
+            this.following = !this.following;
+          });
+        }
+      });
     } else {
-      this.playlistService.followPlaylist(playlistId).subscribe();
+      this.playlistService.followPlaylist(playlistId).subscribe(() => {
+        Swal.fire({
+          title: 'Playlist successfully followed!',
+          timer: 1500,
+          position: 'top-right',
+          icon: 'success',
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+        this.following = !this.following;
+      });
     }
-    this.following = !this.following;
   }
 }

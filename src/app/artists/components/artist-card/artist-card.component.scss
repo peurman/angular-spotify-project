@@ -2,17 +2,20 @@
 @use "./base/variables" as *;
 
 .main-artist-card {
-  @include card-style(150px, 125px);
+  @include card-style(180px, 140px);
+  @include centerMeColumn;
+  justify-content: space-between;
+  gap: 5px;
   img {
-    width: 115px;
-    height: 115px;
+    width: 125px;
+    height: 125px;
+    min-height: 125px;
+    border-radius: 3px;
     object-fit: cover;
-
   }
   .artist-title-artists-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include centerMeColumn;
+    gap: 10px;
     height: 100%;
     width: 100%;
 
