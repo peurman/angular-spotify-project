@@ -6,13 +6,23 @@
 }
 
 .profile-top {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  align-items: center;
+  @include centerMeColumn;
+  gap: 10px;
+  background: rgb(152, 157, 165);
+  background: linear-gradient(
+    180deg,
+    rgb(198, 181, 148) 0%,
+    rgb(129, 118, 89) 38%,
+    rgba(24, 24, 24, 1) 100%
+  );
+  padding: 20px;
+  width: calc(800px - 40px);
+  border-radius: 3px;
 
+  h1,
+  p {
+    margin: 5px 0;
+  }
   .user-avatar {
     margin-top: 10px;
     width: 150px;
@@ -29,7 +39,7 @@
     }
   }
   .user-followers {
-    text-align: center;
+    @include centerMeColumn;
 
     .user-followers-count {
       font-weight: 700;
@@ -216,6 +226,9 @@
   .main {
     width: 300px;
   }
+  .profile-top {
+    width: calc(300px - 40px);
+  }
   .albums-container {
     align-items: center;
     width: 300px;
@@ -280,5 +293,8 @@
       font-size: 0.8rem;
       text-align: center;
     }
+  }
+  .artists-card {
+    width: 300px;
   }
 }

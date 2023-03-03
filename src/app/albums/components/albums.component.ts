@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, firstValueFrom } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import {
   AlbumDetail,
@@ -67,14 +68,43 @@ export class AlbumsComponent implements OnInit {
   }
   saveRemoveAlbum(albumId: string) {
     if (this.following) {
-      this.checkerService
-        .saveRemoveAlbumFromLibrary(albumId, !this.following)
-        .subscribe();
+      Swal.fire({
+        title: 'Are you sure you want to remove this album?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.checkerService
+              .saveRemoveAlbumFromLibrary(albumId, false)
+              .subscribe(() => {
+                Swal.fire({
+                  title: 'Album successfully removed!',
+                  timer: 1500,
+                  icon: 'success',
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              });
+          }
+        })
+        .then(() => (this.following = !this.following));
     } else {
       this.checkerService
-        .saveRemoveAlbumFromLibrary(albumId, !this.following)
-        .subscribe();
+        .saveRemoveAlbumFromLibrary(albumId, true)
+        .subscribe(() => {
+          Swal.fire({
+            title: 'Album successfully added!',
+            timer: 1500,
+            icon: 'success',
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
+          this.following = !this.following;
+        });
     }
-    this.following = !this.following;
   }
 }

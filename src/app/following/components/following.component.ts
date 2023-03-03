@@ -20,8 +20,6 @@ import { PlaylistService } from 'src/app/playlists/services/playlists.service';
 import { unFollowArtistsAction } from 'src/app/store/profile/profile.actions';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
-// import { Artist } from 'src/app/tracks/services/track.service';
-// import { getTrackAction } from 'src/app/store/track/track.actions';
 
 @Component({
   selector: 'app-following',
@@ -78,16 +76,45 @@ export class FollowingComponent implements OnInit {
   }
 
   unfollowArtist(id: string) {
-    this.checkerService
-      .followUnfollowArtist(false, 'artist', id)
-      .subscribe(() => this.store.dispatch(getMyArtistsAction({ url: '' })));
-    Swal.fire('Artist successfully unfollowed!');
+    Swal.fire({
+      title: 'Are you sure you want to unfollow this artist?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#db1c1c',
+      confirmButtonText: 'Yes, unfollow',
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(unFollowArtistsAction({ id }));
+        }
+      })
+      .then(() => {
+        this.store.dispatch(getMyArtistsAction({ url: '' }));
+      });
   }
 
   unfollowPlaylist(id: string) {
-    this.playlistService.unfollowPlaylist(id).subscribe(() => {
-      this.store.dispatch(getMyPlaylistsAction({ url: '' }));
-      Swal.fire('Playlist successfully unfollowed!');
+    Swal.fire({
+      title: 'Are you sure you want to unfollow this playlist?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#db1c1c',
+      confirmButtonText: 'Yes, unfollow',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.playlistService.unfollowPlaylist(id).subscribe(() => {
+          Swal.fire({
+            title: 'Playlist successfully unfollowed!',
+            timer: 1500,
+            icon: 'success',
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
+          this.store.dispatch(getMyPlaylistsAction({ url: '' }));
+        });
+      }
     });
   }
 }

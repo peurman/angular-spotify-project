@@ -7,10 +7,16 @@
       <h1>{{ (profileInfo$ | async)?.display_name }}</h1>
     </div>
     <div class="user-followers">
+      <p class="user-followers-text">
+        {{
+          ((profileInfo$ | async)?.followers)!.total > 1
+            ? "Followers"
+            : "Follower"
+        }}
+      </p>
       <p class="user-followers-count">
         {{ (profileInfo$ | async)?.followers?.total }}
       </p>
-      <p class="user-followers-text">{{(profileInfo$ | async)?.followers!.total > 1 ? 'Followers' : 'Follower'}}</p>
     </div>
   </div>
   <div class="top-artist">

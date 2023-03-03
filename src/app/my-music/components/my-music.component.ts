@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import * as fromMyMusic from 'src/app/store/my-music/my-music.selectors';
 import { TracksSaved, AlbumsSaved } from '../models/my-music.interface';
@@ -74,13 +75,48 @@ export class MyMusicComponent implements OnInit {
   }
 
   removeAlbum(id: string) {
-    this.checkerService
-      .saveRemoveAlbumFromLibrary(id, false)
-      .subscribe(() => this.store.dispatch(getMyAlbumsAction({ url: '' })));
+    Swal.fire({
+      title: 'Are you sure you want to remove this album?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#db1c1c',
+      confirmButtonText: 'Yes, remove',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.checkerService
+          .saveRemoveAlbumFromLibrary(id, false)
+          .subscribe(() => {
+            Swal.fire({
+              title: 'Album successfully removed!',
+              timer: 1500,
+              icon: 'success',
+              timerProgressBar: true,
+              showConfirmButton: false,
+            });
+            this.store.dispatch(getMyAlbumsAction({ url: '' }));
+          });
+      }
+    });
   }
 
   removeTrack(id: string) {
-    this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+    Swal.fire({
+      title: 'Are you sure you want to remove this track?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#db1c1c',
+      confirmButtonText: 'Yes, remove',
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+        }
+      })
+      .then(() => {
+        this.store.dispatch(getMyTracksAction({ url: '' }));
+      });
   }
 
   goToTrack(id: string) {

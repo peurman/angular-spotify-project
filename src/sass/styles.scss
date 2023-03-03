@@ -62,7 +62,6 @@ em {
 
 .swal2-modal {
   border-radius: 15px;
-  // border: 1px solid $main-color !important;
   background-size: 100vh;
 }
 
@@ -75,13 +74,13 @@ em {
   color: $main-color !important;
   font-size: 1.8rem !important;
 }
-.swal2-icon {
-  width: 3.5em !important;
-  height: 3.5em !important;
-}
-.swal2-icon .swal2-icon-content {
-  font-size: 2.5em !important;
-}
+// .swal2-icon {
+//   width: 3.5em !important;
+//   height: 3.5em !important;
+// }
+// .swal2-icon .swal2-icon-content {
+//   font-size: 2.5em !important;
+// }
 .swal2-styled.swal2-cancel,
 .swal2-styled.swal2-confirm,
 .swal2-styled.swal2-deny {

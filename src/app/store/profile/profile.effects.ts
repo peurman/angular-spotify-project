@@ -75,7 +75,13 @@ export class ProfileEffects {
           .followUnfollowArtist(false, 'artist', res.id)
           .pipe(
             map(() => {
-              Swal.fire('Artist successfully unfollowed!');
+              Swal.fire({
+                title: 'Artist successfully unfollowed!',
+                timer: 1500,
+                icon: 'success',
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
               return profileActions.unFollowArtistsSuccessAction({
                 id: res.id,
               });
@@ -99,7 +105,13 @@ export class ProfileEffects {
           .followUnfollowArtist(true, 'artist', res.id)
           .pipe(
             map(() => {
-              Swal.fire('Artist successfully followed!');
+              Swal.fire({
+                title: 'Artist successfully followed!',
+                timer: 1500,
+                icon: 'success',
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
               return profileActions.followArtistsSuccessAction({
                 id: res.id,
               });

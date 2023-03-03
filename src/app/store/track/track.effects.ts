@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
+import Swal from 'sweetalert2';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { TopItems } from 'src/app/profile/services/topitems.service';
 import { Track } from 'src/app/search/models/search.interface';
@@ -50,6 +51,23 @@ export class TrackEffects {
       switchMap((action) => {
         return this.trackService.saveRemoveTrack(action.id, action.save).pipe(
           map(() => {
+            if (action.save) {
+              Swal.fire({
+                title: 'Track successfully added!',
+                timer: 1500,
+                icon: 'success',
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
+            } else {
+              Swal.fire({
+                title: 'Track successfully removed!',
+                timer: 1500,
+                icon: 'success',
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
+            }
             return trackActions.SaveRemoveTrackSuccessAction({ id: action.id });
           })
         );
