@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
+
 import { Track } from 'src/app/profile/model/toptracks.interface';
 import { getAlbumDetailAction } from 'src/app/store/album/album.actions';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
@@ -33,9 +35,18 @@ export class TracksComponent implements OnInit {
   }
   saveRemoveTrack(id: string, saved: boolean | undefined) {
     if (saved) {
-      this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
-    } else {
-      this.store.dispatch(SaveRemoveTrackAction({ id: id, save: true }));
-    }
+      Swal.fire({
+        title: 'Are you sure you want to remove this track?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+        }
+      });
+    } else this.store.dispatch(SaveRemoveTrackAction({ id, save: true }));
   }
 }

@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
+
 import { Artist } from 'src/app/home/models/new-releases.interface';
-import { Album, Albums } from 'src/app/search/models/search.interface';
+import { Albums } from 'src/app/search/models/search.interface';
 import {
   getAlbumDetailAction,
   saveRemoveAlbumAction,
@@ -28,6 +30,7 @@ import {
   ArtistTracks,
   RelatedArtist,
 } from '../models/topartistracks.interface';
+import { getMyTracksAction } from 'src/app/store/my-music/my-music.actions';
 
 @Component({
   selector: 'app-artists',
@@ -86,7 +89,18 @@ export class ArtistsComponent implements OnInit {
   handleFollowClick() {
     this.artistInfo$.pipe(first()).subscribe((artist) => {
       if (artist?.isFollowing) {
-        this.store.dispatch(unFollowArtistsAction({ id: this.id }));
+        Swal.fire({
+          title: 'Are you sure you want to unfollow this artist?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#db1c1c',
+          confirmButtonText: 'Yes, unfollow',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.store.dispatch(unFollowArtistsAction({ id: this.id }));
+          }
+        });
       } else {
         this.store.dispatch(followArtistsAction({ id: this.id }));
       }
@@ -110,17 +124,52 @@ export class ArtistsComponent implements OnInit {
   }
   handleFollowUnfollow(event: { type: string; id: string }) {
     if (event.type == 'unfollow') {
-      this.store.dispatch(unFollowArtistsAction({ id: event.id }));
+      Swal.fire({
+        title: 'Are you sure you want to unfollow this artist?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, unfollow',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(unFollowArtistsAction({ id: event.id }));
+        }
+      });
     } else {
       this.store.dispatch(followArtistsAction({ id: event.id }));
     }
   }
   SaveRemoveAlbum(id: string, saved: boolean) {
-    const save = !saved;
-    this.store.dispatch(saveRemoveAlbumAction({ id, save }));
+    if (saved) {
+      Swal.fire({
+        title: 'Are you sure you want to remove this album?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(saveRemoveAlbumAction({ id: id, save: false }));
+        }
+      });
+    } else this.store.dispatch(saveRemoveAlbumAction({ id, save: true }));
   }
-  SaveRemoveTrack(id: string, save: boolean | undefined) {
-    save = !save;
-    this.store.dispatch(SaveRemoveTrackAction({ id, save }));
+  SaveRemoveTrack(id: string, saved: boolean | undefined) {
+    if (saved) {
+      Swal.fire({
+        title: 'Are you sure you want to remove this track?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+        }
+      });
+    } else this.store.dispatch(SaveRemoveTrackAction({ id, save: true }));
   }
 }

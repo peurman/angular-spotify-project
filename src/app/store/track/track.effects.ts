@@ -55,6 +55,7 @@ export class TrackEffects {
               Swal.fire({
                 title: 'Track successfully added!',
                 timer: 1500,
+                position: 'top-right',
                 icon: 'success',
                 timerProgressBar: true,
                 showConfirmButton: false,
@@ -63,6 +64,7 @@ export class TrackEffects {
               Swal.fire({
                 title: 'Track successfully removed!',
                 timer: 1500,
+                position: 'top-right',
                 icon: 'success',
                 timerProgressBar: true,
                 showConfirmButton: false,

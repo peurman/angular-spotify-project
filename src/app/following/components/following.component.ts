@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -108,6 +109,7 @@ export class FollowingComponent implements OnInit {
           Swal.fire({
             title: 'Playlist successfully unfollowed!',
             timer: 1500,
+            position: 'top-right',
             icon: 'success',
             timerProgressBar: true,
             showConfirmButton: false,

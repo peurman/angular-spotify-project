@@ -78,6 +78,7 @@ export class ProfileEffects {
               Swal.fire({
                 title: 'Artist successfully unfollowed!',
                 timer: 1500,
+                position: 'top-right',
                 icon: 'success',
                 timerProgressBar: true,
                 showConfirmButton: false,
@@ -108,6 +109,7 @@ export class ProfileEffects {
               Swal.fire({
                 title: 'Artist successfully followed!',
                 timer: 1500,
+                position: 'top-right',
                 icon: 'success',
                 timerProgressBar: true,
                 showConfirmButton: false,

@@ -90,6 +90,7 @@ export class MyMusicComponent implements OnInit {
             Swal.fire({
               title: 'Album successfully removed!',
               timer: 1500,
+              position: 'top-right',
               icon: 'success',
               timerProgressBar: true,
               showConfirmButton: false,

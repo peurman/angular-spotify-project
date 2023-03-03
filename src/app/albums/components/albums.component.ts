@@ -18,6 +18,7 @@ import {
 import { Router } from '@angular/router';
 import { CheckerService } from 'src/app/core/services/checker.service';
 import { getArtistAction } from 'src/app/store/artist/artist.actions';
+import { getMyTracksAction } from 'src/app/store/my-music/my-music.actions';
 
 @Component({
   selector: 'app-albums',
@@ -55,7 +56,24 @@ export class AlbumsComponent implements OnInit {
   }
 
   addRemoveTrack(id: string, saved: boolean) {
-    this.store.dispatch(SaveRemoveTrackAction({ id, save: !saved }));
+    if (saved) {
+      Swal.fire({
+        title: 'Are you sure you want to remove this track?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#db1c1c',
+        confirmButtonText: 'Yes, remove',
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.store.dispatch(SaveRemoveTrackAction({ id: id, save: false }));
+          }
+        })
+        .then(() => {
+          this.store.dispatch(getMyTracksAction({ url: '' }));
+        });
+    } else this.store.dispatch(SaveRemoveTrackAction({ id, save: true }));
   }
 
   goToTrack(id: string) {
@@ -84,6 +102,7 @@ export class AlbumsComponent implements OnInit {
                 Swal.fire({
                   title: 'Album successfully removed!',
                   timer: 1500,
+                  position: 'top-right',
                   icon: 'success',
                   timerProgressBar: true,
                   showConfirmButton: false,
@@ -99,6 +118,7 @@ export class AlbumsComponent implements OnInit {
           Swal.fire({
             title: 'Album successfully added!',
             timer: 1500,
+            position: 'top-right',
             icon: 'success',
             timerProgressBar: true,
             showConfirmButton: false,
