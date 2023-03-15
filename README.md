@@ -1,27 +1,45 @@
-# FinalProjectSpotify
+# SpotyBy Us
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+![main cover](/mainCover.png)
 
-## Development server
+### - _Deploy_: **<a target="_blank" href="https://final-project-spotify-applaudo.vercel.app/">HERE</a>**
+
+(created on February 2023)
+
+## Angular Trainee Program - Final Project
+
+This `Angular app` was created as the **`2-weeks Final Group Project`** of the **Angular Trainee Program** (we were a team of two)
+
+It consumes information from the `Spotify API`, so you have to login with your **Spotify account** to use it, and also your email has to be included in our list of the developer dashboard.
+
+The app is using `ngRx` (the library for Angular applications that is based on the popular Redux library) for states management.
+
+### Testing
+
+The app also includes **unit tests** made with `Karma` and `Jasmine`.
+
+You can run the tests with the command **_ng test_** and also get the overall coverage running **_ng test --code-coverage_**, and then opening the **index.html** file in the **coverage/final-project-spotify**.
+
+### Next Steps
+
+Soon I'll be **fixing the loaders**.
+
+And I also will **refactor some components and styles**.
+
+---
+
+## Using this app
+
+First of all, you have to run the command `npm install` or `npm i` to install all the dependencies listed in the package.json file.
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Code scaffolding
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
