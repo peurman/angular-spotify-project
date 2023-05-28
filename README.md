@@ -10,9 +10,11 @@
 
 This `Angular app` was created as the **`2-weeks Final Group Project`** of the **Angular Trainee Program** (we were a team of two)
 
-It consumes information from the `Spotify API`, so you have to login with your **Spotify account** to use it, and also your email has to be included in our list of the developer dashboard.
+It consumes the `Spotify REST API`, so you have to login with your **Spotify account** to use it, and also your email has to be included in our list of the developer dashboard.
 
-The app is using `ngRx` (the library for Angular applications that is based on the popular Redux library) for states management.
+The app is using `ngRx` (the library for Angular applications that is based on the popular Redux library) for global state management.
+
+It also has an **_HTTP Interceptor_** to refresh the token that expires every 1 hour.
 
 ### Testing
 
@@ -30,7 +32,23 @@ And I also will **refactor some components and styles**.
 
 ## Using this app
 
+### Installing dependencies
+
 First of all, you have to run the command `npm install` or `npm i` to install all the dependencies listed in the package.json file.
+
+### Adding environment variables
+
+You have to add the **`environment.development.ts` file** within the **_src/environments_** folder with these info:
+
+    export const environment = {
+      credentials: {
+        clientId: 'your_client_ID',
+        clientSecret: 'your_client_secret',
+      },
+      production: false,
+      apiUrl: 'http://localhost:4200',
+      isLocal: true,
+    };
 
 ### Development server
 
@@ -42,4 +60,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ### Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component (or **_ng g c component-name_** ).
+
+You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
