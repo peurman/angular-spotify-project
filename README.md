@@ -2,7 +2,7 @@
 
 ![main cover](/mainCover.png)
 
-### - _Deploy_: **<a target="_blank" href="https://final-project-spotify-applaudo.vercel.app/">HERE</a>**
+### - _Deploy_: **<a target="_blank" href="https://final-project-spotify-applaudo.vercel.app/" rel="noopener noreferrer">HERE</a>**
 
 (created on February 2023)
 
